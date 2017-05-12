@@ -206,13 +206,13 @@ namespace Unigram.Common
                     parameter = inputPeer.ToPeer();
                     break;
                 case TLInputUser inputUser:
-                    parameter = new TLPeerUser { UserId = inputUser.UserId };
+                    parameter = new ITLPeerUser { UserId = inputUser.UserId };
                     break;
                 case TLInputUserSelf inputSelf:
-                    parameter = new TLPeerUser { UserId = SettingsHelper.UserId };
+                    parameter = new ITLPeerUser { UserId = SettingsHelper.UserId };
                     break;
                 case TLInputChannel inputChannel:
-                    parameter = new TLPeerChannel { ChannelId = inputChannel.ChannelId };
+                    parameter = new ITLPeerChannel { ChannelId = inputChannel.ChannelId };
                     break;
             }
 

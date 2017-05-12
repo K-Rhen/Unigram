@@ -35,10 +35,10 @@ namespace Unigram.ViewModels.Payments
                     Invoice = tuple.Item1.Media as TLMessageMediaInvoice;
                     PaymentForm = tuple.Item2;
 
-                    var info = PaymentForm.HasSavedInfo ? PaymentForm.SavedInfo : new TLPaymentRequestedInfo();
+                    var info = PaymentForm.HasSavedInfo ? PaymentForm.SavedInfo : new ITLPaymentRequestedInfo();
                     if (info.ShippingAddress == null)
                     {
-                        info.ShippingAddress = new TLPostAddress();
+                        info.ShippingAddress = new ITLPostAddress();
                     }
 
                     Info = info;
@@ -49,7 +49,7 @@ namespace Unigram.ViewModels.Payments
             return Task.CompletedTask;
         }
 
-        private TLPaymentRequestedInfo _info = new TLPaymentRequestedInfo { ShippingAddress = new TLPostAddress() };
+        private TLPaymentRequestedInfo _info = new ITLPaymentRequestedInfo { ShippingAddress = new ITLPostAddress() };
         public TLPaymentRequestedInfo Info
         {
             get
@@ -105,7 +105,7 @@ namespace Unigram.ViewModels.Payments
             IsLoading = true;
 
             var save = _isSave ?? false;
-            var info = new TLPaymentRequestedInfo();
+            var info = new ITLPaymentRequestedInfo();
             if (_paymentForm.Invoice.IsNameRequested)
             {
                 info.Name = _info.Name;

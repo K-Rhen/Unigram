@@ -9,9 +9,28 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLDocumentBase : ITLTransferable, INotifyPropertyChanged
+#if !PORTABLE
+    public partial interface TLDocumentBase : ITLTransferable, INotifyPropertyChanged
     {
-		public virtual TLInputDocumentBase ToInputDocument()
+        TLInputDocumentBase ToInputDocument();
+
+        bool IsGif(bool real = false);
+        bool IsMusic();
+        bool IsVideo();
+        bool IsAudio();
+        bool IsVoice();
+        bool IsSticker();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDocumentBase : ITLTransferable, INotifyPropertyChanged
+    {
+        public virtual TLInputDocumentBase ToInputDocument()
         {
             throw new NotImplementedException();
         }
@@ -92,21 +111,63 @@ namespace Telegram.Api.TL
         }
 
         #endregion
+
+        #region Type
+        public bool IsGif(bool real = false)
+        {
+            return ITLMessage.IsGif(this, real);
+        }
+
+        public virtual bool IsMusic()
+        {
+            return ITLMessage.IsMusic(this);
+        }
+
+        public bool IsVideo()
+        {
+            return ITLMessage.IsVideo(this);
+        }
+
+        public bool IsAudio()
+        {
+            return ITLMessage.IsAudio(this);
+        }
+
+        public bool IsVoice()
+        {
+            return ITLMessage.IsVoice(this);
+        }
+
+        public bool IsSticker()
+        {
+            return ITLMessage.IsSticker(this);
+        }
+        #endregion
     }
 
-    public partial class TLDocument
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDocument
     {
         public override TLInputDocumentBase ToInputDocument()
         {
-            return new TLInputDocument { Id = Id, AccessHash = AccessHash };
+            return new ITLInputDocument { Id = Id, AccessHash = AccessHash };
         }
     }
 
-	public partial class TLDocumentEmpty
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDocumentEmpty
     {
         public override TLInputDocumentBase ToInputDocument()
         {
-            return new TLInputDocumentEmpty();
+            return new ITLInputDocumentEmpty();
         }
     }
 }

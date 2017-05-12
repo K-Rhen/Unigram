@@ -11,7 +11,58 @@ using Windows.UI.Xaml;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLMessageBase : ITLRandomId, INotifyPropertyChanged
+#if !PORTABLE
+    public partial interface TLMessageBase : ITLRandomId, INotifyPropertyChanged
+    {
+        // TODO:
+        bool IsUnread
+        {
+            get;
+            set;
+        }
+
+        TLMessageBase Reply { get; set; }
+
+        //public virtual ReplyInfo ReplyInfo
+        //{
+        //    get { return null; }
+        //}
+
+        void SetUnreadSilent(bool unread);
+
+        void SetUnread(bool unread);
+
+        Int64? RandomId { get; set; }
+
+        TLMessageState State { get; set; }
+
+        void Update(TLMessageBase message);
+
+        bool ShowFrom { get; }
+
+        void Edit(TLMessageBase messageBase);
+
+        TLUser From { get; }
+
+        ITLDialogWith Parent { get; }
+
+        bool IsFirst { get; set; }
+        bool IsLast { get; set; }
+
+        //public TLMessageBase Reply { get; set; }
+
+        ReplyInfo ReplyInfo { get; }
+
+        Visibility ReplyVisibility { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLMessageBase : ITLRandomId, INotifyPropertyChanged
     {
         // TODO:
         public bool IsUnread
@@ -123,7 +174,7 @@ namespace Telegram.Api.TL
                 {
                     if (this is TLMessageCommonBase messageCommon)
                     {
-                        var peer = messageCommon.IsOut || messageCommon.ToId is TLPeerChannel || messageCommon.ToId is TLPeerChat ? messageCommon.ToId : new TLPeerUser { UserId = messageCommon.FromId.Value };
+                        var peer = messageCommon.IsOut || messageCommon.ToId is TLPeerChannel || messageCommon.ToId is TLPeerChat ? messageCommon.ToId : new ITLPeerUser { UserId = messageCommon.FromId.Value };
                         if (peer is TLPeerUser)
                             _parent = InMemoryCacheService.Current.GetUser(peer.Id);
                         if (peer is TLPeerChat || ToId is TLPeerChannel)
@@ -207,7 +258,8 @@ namespace Telegram.Api.TL
         }
     }
 
-    public class ReplyInfo
+#if !PORTABLE
+    public sealed class ReplyInfo
     {
         public int? ReplyToMsgId
         {
@@ -222,7 +274,18 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLMessageService
+    public partial interface TLMessageService
+    {
+        TLMessageService Self { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessageService
     {
         public TLMessageService Self
         {
@@ -233,9 +296,39 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLMessage
+#if !PORTABLE
+    public partial interface TLMessage
     {
-        #region Gif
+        TLMessage Self { get; }
+
+        Visibility StickerReplyVisibility { get; }
+
+        TLUser ViaBot { get; }
+        TLUserBase FwdFromUser { get; }
+
+        TLChannel FwdFromChannel { get; }
+
+        long InlineBotResultQueryId { get; set; }
+
+        string InlineBotResultId { get; set; }
+
+        bool IsGif(bool real = false);
+        bool IsMusic();
+        bool IsVideo();
+        bool IsAudio();
+        bool IsVoice();
+        bool IsSticker();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessage
+    {
+#region Gif
         public bool IsGif(bool real = false)
         {
             var documentMedia = Media as TLMessageMediaDocument;
@@ -279,9 +372,9 @@ namespace Telegram.Api.TL
             }
             return false;
         }
-        #endregion
+#endregion
 
-        #region Music
+#region Music
         public virtual bool IsMusic()
         {
             var documentMedia = Media as TLMessageMediaDocument;
@@ -306,9 +399,9 @@ namespace Telegram.Api.TL
             }
             return false;
         }
-        #endregion
+#endregion
 
-        #region Video
+#region Video
         public bool IsVideo()
         {
             var documentMedia = Media as TLMessageMediaDocument;
@@ -334,9 +427,9 @@ namespace Telegram.Api.TL
             }
             return false;
         }
-        #endregion
+#endregion
 
-        #region Audio
+#region Audio
         public virtual bool IsAudio()
         {
             var documentMedia = Media as TLMessageMediaDocument;
@@ -354,9 +447,9 @@ namespace Telegram.Api.TL
             var audioAttribute = document.Attributes.OfType<TLDocumentAttributeAudio>().FirstOrDefault();
             return audioAttribute != null && !audioAttribute.IsVoice;
         }
-        #endregion
+#endregion
 
-        #region Voice
+#region Voice
         public virtual bool IsVoice()
         {
             var documentMedia = Media as TLMessageMediaDocument;
@@ -374,9 +467,9 @@ namespace Telegram.Api.TL
             var audioAttribute = document.Attributes.OfType<TLDocumentAttributeAudio>().FirstOrDefault();
             return audioAttribute != null && audioAttribute.IsVoice;
         }
-        #endregion
+#endregion
 
-        #region Sticker
+#region Sticker
         public bool IsSticker()
         {
             var documentMedia = Media as TLMessageMediaDocument;
@@ -400,7 +493,7 @@ namespace Telegram.Api.TL
             }
             return false;
         }
-        #endregion
+#endregion
 
         public TLMessage Self
         {
@@ -454,7 +547,7 @@ namespace Telegram.Api.TL
                 var webpageNew = message.Media as TLMessageMediaWebPage;
                 if ((webpageOld == null && webpageNew != null) || (webpageOld != null && webpageNew == null) || (webpageOld != null && webpageNew != null && webpageOld.WebPage.Id != webpageNew.WebPage.Id))
                 {
-                    Media = (TLMessageMediaBase)webpageNew ?? new TLMessageMediaEmpty();
+                    Media = (TLMessageMediaBase)webpageNew ?? new ITLMessageMediaEmpty();
                 }
 
                 var captionNew = message.Media as ITLMessageMediaCaption;
@@ -706,7 +799,20 @@ namespace Telegram.Api.TL
         public string InlineBotResultId { get; set; }
     }
 
-    public partial class TLMessageFwdHeader
+#if !PORTABLE
+    public partial interface TLMessageFwdHeader
+    {
+        TLUserBase User { get; }
+        TLChatBase Channel { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessageFwdHeader
     {
         private TLUserBase _user;
         public TLUserBase User
@@ -734,11 +840,23 @@ namespace Telegram.Api.TL
 
     }
 
-    public partial class TLMessage
+#if !PORTABLE
+    public partial interface TLMessage
+    {
+        TLMessage Clone();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessage
     {
         public TLMessage Clone()
         {
-            var clone = new TLMessage();
+            var clone = new ITLMessage();
             clone.Flags = Flags;
             clone.Id = Id;
             clone.FromId = FromId;

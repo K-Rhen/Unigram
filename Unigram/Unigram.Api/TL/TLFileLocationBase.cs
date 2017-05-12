@@ -4,18 +4,26 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLFileLocationBase : TLObject, ITLFileLocationBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLFileLocationBase : ITLObject, TLFileLocationBase
 	{
 		public Int64 VolumeId { get; set; }
 		public Int32 LocalId { get; set; }
 		public Int64 Secret { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0x37ed3123, 0x824a, 0xa90c, 0x57, 0x62, 0x4d, 0x7b, 0x2e, 0x7e, 0x47, 0xa4)]
-	public partial interface ITLFileLocationBase : TLObject
+	public partial interface TLFileLocationBase : TLObject
 	{
 		Int64 VolumeId { get; set; }
 		Int32 LocalId { get; set; }
 		Int64 Secret { get; set; }
 	}
+#endif
+
 }

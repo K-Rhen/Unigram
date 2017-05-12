@@ -57,7 +57,7 @@ namespace Unigram.Controls.Views
 
         public IAsyncOperation<ContentDialogBaseResult> ShowAsync(TLStickerSet parameter, ItemClickEventHandler callback)
         {
-            return ShowAsync(new TLInputStickerSetID { Id = parameter.Id, AccessHash = parameter.AccessHash }, callback);
+            return ShowAsync(new ITLInputStickerSetID { Id = parameter.Id, AccessHash = parameter.AccessHash }, callback);
         }
 
         public IAsyncOperation<ContentDialogBaseResult> ShowAsync(TLStickerSetCoveredBase parameter)
@@ -67,7 +67,7 @@ namespace Unigram.Controls.Views
 
         public IAsyncOperation<ContentDialogBaseResult> ShowAsync(TLStickerSetCoveredBase parameter, ItemClickEventHandler callback)
         {
-            return ShowAsync(new TLInputStickerSetID { Id = parameter.Set.Id, AccessHash = parameter.Set.AccessHash }, callback);
+            return ShowAsync(new ITLInputStickerSetID { Id = parameter.Set.Id, AccessHash = parameter.Set.AccessHash }, callback);
         }
 
         public IAsyncOperation<ContentDialogBaseResult> ShowAsync(TLInputStickerSetBase parameter)
@@ -78,7 +78,7 @@ namespace Unigram.Controls.Views
         public IAsyncOperation<ContentDialogBaseResult> ShowAsync(TLInputStickerSetBase parameter, ItemClickEventHandler callback)
         {
             //ViewModel.IsLoading = true;
-            //ViewModel.StickerSet = new TLStickerSet();
+            //ViewModel.StickerSet = new ITLStickerSet();
             //ViewModel.Items.Clear();
 
             //RoutedEventHandler handler = null;

@@ -310,7 +310,7 @@ namespace Unigram.Services
         public void RemoveRecentGif(TLDocument document)
         {
             recentGifs.Remove(document);
-            _protoService.SaveGifAsync(new TLInputDocument { Id = document.Id, AccessHash = document.AccessHash }, true, null);
+            _protoService.SaveGifAsync(new ITLInputDocument { Id = document.Id, AccessHash = document.AccessHash }, true, null);
 
             try
             {
@@ -496,7 +496,7 @@ namespace Unigram.Services
                     var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
                     while (Sqlite3.sqlite3_step(statement) == SQLiteResult.Row)
                     {
-                        arrayList.Add(new TLDocument
+                        arrayList.Add(new ITLDocument
                         {
                             Id = Sqlite3.sqlite3_column_int64(statement, 0),
                             AccessHash = Sqlite3.sqlite3_column_int64(statement, 1),
@@ -803,7 +803,7 @@ namespace Unigram.Services
             }
             else
             {
-                var req = new TLMessagesGetArchivedStickers();
+                var req = new ITLMessagesGetArchivedStickers();
                 req.Limit = 0;
                 req.IsMasks = stickerType == StickerType.Mask;
                 _protoService.SendRequestAsync<TLMessagesArchivedStickers>("messages.getArchivedStickers", req, result =>
@@ -905,7 +905,7 @@ namespace Unigram.Services
                                 newStickerArray.Add(null);
                                 int index = i;
 
-                                _protoService.GetStickerSetAsync(new TLInputStickerSetID { Id = stickerSet.Set.Id, AccessHash = stickerSet.Set.AccessHash }, callback =>
+                                _protoService.GetStickerSetAsync(new ITLInputStickerSetID { Id = stickerSet.Set.Id, AccessHash = stickerSet.Set.AccessHash }, callback =>
                                 {
                                     newStickerArray[index] = callback;
                                     newStickerSets[stickerSet.Set.Id] = callback;
@@ -1017,7 +1017,7 @@ namespace Unigram.Services
 
         private void PutFeaturedStickersToCache(IList<TLMessagesStickerSet> stickers, IList<long> unreadStickers, int date, int hash)
         {
-            TLVector<TLMessagesStickerSet> stickersFinal = stickers != null ? new TLVector<TLMessagesStickerSet>(stickers) : null;
+            TLVector<TLMessagesStickerSet> stickersFinal = stickers != null ? new ITLVector<TLMessagesStickerSet>(stickers) : null;
 
             try
             {
@@ -1040,7 +1040,7 @@ namespace Unigram.Services
 
                         using (var to = new TLBinaryWriter(data2))
                         {
-                            new TLVector<long>(unreadStickers).Write(to);
+                            new ITLVector<long>(unreadStickers).Write(to);
                         }
 
                         Sqlite3.sqlite3_reset(statement);
@@ -1118,7 +1118,7 @@ namespace Unigram.Services
                 return;
             }
             readingStickerSets.Add(id);
-            _protoService.ReadFeaturedStickersAsync(new TLVector<long> { id }, null);
+            _protoService.ReadFeaturedStickersAsync(new ITLVector<long> { id }, null);
 
             //AndroidUtilities.runOnUIThread(new Runnable()
             //{
@@ -1185,13 +1185,13 @@ namespace Unigram.Services
                 string caption;
                 if (stickerType == StickerType.Image)
                 {
-                    req = new TLMessagesGetAllStickers();
+                    req = new ITLMessagesGetAllStickers();
                     hash = ((TLMessagesGetAllStickers)req).Hash = force ? 0 : loadHash[type];
                     caption = "messages.getAllStickers";
                 }
                 else
                 {
-                    req = new TLMessagesGetMaskStickers();
+                    req = new ITLMessagesGetMaskStickers();
                     hash = ((TLMessagesGetMaskStickers)req).Hash = force ? 0 : loadHash[type];
                     caption = "messages.getMaskStickers";
                 }
@@ -1230,7 +1230,7 @@ namespace Unigram.Services
                                 newStickerArray.Add(null);
                                 int index = i;
 
-                                _protoService.GetStickerSetAsync(new TLInputStickerSetID { Id = stickerSet.Id, AccessHash = stickerSet.AccessHash }, callback =>
+                                _protoService.GetStickerSetAsync(new ITLInputStickerSetID { Id = stickerSet.Id, AccessHash = stickerSet.AccessHash }, callback =>
                                 {
                                     newStickerArray[index] = callback;
                                     newStickerSets[stickerSet.Id] = callback;
@@ -1261,7 +1261,7 @@ namespace Unigram.Services
 
         private void PutStickersToCache(StickerType stickerType, List<TLMessagesStickerSet> stickers, int date, int hash)
         {
-            TLVector<TLMessagesStickerSet> stickersFinal = stickers != null ? new TLVector<TLMessagesStickerSet>(stickers) : null;
+            TLVector<TLMessagesStickerSet> stickersFinal = stickers != null ? new ITLVector<TLMessagesStickerSet>(stickers) : null;
 
             try
             {
@@ -1504,7 +1504,7 @@ namespace Unigram.Services
         {
             StickerType stickerType = stickerSet.IsMasks ? StickerType.Mask : StickerType.Image;
             int type = (int)stickerType;
-            TLInputStickerSetID stickerSetID = new TLInputStickerSetID();
+            TLInputStickerSetID stickerSetID = new ITLInputStickerSetID();
             stickerSetID.AccessHash = stickerSet.AccessHash;
             stickerSetID.Id = stickerSet.Id;
             if (hide != 0)
@@ -1532,7 +1532,7 @@ namespace Unigram.Services
                 PutStickersToCache(stickerType, stickerSets[type], loadDate[type], loadHash[type]);
                 //NotificationCenter.getInstance().postNotificationName(NotificationCenter.stickersDidLoaded, type);
                 StickersDidLoaded?.Invoke(this, new StickersDidLoadedEventArgs(stickerType));
-                TLMessagesInstallStickerSet req = new TLMessagesInstallStickerSet();
+                TLMessagesInstallStickerSet req = new ITLMessagesInstallStickerSet();
                 req.StickerSet = stickerSetID;
                 req.Archived = hide == 1;
                 _protoService.SendRequestAsync<TLMessagesStickerSetInstallResultBase>("messages.installStickerSet", req, result =>
@@ -1554,7 +1554,7 @@ namespace Unigram.Services
             }
             else
             {
-                TLMessagesUninstallStickerSet req = new TLMessagesUninstallStickerSet();
+                TLMessagesUninstallStickerSet req = new ITLMessagesUninstallStickerSet();
                 req.StickerSet = stickerSetID;
                 _protoService.SendRequestAsync<bool>("messages.uninstallStickerSet", req, result =>
                 {

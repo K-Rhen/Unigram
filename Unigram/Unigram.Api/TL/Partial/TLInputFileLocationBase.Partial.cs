@@ -6,7 +6,25 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLInputFileLocationBase
+#if !PORTABLE
+    public partial interface TLInputFileLocationBase
+    {
+        bool LocationEquals(TLInputFileLocationBase location);
+
+        string GetPartFileName(int partNumbert);
+
+        string GetFileName();
+
+        string GetLocationString();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLInputFileLocationBase
     {
         public abstract bool LocationEquals(TLInputFileLocationBase location);
 
@@ -17,7 +35,12 @@ namespace Telegram.Api.TL
         public abstract string GetLocationString();
     }
 
-    public partial class TLInputFileLocation
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLInputFileLocation
     {
         public override bool LocationEquals(TLInputFileLocationBase location)
         {
@@ -48,7 +71,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLInputDocumentFileLocation
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLInputDocumentFileLocation
     {
         public override bool LocationEquals(TLInputFileLocationBase location)
         {
@@ -97,7 +125,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLInputEncryptedFileLocation
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLInputEncryptedFileLocation
     {
         public override bool LocationEquals(TLInputFileLocationBase location)
         {

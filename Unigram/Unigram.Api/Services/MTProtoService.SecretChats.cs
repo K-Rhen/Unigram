@@ -14,7 +14,7 @@ namespace Telegram.Api.Services
 
         public void GetDHConfigAsync(int version, int randomLength, Action<TLMessagesDHConfig> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLMessagesGetDHConfig { Version = version, RandomLength = randomLength };
+            var obj = new ITLMessagesGetDHConfig { Version = version, RandomLength = randomLength };
 
             SendInformativeMessage("messages.getDhConfig", obj, callback, faultCallback);
         }
@@ -22,7 +22,7 @@ namespace Telegram.Api.Services
         // TODO: Encrypted 
         //public void RequestEncryptionAsync(TLInputUserBase userId, int randomId, byte[] ga, Action<TLEncryptedChatBase> callback, Action<TLRPCError> faultCallback = null)
         //{
-        //    var obj = new TLMessagesRequestEncryption { UserId = userId, RandomId = randomId, GA = ga };
+        //    var obj = new ITLMessagesRequestEncryption { UserId = userId, RandomId = randomId, GA = ga };
 
         //    SendInformativeMessage<TLEncryptedChatBase>("messages.requestEncryption", obj,
         //        encryptedChat =>
@@ -35,7 +35,7 @@ namespace Telegram.Api.Services
         // TODO: Encrypted 
         //public void AcceptEncryptionAsync(TLInputEncryptedChat peer, byte[] gb, long keyFingerprint, Action<TLEncryptedChatBase> callback, Action<TLRPCError> faultCallback = null)
         //{
-        //    var obj = new TLMessagesAcceptEncryption { Peer = peer, GB = gb, KeyFingerprint = keyFingerprint };
+        //    var obj = new ITLMessagesAcceptEncryption { Peer = peer, GB = gb, KeyFingerprint = keyFingerprint };
 
         //    SendInformativeMessage<TLEncryptedChatBase>("messages.acceptEncryption", obj,
         //        encryptedChat =>
@@ -48,7 +48,7 @@ namespace Telegram.Api.Services
         // TODO: Encrypted 
         //public void DiscardEncryptionAsync(int chatId, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         //{
-        //    var obj = new TLMessagesDiscardEncryption { ChatId = chatId };
+        //    var obj = new ITLMessagesDiscardEncryption { ChatId = chatId };
 
         //    SendInformativeMessage("messages.discardEncryption", obj, callback, faultCallback);
         //}

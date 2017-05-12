@@ -320,7 +320,7 @@ namespace Unigram.Common
                             var documentMedia = repliedMessage.Media as TLMessageMediaDocument;
                             if (documentMedia != null)
                             {
-                                if (TLMessage.IsSticker(documentMedia.Document))
+                                if (documentMedia.Document.IsSticker())
                                 {
                                     var emoji = string.Empty;
 
@@ -336,19 +336,19 @@ namespace Unigram.Common
 
                                     return ReplaceLinks(AppResources.MessageActionPinSticker, new[] { userFullName, emoji }, new[] { "tg-user://" + fromId.Value }, useActiveLinks);
                                 }
-                                if (TLMessage.IsVoice(documentMedia.Document))
+                                if (documentMedia.Document.IsVoice())
                                 {
                                     return ReplaceLinks(AppResources.MessageActionPinVoiceMessage, new[] { userFullName }, new[] { "tg-user://" + fromId.Value }, useActiveLinks);
                                 }
-                                if (TLMessage.IsMusic(documentMedia.Document))
+                                if (documentMedia.Document.IsMusic())
                                 {
                                     return ReplaceLinks(AppResources.MessageActionPinTrack, new[] { userFullName }, new[] { "tg-user://" + fromId.Value }, useActiveLinks);
                                 }
-                                if (TLMessage.IsVideo(documentMedia.Document))
+                                if (documentMedia.Document.IsVideo())
                                 {
                                     return ReplaceLinks(AppResources.MessageActionPinVideo, new[] { userFullName }, new[] { "tg-user://" + fromId.Value }, useActiveLinks);
                                 }
-                                if (TLMessage.IsGif(documentMedia.Document))
+                                if (documentMedia.Document.IsGif())
                                 {
                                     return ReplaceLinks(AppResources.MessageActionPinGif, new[] { userFullName }, new[] { "tg-user://" + fromId.Value }, useActiveLinks);
                                 }
@@ -522,7 +522,7 @@ namespace Unigram.Common
                 var navigationService = WindowWrapper.Current().NavigationServices.GetByFrameId("Main");
                 if (navigationService != null)
                 {
-                    navigationService.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = int.Parse(userId.Replace("tg-user://", string.Empty)) });
+                    navigationService.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = int.Parse(userId.Replace("tg-user://", string.Empty)) });
                 }
             }
         }

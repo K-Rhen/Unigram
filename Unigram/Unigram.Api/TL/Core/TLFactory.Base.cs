@@ -20,9 +20,9 @@ namespace Telegram.Api.TL
             else if (typeof(T) == typeof(Boolean)) return (T)(Object)from.ReadBoolean();
             else if (typeof(T) == typeof(String)) return (T)(Object)from.ReadString();
             else if (typeof(T) == typeof(Byte[])) return (T)(Object)from.ReadByteArray();
-            else if (typeof(T) == typeof(TLInt128)) return (T)(Object)new TLInt128(from);
-            else if (typeof(T) == typeof(TLInt256)) return (T)(Object)new TLInt256(from);
-            else if (typeof(T) == typeof(TLNonEncryptedTransportMessage)) return (T)(Object)new TLNonEncryptedTransportMessage(from);
+            else if (typeof(T) == typeof(TLInt128)) return (T)(Object)new ITLInt128(from);
+            else if (typeof(T) == typeof(TLInt256)) return (T)(Object)new ITLInt256(from);
+            else if (typeof(T) == typeof(TLNonEncryptedTransportMessage)) return (T)(Object)new ITLNonEncryptedTransportMessage(from);
 
             var type = from.ReadUInt32();
             if (type == 0xFFFFFF0D || typeof(T) == typeof(TLActionInfo))

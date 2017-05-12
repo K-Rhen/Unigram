@@ -73,13 +73,13 @@ namespace Telegram.Api.Services.FileManager
 
         public TLInputFileBase ToInputFile()
         {
-            return IsSmallFile ? (TLInputFileBase)new TLInputFile
+            return IsSmallFile ? (TLInputFileBase)new ITLInputFile
             {
                 Id = FileId,
                 Md5Checksum = string.Empty,
                 Name = FileName,
                 Parts = Parts.Count
-            } : new TLInputFileBig
+            } : new ITLInputFileBig
             {
                 Id = FileId,
                 Name = FileName,

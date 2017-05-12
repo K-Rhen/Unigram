@@ -12,7 +12,7 @@ namespace Telegram.Api.Services
     {
         public void ClearSavedInfoAsync(bool info, bool credentials, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPaymentsClearSavedInfo { IsInfo = info, IsCredentials = credentials };
+            var obj = new ITLPaymentsClearSavedInfo { IsInfo = info, IsCredentials = credentials };
 
             const string caption = "payments.clearSavedInfo";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -20,12 +20,12 @@ namespace Telegram.Api.Services
 
         public void GetPaymentFormAsync(int msgId, Action<TLPaymentsPaymentForm> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPaymentsGetPaymentForm { MsgId = msgId };
+            var obj = new ITLPaymentsGetPaymentForm { MsgId = msgId };
 
             const string caption = "payments.getPaymentForm";
             SendInformativeMessage<TLPaymentsPaymentForm>(caption, obj, result =>
             {
-                _cacheService.SyncUsersAndChats(result.Users, new TLVector<TLChatBase>(), tuple =>
+                _cacheService.SyncUsersAndChats(result.Users, new ITLVector<TLChatBase>(), tuple =>
                 {
                     result.Users = tuple.Item1;
                     callback?.Invoke(result);
@@ -35,12 +35,12 @@ namespace Telegram.Api.Services
 
         public void GetPaymentReceiptAsync(int msgId, Action<TLPaymentsPaymentReceipt> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPaymentsGetPaymentReceipt { MsgId = msgId };
+            var obj = new ITLPaymentsGetPaymentReceipt { MsgId = msgId };
 
             const string caption = "payments.getPaymentReceipt";
             SendInformativeMessage<TLPaymentsPaymentReceipt>(caption, obj, result =>
             {
-                _cacheService.SyncUsersAndChats(result.Users, new TLVector<TLChatBase>(), tuple =>
+                _cacheService.SyncUsersAndChats(result.Users, new ITLVector<TLChatBase>(), tuple =>
                 {
                     result.Users = tuple.Item1;
                     callback?.Invoke(result);
@@ -50,7 +50,7 @@ namespace Telegram.Api.Services
 
         public void GetSavedInfoAsync(Action<TLPaymentsSavedInfo> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPaymentsGetSavedInfo { };
+            var obj = new ITLPaymentsGetSavedInfo { };
 
             const string caption = "payments.getSavedInfo";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -58,7 +58,7 @@ namespace Telegram.Api.Services
 
         public void SendPaymentFormAsync(int msgId, string infoId, string optionId, TLInputPaymentCredentialsBase credentials, Action<TLPaymentsPaymentResultBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPaymentsSendPaymentForm { MsgId = msgId, RequestedInfoId = infoId, ShippingOptionId = optionId, Credentials = credentials };
+            var obj = new ITLPaymentsSendPaymentForm { MsgId = msgId, RequestedInfoId = infoId, ShippingOptionId = optionId, Credentials = credentials };
 
             const string caption = "payments.sendPaymentForm";
             SendInformativeMessage<TLPaymentsPaymentResultBase>(caption, obj,
@@ -84,7 +84,7 @@ namespace Telegram.Api.Services
         
         public void ValidateRequestedInfoAsync(int msgId, TLPaymentRequestedInfo info, bool save, Action<TLPaymentsValidatedRequestedInfo> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPaymentsValidateRequestedInfo { IsSave = save, MsgId = msgId, Info = info };
+            var obj = new ITLPaymentsValidateRequestedInfo { IsSave = save, MsgId = msgId, Info = info };
 
             const string caption = "payments.validateRequestedInfo";
             SendInformativeMessage(caption, obj, callback, faultCallback);

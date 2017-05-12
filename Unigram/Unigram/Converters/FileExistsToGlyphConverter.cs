@@ -25,12 +25,12 @@ namespace Unigram.Converters
                     var fileName = document.GetFileName();
                     if (File.Exists(Path.Combine(ApplicationData.Current.TemporaryFolder.Path, fileName)))
                     {
-                        if (TLMessage.IsVideo(document))
+                        if (document.IsVideo())
                         {
                             return Symbol.Play;
                         }
 
-                        if (TLMessage.IsVoice(document))
+                        if (document.IsVoice())
                         {
                             return Symbol.Play;
                         }

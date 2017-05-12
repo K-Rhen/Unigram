@@ -12,7 +12,7 @@ namespace Telegram.Api.Services
     {
         public void AcceptCallAsync(TLInputPhoneCall peer, byte[] gb, Action<TLPhonePhoneCall> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneAcceptCall { Peer = peer, GB = gb, Protocol = GetPhoneCallProtocol() };
+            var obj = new ITLPhoneAcceptCall { Peer = peer, GB = gb, Protocol = GetPhoneCallProtocol() };
 
             const string caption = "phone.acceptCall";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -20,7 +20,7 @@ namespace Telegram.Api.Services
 
         public void ConfirmCallAsync(TLInputPhoneCall peer, byte[] ga, long fingerprint, Action<TLPhonePhoneCall> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneConfirmCall { Peer = peer, GA = ga, KeyFingerprint = fingerprint, Protocol = GetPhoneCallProtocol() };
+            var obj = new ITLPhoneConfirmCall { Peer = peer, GA = ga, KeyFingerprint = fingerprint, Protocol = GetPhoneCallProtocol() };
 
             const string caption = "phone.confirmCall";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -28,7 +28,7 @@ namespace Telegram.Api.Services
 
         public void DiscardCallAsync(TLInputPhoneCall peer, int duration, TLPhoneCallDiscardReasonBase reason, long connectionId, Action<TLUpdatesBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneDiscardCall { Peer = peer, Duration = duration, Reason = reason, ConnectionId = connectionId };
+            var obj = new ITLPhoneDiscardCall { Peer = peer, Duration = duration, Reason = reason, ConnectionId = connectionId };
 
             const string caption = "phone.discardCall";
             SendInformativeMessage<TLUpdatesBase>(caption, obj,
@@ -51,7 +51,7 @@ namespace Telegram.Api.Services
 
         public void GetCallConfigAsync(Action<TLDataJSON> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneGetCallConfig();
+            var obj = new ITLPhoneGetCallConfig();
 
             const string caption = "phone.getCallConfig";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -59,7 +59,7 @@ namespace Telegram.Api.Services
 
         public void ReceivedCallAsync(TLInputPhoneCall peer, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneReceivedCall { Peer = peer };
+            var obj = new ITLPhoneReceivedCall { Peer = peer };
 
             const string caption = "phone.receivedCall";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -67,7 +67,7 @@ namespace Telegram.Api.Services
 
         public void RequestCallAsync(TLInputUserBase userId, int randomId, byte[] gaHash, Action<TLPhonePhoneCall> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneRequestCall { UserId = userId, RandomId = randomId, GAHash = gaHash, Protocol = GetPhoneCallProtocol() };
+            var obj = new ITLPhoneRequestCall { UserId = userId, RandomId = randomId, GAHash = gaHash, Protocol = GetPhoneCallProtocol() };
 
             const string caption = "phone.requestCall";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -75,7 +75,7 @@ namespace Telegram.Api.Services
 
         public void SaveCallDebugAsync(TLInputPhoneCall peer, TLDataJSON debug, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneSaveCallDebug { Peer = peer, Debug = debug };
+            var obj = new ITLPhoneSaveCallDebug { Peer = peer, Debug = debug };
 
             const string caption = "phone.saveCallDebug";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -83,7 +83,7 @@ namespace Telegram.Api.Services
 
         public void SetCallRatingAsync(TLInputPhoneCall peer, int rating, string comment, Action<TLUpdatesBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhoneSetCallRating { Peer = peer, Rating = rating, Comment = comment };
+            var obj = new ITLPhoneSetCallRating { Peer = peer, Rating = rating, Comment = comment };
 
             const string caption = "phone.setCallRating";
             SendInformativeMessage<TLUpdatesBase>(caption, obj,
@@ -106,7 +106,7 @@ namespace Telegram.Api.Services
 
         private TLPhoneCallProtocol GetPhoneCallProtocol()
         {
-            return new TLPhoneCallProtocol
+            return new ITLPhoneCallProtocol
             {
                 MaxLayer = Constants.CallsMaxLayer,
                 MinLayer = Constants.CallsMinLayer,

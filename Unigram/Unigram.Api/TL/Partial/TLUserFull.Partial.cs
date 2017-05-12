@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLUserFull
+#if !PORTABLE
+    public partial interface TLUserFull
+    {
+        void Update(TLUserFull userFull);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUserFull
     {
         public void Update(TLUserFull userFull)
         {

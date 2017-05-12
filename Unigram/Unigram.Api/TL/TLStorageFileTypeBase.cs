@@ -4,12 +4,20 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLStorageFileTypeBase : TLObject, ITLStorageFileTypeBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLStorageFileTypeBase : ITLObject, TLStorageFileTypeBase
 	{
 	}
 
+#if !PORTABLE
 	[Guid(0x18068029, 0xeb39, 0x8ea6, 0xf0, 0xfc, 0x4c, 0xee, 0x26, 0x8c, 0x5c, 0xef)]
-	public partial interface ITLStorageFileTypeBase : TLObject
+	public partial interface TLStorageFileTypeBase : TLObject
 	{
 	}
+#endif
+
 }

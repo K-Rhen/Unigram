@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLRichTextBase
+#if !PORTABLE
+    public partial interface TLRichTextBase
+    {
+        string ToString(bool reserved);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLRichTextBase
     {
         public override string ToString()
         {
@@ -19,7 +31,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextBold
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextBold
     {
         public override string ToString(bool reserved)
         {
@@ -27,7 +44,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextConcat
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextConcat
     {
         public override string ToString(bool reserved)
         {
@@ -41,7 +63,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextEmail
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextEmail
     {
         public override string ToString(bool reserved)
         {
@@ -49,7 +76,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextEmpty
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextEmpty
     {
         public override string ToString(bool reserved)
         {
@@ -57,7 +89,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextFixed
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextFixed
     {
         public override string ToString(bool reserved)
         {
@@ -65,7 +102,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextItalic
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextItalic
     {
         public override string ToString(bool reserved)
         {
@@ -73,7 +115,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextPlain
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextPlain
     {
         public override string ToString(bool reserved)
         {
@@ -81,7 +128,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextStrike
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextStrike
     {
         public override string ToString(bool reserved)
         {
@@ -89,7 +141,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextUnderline
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextUnderline
     {
         public override string ToString(bool reserved)
         {
@@ -97,7 +154,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLTextUrl
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLTextUrl
     {
         public override string ToString(bool reserved)
         {

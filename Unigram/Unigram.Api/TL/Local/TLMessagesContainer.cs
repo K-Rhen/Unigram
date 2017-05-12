@@ -10,7 +10,8 @@ using Telegram.Api.TL;
 namespace Telegram.Api.TL
 {
     // TODO: find a better name, this is confusing with TLMessageContainer :P
-    public class TLMessagesContainter : TLMessageBase
+#if PORTABLE
+    public class TLMessagesContainter : ITLMessageBase
     {
         public const uint Signature = 4294967058u;
 
@@ -106,4 +107,5 @@ namespace Telegram.Api.TL
 
         public TLMessage PreviousMessage { get; set; }
     }
+#endif
 }

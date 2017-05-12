@@ -12,7 +12,74 @@ using Windows.UI.Xaml;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLDialog : INotifyPropertyChanged
+#if !PORTABLE
+    public partial interface TLDialog : ITLReadMaxId, INotifyPropertyChanged
+    {
+        ObservableCollection<TLMessageBase> Messages { get; set; }
+
+        List<TLMessageBase> CommitMessages { get; set; }
+
+        //public override void ReadFromCache(TLBinaryReader from)
+        //{
+        //    Messages = new ObservableCollection<TLMessageBase>(TLFactory.Read<TLVector<TLMessageBase>>(from, true));
+        //    CommitMessages = new List<TLMessageBase>(TLFactory.Read<TLVector<TLMessageBase>>(from, true));
+        //}
+
+        //public override void WriteToCache(TLBinaryWriter to)
+        //{
+        //    to.WriteObject(new ITLVector<TLMessageBase>(Messages), true);
+        //    to.WriteObject(new ITLVector<TLMessageBase>(CommitMessages), true);
+        //}
+
+        int CountMessages();
+
+        TLInputPeerBase ToInputPeer();
+
+        void Update(TLDialog dialog);
+
+        object MessagesSyncRoot { get; }
+
+        long? TopMessageRandomId { get; set; }
+
+        TLMessageBase TopMessageItem { get; set; }
+
+        int GetDateIndex();
+
+        int GetDateIndexWithDraft();
+
+        bool IsChat { get; }
+
+        ITLDialogWith With { get; set; }
+
+        int WithId { get; }
+
+        int Id { get; }
+
+        TLDialog Self { get; }
+
+    #region Add
+
+        int PinnedIndex { get; set; }
+
+        bool IsSearchResult { get; set; }
+
+        Visibility ChatBaseVisibility { get; }
+
+        Visibility VerifiedVisibility { get; }
+
+        Visibility MutedVisibility { get; }
+
+    #endregion
+
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDialog : INotifyPropertyChanged
     {
         public ObservableCollection<TLMessageBase> Messages { get; set; } = new ObservableCollection<TLMessageBase>();
 
@@ -26,8 +93,8 @@ namespace Telegram.Api.TL
 
         //public override void WriteToCache(TLBinaryWriter to)
         //{
-        //    to.WriteObject(new TLVector<TLMessageBase>(Messages), true);
-        //    to.WriteObject(new TLVector<TLMessageBase>(CommitMessages), true);
+        //    to.WriteObject(new ITLVector<TLMessageBase>(Messages), true);
+        //    to.WriteObject(new ITLVector<TLMessageBase>(CommitMessages), true);
         //}
 
         public virtual int CountMessages()
@@ -194,7 +261,7 @@ namespace Telegram.Api.TL
 
 
 
-        public object MessagesSyncRoot = new object();
+        public object MessagesSyncRoot => new object();
 
         public long? TopMessageRandomId { get; set; }
 
@@ -283,7 +350,7 @@ namespace Telegram.Api.TL
             }
         }
 
-        #region Add
+#region Add
 
         public event PropertyChangedEventHandler PropertyChanged;
         public override void RaisePropertyChanged(string propertyName)
@@ -356,7 +423,7 @@ namespace Telegram.Api.TL
                 return muteUntilDateTime > DateTime.Now ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-        #endregion
+#endregion
 
     }
 }

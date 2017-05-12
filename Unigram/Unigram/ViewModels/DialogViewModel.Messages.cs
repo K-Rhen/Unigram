@@ -118,7 +118,7 @@ namespace Unigram.ViewModels
 
                     if (dialog.ReportSpam)
                     {
-                        var response = await ProtoService.ReportSpamAsync(channel.ToInputChannel(), message.From.ToInputUser(), new TLVector<int> { message.Id });
+                        var response = await ProtoService.ReportSpamAsync(channel.ToInputChannel(), message.From.ToInputUser(), new ITLVector<int> { message.Id });
                     }
                 }
             }
@@ -177,8 +177,8 @@ namespace Unigram.ViewModels
 
         private void DeleteMessagesInternal(TLMessageBase lastMessage, IList<TLMessageBase> messages)
         {
-            var cachedMessages = new TLVector<long>();
-            var remoteMessages = new TLVector<int>();
+            var cachedMessages = new ITLVector<long>();
+            var remoteMessages = new ITLVector<int>();
             for (int i = 0; i < messages.Count; i++)
             {
                 if (messages[i].RandomId.HasValue && messages[i].RandomId != 0L)
@@ -216,13 +216,13 @@ namespace Unigram.ViewModels
             }
             if (remoteMessages != null && remoteMessages.Count > 0)
             {
-                var messages = new TLVector<int>(remoteMessages.Select(x => x.Id).ToList());
+                var messages = new ITLVector<int>(remoteMessages.Select(x => x.Id).ToList());
 
                 Task<MTProtoResponse<TLMessagesAffectedMessages>> task;
 
                 if (Peer is TLInputPeerChannel)
                 {
-                    task = ProtoService.DeleteMessagesAsync(new TLInputChannel { ChannelId = ((TLInputPeerChannel)Peer).ChannelId, AccessHash = ((TLInputPeerChannel)Peer).AccessHash }, messages);
+                    task = ProtoService.DeleteMessagesAsync(new ITLInputChannel { ChannelId = ((TLInputPeerChannel)Peer).ChannelId, AccessHash = ((TLInputPeerChannel)Peer).AccessHash }, messages);
                 }
                 else
                 {
@@ -246,7 +246,7 @@ namespace Unigram.ViewModels
         {
             if (message is TLMessage)
             {
-                await ShareView.Current.ShowAsync(new TLStickerSet());
+                await ShareView.Current.ShowAsync(new ITLStickerSet());
                 return;
 
                 App.InMemoryState.ForwardMessages = new List<TLMessage> { message as TLMessage };
@@ -447,7 +447,7 @@ namespace Unigram.ViewModels
                 EditMessage = _editedMessage,
                 EditUntil = editUntil,
                 // TODO: setup original content
-                PreviousMessage = new TLMessage
+                PreviousMessage = new ITLMessage
                 {
                     ToId = message.ToId,
                     FromId = message.FromId,
@@ -595,7 +595,7 @@ namespace Unigram.ViewModels
                 if (dialogResult == ContentDialogResult.Primary)
                 {
                     var channel = Peer as TLInputPeerChannel;
-                    var inputChannel = new TLInputChannel { ChannelId = channel.ChannelId, AccessHash = channel.AccessHash };
+                    var inputChannel = new ITLInputChannel { ChannelId = channel.ChannelId, AccessHash = channel.AccessHash };
 
                     var result = await ProtoService.UpdatePinnedMessageAsync(false, inputChannel, 0);
                     if (result.IsSucceeded)
@@ -618,7 +618,7 @@ namespace Unigram.ViewModels
                 if (dialogResult == ContentDialogResult.Primary)
                 {
                     var channel = Peer as TLInputPeerChannel;
-                    var inputChannel = new TLInputChannel { ChannelId = channel.ChannelId, AccessHash = channel.AccessHash };
+                    var inputChannel = new ITLInputChannel { ChannelId = channel.ChannelId, AccessHash = channel.AccessHash };
 
                     var silent = dialog.IsChecked == false;
                     var result = await ProtoService.UpdatePinnedMessageAsync(silent, inputChannel, message.Id);
@@ -1037,7 +1037,7 @@ namespace Unigram.ViewModels
         {
             if (message?.Media is TLMessageMediaDocument documentMedia && documentMedia.Document is TLDocument document)
             {
-                var response = await ProtoService.SaveGifAsync(new TLInputDocument { Id = document.Id, AccessHash = document.AccessHash }, false);
+                var response = await ProtoService.SaveGifAsync(new ITLInputDocument { Id = document.Id, AccessHash = document.AccessHash }, false);
                 if (response.IsSucceeded)
                 {
                     _stickers.SyncGifs();

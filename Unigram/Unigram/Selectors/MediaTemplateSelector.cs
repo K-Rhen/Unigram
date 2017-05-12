@@ -39,7 +39,7 @@ namespace Unigram.Selectors
             var presenter = container as ContentControl;
             if (presenter != null && item is TLDocument doc)
             {
-                presenter.Content = new TLMessage { Media = new TLMessageMediaDocument { Document = doc } };
+                presenter.Content = new ITLMessage { Media = new ITLMessageMediaDocument { Document = doc } };
             }
 
             if (item is TLMessage message)
@@ -89,19 +89,19 @@ namespace Unigram.Selectors
                 
                 if (item is TLDocument document)
                 {
-                    if (TLMessage.IsVoice(document))
+                    if (document.IsVoice())
                     {
                         return AudioTemplate;
                     }
-                    else if (TLMessage.IsVideo(document))
+                    else if (document.IsVideo())
                     {
                         return VideoTemplate;
                     }
-                    else if (TLMessage.IsGif(document))
+                    else if (document.IsGif())
                     {
                         return GifTemplate;
                     }
-                    else if (TLMessage.IsSticker(document))
+                    else if (document.IsSticker())
                     {
                         return StickerTemplate;
                     }

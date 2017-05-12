@@ -109,7 +109,7 @@ namespace Unigram.ViewModels.Chats
         public RelayCommand<StorageFile> EditPhotoCommand => new RelayCommand<StorageFile>(EditPhotoExecute);
         private async void EditPhotoExecute(StorageFile file)
         {
-            var fileLocation = new TLFileLocation
+            var fileLocation = new ITLFileLocation
             {
                 VolumeId = TLLong.Random(),
                 LocalId = TLInt.Random(),
@@ -132,7 +132,7 @@ namespace Unigram.ViewModels.Chats
             var upload = await _uploadFileManager.UploadFileAsync(fileId, fileCache.Name, false);
             if (upload != null)
             {
-                var response = await ProtoService.EditChatPhotoAsync(_item.Id, new TLInputChatUploadedPhoto { File = upload.ToInputFile() });
+                var response = await ProtoService.EditChatPhotoAsync(_item.Id, new ITLInputChatUploadedPhoto { File = upload.ToInputFile() });
                 if (response.IsSucceeded)
                 {
                     //var photo = response.Result.Photo as TLPhoto;

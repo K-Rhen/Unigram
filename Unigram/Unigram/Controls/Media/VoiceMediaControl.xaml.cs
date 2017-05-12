@@ -222,7 +222,7 @@ namespace Unigram.Controls.Media
 
                         if (message.IsMediaUnread && !message.IsOut)
                         {
-                            MTProtoService.Current.ReadMessageContentsAsync(new TLVector<int> { message.Id }, affected =>
+                            MTProtoService.Current.ReadMessageContentsAsync(new ITLVector<int> { message.Id }, affected =>
                             {
                                 message.IsMediaUnread = false;
                                 message.RaisePropertyChanged(() => message.IsMediaUnread);

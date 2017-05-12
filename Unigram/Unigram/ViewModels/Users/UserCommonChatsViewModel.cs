@@ -61,7 +61,7 @@ namespace Unigram.ViewModels.Users
                     return response.Result.Chats;
                 }
 
-                return new TLChatBase[0];
+                return new ITLChatBase[0];
             }
         }
     }

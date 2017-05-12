@@ -43,7 +43,7 @@ namespace Unigram.Views.Settings
             {
                 // WARNING: we are using TLMessagesStickerSet only because we already expanded it to supply "Cover" property.
                 // but this IS NOT a full sticker set.
-                await StickerSetView.Current.ShowAsync(new TLInputStickerSetID { Id = stickerSet.Set.Id, AccessHash = stickerSet.Set.AccessHash });
+                await StickerSetView.Current.ShowAsync(new ITLInputStickerSetID { Id = stickerSet.Set.Id, AccessHash = stickerSet.Set.AccessHash });
             }
         }
     }

@@ -4,16 +4,24 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLContactsBlockedBase : TLObject, ITLContactsBlockedBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLContactsBlockedBase : ITLObject, TLContactsBlockedBase
 	{
 		public TLVector<TLContactBlocked> Blocked { get; set; }
 		public TLVector<TLUserBase> Users { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0x8dfb760e, 0x3780, 0x8ccc, 0xd7, 0x9c, 0x22, 0x98, 0x11, 0xd9, 0x35, 0x7f)]
-	public partial interface ITLContactsBlockedBase : TLObject
+	public partial interface TLContactsBlockedBase : TLObject
 	{
 		TLVector<TLContactBlocked> Blocked { get; set; }
 		TLVector<TLUserBase> Users { get; set; }
 	}
+#endif
+
 }

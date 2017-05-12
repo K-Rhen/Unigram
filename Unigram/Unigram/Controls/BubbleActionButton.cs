@@ -61,7 +61,7 @@ namespace Unigram.Controls
             {
                 // TODO: check if blocked
                 // WARNING: this is absolutely the wrong way
-                //var response = await MTProtoService.Current.GetFullUserAsync(new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 });
+                //var response = await MTProtoService.Current.GetFullUserAsync(new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 });
                 //if (response.IsSucceeded)
                 //{
                 //    var blocked = response.Result.IsBlocked;
@@ -207,7 +207,7 @@ namespace Unigram.Controls
             {
                 // TODO: check if blocked
                 // WARNING: this is absolutely the wrong way
-                //var response = await MTProtoService.Current.GetFullUserAsync(new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 });
+                //var response = await MTProtoService.Current.GetFullUserAsync(new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 });
                 //if (response.IsSucceeded)
                 //{
                 //    var blocked = response.Result.IsBlocked;

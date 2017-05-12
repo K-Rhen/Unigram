@@ -240,12 +240,12 @@ namespace Telegram.Api
 
         public static TLInputChannel ToInputChannel(this TLChannel channel)
         {
-            return new TLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash.Value };
+            return new ITLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash.Value };
         }
 
         public static TLInputChannel ToInputChannel(this TLChannelForbidden channel)
         {
-            return new TLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash };
+            return new ITLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash };
         }
     }
 }

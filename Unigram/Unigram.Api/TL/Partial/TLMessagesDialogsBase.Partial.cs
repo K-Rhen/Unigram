@@ -6,36 +6,58 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLMessagesDialogsBase
+#if !PORTABLE
+    public partial interface TLMessagesDialogsBase
+    {
+        TLMessagesDialogsBase GetEmptyObject();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLMessagesDialogsBase
     {
         public abstract TLMessagesDialogsBase GetEmptyObject();
     }
 
-    public partial class TLMessagesDialogs
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessagesDialogs
     {
         public override TLMessagesDialogsBase GetEmptyObject()
         {
-            return new TLMessagesDialogs
+            return new ITLMessagesDialogs
             {
-                Dialogs = new TLVector<TLDialog>(Dialogs.Count),
-                Messages = new TLVector<TLMessageBase>(Messages.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
-                Users = new TLVector<TLUserBase>(Users.Count)
+                Dialogs = new ITLVector<TLDialog>(Dialogs.Count),
+                Messages = new ITLVector<TLMessageBase>(Messages.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count)
             };
         }
     }
 
-    public partial class TLMessagesDialogsSlice
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessagesDialogsSlice
     {
         public override TLMessagesDialogsBase GetEmptyObject()
         {
-            return new TLMessagesDialogsSlice
+            return new ITLMessagesDialogsSlice
             {
                 Count = Count,
-                Dialogs = new TLVector<TLDialog>(Dialogs.Count),
-                Messages = new TLVector<TLMessageBase>(Messages.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
-                Users = new TLVector<TLUserBase>(Users.Count)
+                Dialogs = new ITLVector<TLDialog>(Dialogs.Count),
+                Messages = new ITLVector<TLMessageBase>(Messages.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count)
             };
         }
     }

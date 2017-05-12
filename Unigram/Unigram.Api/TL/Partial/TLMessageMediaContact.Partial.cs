@@ -7,7 +7,21 @@ using Telegram.Api.Services.Cache;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLMessageMediaContact
+#if !PORTABLE
+    public partial interface TLMessageMediaContact
+    {
+        TLUser User { get; }
+
+        string FullName { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessageMediaContact
     {
         private TLUser _user;
         public TLUser User
@@ -19,13 +33,13 @@ namespace Telegram.Api.TL
                     var user = InMemoryCacheService.Current.GetUser(UserId) as TLUser;
                     if (user == null)
                     {
-                        user = new TLUser
+                        user = new ITLUser
                         {
                             FirstName = FirstName,
                             LastName = LastName,
                             Id = UserId,
                             Phone = PhoneNumber,
-                            Photo = new TLUserProfilePhotoEmpty()
+                            Photo = new ITLUserProfilePhotoEmpty()
                         };
                     }
 

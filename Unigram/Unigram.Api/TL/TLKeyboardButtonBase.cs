@@ -4,14 +4,22 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLKeyboardButtonBase : TLObject, ITLKeyboardButtonBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLKeyboardButtonBase : ITLObject, TLKeyboardButtonBase
 	{
 		public String Text { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0x64b95636, 0x2de1, 0xcca8, 0xa8, 0xe8, 0xf3, 0xfa, 0x81, 0xc2, 0xe4, 0x8f)]
-	public partial interface ITLKeyboardButtonBase : TLObject
+	public partial interface TLKeyboardButtonBase : TLObject
 	{
 		String Text { get; set; }
 	}
+#endif
+
 }

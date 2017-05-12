@@ -18,7 +18,7 @@ namespace Telegram.Api.Services
 	        {
 	            TLUtils.WriteLine(TLUtils.MessageIdString(id));
             }
-            var obj = new TLMsgsAck { MsgIds = ids };
+            var obj = new ITLMsgsAck { MsgIds = ids };
 
             var authKey = _activeTransport.AuthKey;
 	        var sesseionId = _activeTransport.SessionId;
@@ -83,7 +83,7 @@ namespace Telegram.Api.Services
 
         public void PingAsync(long pingId, Action<TLPong> callback, Action<TLRPCError> faultCallback = null)
 	    {
-	        var obj = new TLPing{ PingId = pingId };
+	        var obj = new ITLPing{ PingId = pingId };
 
             SendNonInformativeMessage<TLPong>("ping", obj,
                 result =>
@@ -95,7 +95,7 @@ namespace Telegram.Api.Services
 
         public void PingDelayDisconnectAsync(long pingId, int disconnectDelay, Action<TLPong> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPingDelayDisconnect { PingId = pingId, DisconnectDelay = disconnectDelay };
+            var obj = new ITLPingDelayDisconnect { PingId = pingId, DisconnectDelay = disconnectDelay };
 
             SendNonInformativeMessage<TLPong>("ping_delay_disconnect", obj,
                 result =>
@@ -109,7 +109,7 @@ namespace Telegram.Api.Services
 	    {
             PrintCaption("http_wait");
 
-            var obj = new TLHttpWait { MaxDelay = maxDelay, WaitAfter = waitAfter, MaxWait = maxWait };
+            var obj = new ITLHttpWait { MaxDelay = maxDelay, WaitAfter = waitAfter, MaxWait = maxWait };
             
             var authKey = _activeTransport.AuthKey;
             var salt = _activeTransport.Salt;

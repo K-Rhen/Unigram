@@ -4,18 +4,26 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLPageBase : TLObject, ITLPageBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLPageBase : ITLObject, TLPageBase
 	{
 		public TLVector<TLPageBlockBase> Blocks { get; set; }
 		public TLVector<TLPhotoBase> Photos { get; set; }
 		public TLVector<TLDocumentBase> Videos { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0x770c8671, 0x74c6, 0x7953, 0xb0, 0xd4, 0x43, 0x04, 0xd6, 0x6b, 0x6a, 0x13)]
-	public partial interface ITLPageBase : TLObject
+	public partial interface TLPageBase : TLObject
 	{
 		TLVector<TLPageBlockBase> Blocks { get; set; }
 		TLVector<TLPhotoBase> Photos { get; set; }
 		TLVector<TLDocumentBase> Videos { get; set; }
 	}
+#endif
+
 }

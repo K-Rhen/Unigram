@@ -114,7 +114,7 @@ namespace Telegram.Api.Services
                             RaisePropertyChanged(() => History);
 #endif
                         }
-                        faultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "FastCallback SocketError=" + result });
+                        faultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "FastCallback SocketError=" + result });
                     }
                 },
                 error =>
@@ -129,7 +129,7 @@ namespace Telegram.Api.Services
                         RaisePropertyChanged(() => History);
 #endif
                     }
-                    faultCallback?.Invoke(new TLRPCError
+                    faultCallback?.Invoke(new ITLRPCError
                     {
                         ErrorCode = 404,
 #if WINDOWS_PHONE
@@ -222,7 +222,7 @@ namespace Telegram.Api.Services
                 {
                     //var cultureinfo = CultureInfo.InvariantCulture
                     //SystemEvents.TimeChanged
-                    var initConnection = new TLInitConnection
+                    var initConnection = new ITLInitConnection
                     {
                         ApiId = Constants.ApiId,
                         AppVersion = _deviceInfo.AppVersion,
@@ -235,7 +235,7 @@ namespace Telegram.Api.Services
                     SaveInitConnectionAsync(initConnection);
 
                     // TODO?
-                    var withLayerN = new TLInvokeWithLayer { Query = initConnection, Layer = Constants.SupportedLayer };
+                    var withLayerN = new ITLInvokeWithLayer { Query = initConnection, Layer = Constants.SupportedLayer };
                     data = withLayerN;
                     _activeTransport.Initiated = true;
                 }
@@ -351,7 +351,7 @@ namespace Telegram.Api.Services
                             }
 #endif
                         }
-                        faultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "FastCallback SocketError=" + result });
+                        faultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "FastCallback SocketError=" + result });
                     }
                 },
                 error =>
@@ -369,7 +369,7 @@ namespace Telegram.Api.Services
                         }
 #endif
                     }
-                    faultCallback?.Invoke(new TLRPCError
+                    faultCallback?.Invoke(new ITLRPCError
                     {
                         ErrorCode = 404,
 #if WINDOWS_PHONE
@@ -465,7 +465,7 @@ namespace Telegram.Api.Services
 
                         if (result)
                         {
-                            faultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "FastCallback SocketError=" + socketError });
+                            faultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "FastCallback SocketError=" + socketError });
                         }
                     }                  
                 },
@@ -479,7 +479,7 @@ namespace Telegram.Api.Services
                     // чтобы callback не вызвался два раза из CheckTimeouts и отсюда
                     if (result)
                     {
-                        faultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "FaltCallback" });
+                        faultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "FaltCallback" });
                     }                    
                 });
         }
@@ -493,7 +493,7 @@ namespace Telegram.Api.Services
 
         private TLTransportMessage CreateTLTransportMessage(long salt, long sessionId, int seqNo, long messageId, TLObject obj)
         {
-            var message = new TLTransportMessage();
+            var message = new ITLTransportMessage();
             message.Salt = salt;
             message.SessionId = sessionId;
             message.MsgId = messageId;
@@ -503,9 +503,9 @@ namespace Telegram.Api.Services
             return message;
         }
 
-        public static TLNonEncryptedTransportMessage CreateTLNonEncryptedMessage(long messageId, TLObject obj)
+        private static TLNonEncryptedTransportMessage CreateTLNonEncryptedMessage(long messageId, TLObject obj)
         {
-            var message = new TLNonEncryptedTransportMessage();
+            var message = new ITLNonEncryptedTransportMessage();
             message.AuthKeyId = 0;
             message.MsgId = messageId;
             message.Query = obj;

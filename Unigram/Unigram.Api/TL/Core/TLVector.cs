@@ -7,33 +7,48 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLVector : TLObject
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    class TLVector : ITLObject
     {
 
     }
 
-    public class TLVectorEmpty
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    class TLVectorEmpty
     {
     }
 
-    public class TLVector<T> : TLVector, IList<T>, ICollection<T>, IEnumerable<T>, IEnumerable
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    class ITLVector<T> : TLVector, TLVector<T>, IList<T>, ICollection<T>, IEnumerable<T>, IEnumerable
     {
         private List<T> _items;
 
-        public TLVector()
+        public ITLVector()
         {
             _items = new List<T>();
         }
-        public TLVector(TLBinaryReader from)
+        public ITLVector(TLBinaryReader from)
         {
             _items = new List<T>();
             Read(from);
         }
-        public TLVector(IEnumerable<T> source)
+        public ITLVector(IEnumerable<T> source)
         {
             _items = new List<T>(source);
         }
-        public TLVector(int capacity)
+        public ITLVector(int capacity)
         {
             _items = new List<T>(capacity);
         }
@@ -63,7 +78,7 @@ namespace Telegram.Api.TL
             }
         }
 
-        #region Enumeration
+#region Enumeration
         public T this[int index]
         {
             get { return _items[index]; }
@@ -126,6 +141,13 @@ namespace Telegram.Api.TL
         {
             return _items.GetEnumerator();
         }
-        #endregion
+#endregion
     }
+
+#if !PORTABLE
+    public interface TLVector<T> : TLObject, IList<T>, ICollection<T>, IEnumerable<T>, IEnumerable
+    {
+
+    }
+#endif
 }

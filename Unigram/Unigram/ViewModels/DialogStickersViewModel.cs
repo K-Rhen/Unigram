@@ -40,9 +40,9 @@ namespace Unigram.ViewModels
             _stickersService.StickersDidLoaded += OnStickersDidLoaded;
             _stickersService.FeaturedStickersDidLoaded += OnFeaturedStickersDidLoaded;
 
-            _frequentlyUsed = new TLMessagesStickerSet
+            _frequentlyUsed = new ITLMessagesStickerSet
             {
-                Set = new TLStickerSet
+                Set = new ITLStickerSet
                 {
                     Title = "Frequently used",
                     ShortName = "tg/recentlyUsed"
@@ -106,7 +106,7 @@ namespace Unigram.ViewModels
             var recent = _stickersService.GetRecentStickers(StickerType.Image);
             Execute.BeginOnUIThread(() =>
             {
-                _frequentlyUsed.Documents = new TLVector<TLDocumentBase>(recent);
+                _frequentlyUsed.Documents = new ITLVector<TLDocumentBase>(recent);
 
                 if (SavedStickers.Count > 0 && SavedStickers[0].Set.ShortName.Equals("tg/recentlyUsed"))
                 {
@@ -148,7 +148,7 @@ namespace Unigram.ViewModels
                 {
                     Set = set.Set,
                     IsUnread = unread.Contains(set.Set.Id),
-                    Covers = new TLVector<TLDocumentBase>(set.Documents.Take(Math.Min(set.Documents.Count, 5)))
+                    Covers = new ITLVector<TLDocumentBase>(set.Documents.Take(Math.Min(set.Documents.Count, 5)))
                 }));
             });
         }
@@ -224,7 +224,7 @@ namespace Unigram.ViewModels
                 //        {
                 //            var results = new List<TLMessagesStickerSet>();
                 //            var resultsSyncRoot = new object();
-                //            ProtoService.GetStickerSetsAsync(new TLMessagesAllStickers { Sets = new TLVector<TLStickerSet>(needData.Values) },
+                //            ProtoService.GetStickerSetsAsync(new ITLMessagesAllStickers { Sets = new ITLVector<TLStickerSet>(needData.Values) },
                 //                result =>
                 //                {
                 //                    Debugger.Break();
@@ -424,7 +424,7 @@ namespace Unigram.ViewModels
             }
             set
             {
-                _covers = new TLVector<TLDocumentBase>();
+                _covers = new ITLVector<TLDocumentBase>();
 
                 for (int i = 0; i < 5; i++)
                 {

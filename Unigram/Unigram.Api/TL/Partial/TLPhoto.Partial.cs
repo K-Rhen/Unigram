@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLPhoto
+#if !PORTABLE
+    public partial interface TLPhoto
+    {
+        TLPhotoSizeBase Thumb { get; }
+        TLPhotoSizeBase Medium { get; }
+        TLPhotoSizeBase Full { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLPhoto
     {
         private TLPhotoSizeBase _thumb;
         public TLPhotoSizeBase Thumb

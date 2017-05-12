@@ -154,11 +154,11 @@ namespace Unigram.ViewModels.Payments
             TLInputPaymentCredentialsBase credentials;
             if (_paymentForm.HasSavedCredentials && _paymentForm.SavedCredentials is TLPaymentSavedCredentialsCard savedCard)
             {
-                credentials = new TLInputPaymentCredentialsSaved { Id = savedCard.Id, TmpPassword = ApplicationSettings.Current.TmpPassword.TmpPassword };
+                credentials = new ITLInputPaymentCredentialsSaved { Id = savedCard.Id, TmpPassword = ApplicationSettings.Current.TmpPassword.TmpPassword };
             }
             else
             {
-                credentials = new TLInputPaymentCredentials { Data = new TLDataJSON { Data = _credentials }, IsSave = _save };
+                credentials = new ITLInputPaymentCredentials { Data = new ITLDataJSON { Data = _credentials }, IsSave = _save };
             }
 
             var response = await ProtoService.SendPaymentFormAsync(_message.Id, _requestedInfo?.Id, _shipping?.Id, credentials);

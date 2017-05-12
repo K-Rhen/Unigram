@@ -134,7 +134,7 @@ namespace Unigram.Controls
                 panel.Margin = new Thickness(-2, 0, -2, 0);
 
                 var button = new GlyphButton();
-                button.DataContext = new TLKeyboardButtonBuy();
+                button.DataContext = new ITLKeyboardButtonBuy();
                 button.Content = "Receipt";
                 button.Margin = new Thickness(2, 2, 2, 0);
                 button.HorizontalAlignment = HorizontalAlignment.Stretch;

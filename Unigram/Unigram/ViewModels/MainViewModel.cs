@@ -75,8 +75,8 @@ namespace Unigram.ViewModels
 
             if (update.PhoneCall is TLPhoneCallRequested callRequested)
             {
-                var reqReceived = new TLPhoneReceivedCall();
-                reqReceived.Peer = new TLInputPhoneCall();
+                var reqReceived = new ITLPhoneReceivedCall();
+                reqReceived.Peer = new ITLInputPhoneCall();
                 reqReceived.Peer.Id = callRequested.Id;
                 reqReceived.Peer.AccessHash = callRequested.AccessHash;
 
@@ -108,15 +108,15 @@ namespace Unigram.ViewModels
 
                             var g_b = MTProtoService.GetGB(salt, dh.G, dh.P);
 
-                            var request = new TLPhoneAcceptCall
+                            var request = new ITLPhoneAcceptCall
                             {
                                 GB = g_b,
-                                Peer = new TLInputPhoneCall
+                                Peer = new ITLInputPhoneCall
                                 {
                                     Id = callRequested.Id,
                                     AccessHash = callRequested.AccessHash
                                 },
-                                Protocol = new TLPhoneCallProtocol
+                                Protocol = new ITLPhoneCallProtocol
                                 {
                                     IsUdpP2p = true,
                                     IsUdpReflector = true,
@@ -133,11 +133,11 @@ namespace Unigram.ViewModels
                     }
                     else
                     {
-                        var req = new TLPhoneDiscardCall();
-                        req.Peer = new TLInputPhoneCall();
+                        var req = new ITLPhoneDiscardCall();
+                        req.Peer = new ITLInputPhoneCall();
                         req.Peer.Id = callRequested.Id;
                         req.Peer.AccessHash = callRequested.AccessHash;
-                        req.Reason = new TLPhoneCallDiscardReasonHangup();
+                        req.Reason = new ITLPhoneCallDiscardReasonHangup();
 
                         ProtoService.SendRequestAsync<TLPhonePhoneCall>("phone.acceptCall", req, null, null);
                     }

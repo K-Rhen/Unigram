@@ -9,30 +9,30 @@ namespace Telegram.Api.Services
 	{
         public void GetStateAsync(Action<TLUpdatesState> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUpdatesGetState();
+            var obj = new ITLUpdatesGetState();
 
             SendInformativeMessage("updates.getState", obj, callback, faultCallback);
         }
 
         public void GetStateWithoutUpdatesAsync(Action<TLUpdatesState> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLInvokeWithoutUpdates { Query = new TLUpdatesGetState() };
+            var obj = new ITLInvokeWithoutUpdates { Query = new ITLUpdatesGetState() };
 
             SendInformativeMessage("updates.getState", obj, callback, faultCallback);
         }
 
         public void GetDifferenceAsync(int pts, int date, int qts, Action<TLUpdatesDifferenceBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUpdatesGetDifference { Date = date, Pts = pts, Qts = qts };
+            var obj = new ITLUpdatesGetDifference { Date = date, Pts = pts, Qts = qts };
 
             SendInformativeMessage("updates.getDifference", obj, callback, faultCallback);
         }
 
         public void GetDifferenceWithoutUpdatesAsync(int pts, int date, int qts, Action<TLUpdatesDifferenceBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUpdatesGetDifference { Date = date, Pts = pts, Qts = qts };
+            var obj = new ITLUpdatesGetDifference { Date = date, Pts = pts, Qts = qts };
 
-            SendInformativeMessage("updates.getDifference", new TLInvokeWithoutUpdates{Query = obj}, callback, faultCallback);
+            SendInformativeMessage("updates.getDifference", new ITLInvokeWithoutUpdates{Query = obj}, callback, faultCallback);
         }
 	}
 }

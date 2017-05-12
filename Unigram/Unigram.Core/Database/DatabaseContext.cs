@@ -168,7 +168,7 @@ namespace Unigram.Core
             var result = new List<TLDocument>();
             while (Sqlite3.sqlite3_step(statement) == SQLiteResult.Row)
             {
-                result.Add(new TLDocument
+                result.Add(new ITLDocument
                 {
                     Id = Sqlite3.sqlite3_column_int64(statement, 0),
                     AccessHash = Sqlite3.sqlite3_column_int64(statement, 1),
@@ -362,7 +362,7 @@ namespace Unigram.Core
             var result = new List<TLStickerSet>();
             while (Sqlite3.sqlite3_step(statement) == SQLiteResult.Row)
             {
-                result.Add(new TLStickerSet
+                result.Add(new ITLStickerSet
                 {
                     Id = Sqlite3.sqlite3_column_int64(statement, 0),
                     AccessHash = Sqlite3.sqlite3_column_int64(statement, 1),
@@ -370,7 +370,7 @@ namespace Unigram.Core
                     ShortName = Sqlite3.sqlite3_column_text(statement, 3),
                     Count = Sqlite3.sqlite3_column_int(statement, 4),
                     Hash = Sqlite3.sqlite3_column_int(statement, 5),
-                    Flags = (TLStickerSet.Flag)Sqlite3.sqlite3_column_int(statement, 6)
+                    Flags = (TLStickerSetFlag)Sqlite3.sqlite3_column_int(statement, 6)
                 });
             }
 
@@ -393,7 +393,7 @@ namespace Unigram.Core
             TLStickerSet result = null;
             while (Sqlite3.sqlite3_step(statement) == SQLiteResult.Row)
             {
-                result = new TLStickerSet
+                result = new ITLStickerSet
                 {
                     Id = Sqlite3.sqlite3_column_int64(statement, 0),
                     AccessHash = Sqlite3.sqlite3_column_int64(statement, 1),
@@ -401,7 +401,7 @@ namespace Unigram.Core
                     ShortName = Sqlite3.sqlite3_column_text(statement, 3),
                     Count = Sqlite3.sqlite3_column_int(statement, 4),
                     Hash = Sqlite3.sqlite3_column_int(statement, 5),
-                    Flags = (TLStickerSet.Flag)Sqlite3.sqlite3_column_int(statement, 6)
+                    Flags = (TLStickerSetFlag)Sqlite3.sqlite3_column_int(statement, 6)
                 };
             }
 
@@ -424,9 +424,9 @@ namespace Unigram.Core
             var result = new List<TLStickerSetCovered>();
             while (Sqlite3.sqlite3_step(statement) == SQLiteResult.Row)
             {
-                result.Add(new TLStickerSetCovered
+                result.Add(new ITLStickerSetCovered
                 {
-                    Set = new TLStickerSet
+                    Set = new ITLStickerSet
                     {
                         Id = Sqlite3.sqlite3_column_int64(statement, 0),
                         AccessHash = Sqlite3.sqlite3_column_int64(statement, 1),
@@ -434,7 +434,7 @@ namespace Unigram.Core
                         ShortName = Sqlite3.sqlite3_column_text(statement, 3),
                         Count = Sqlite3.sqlite3_column_int(statement, 4),
                         Hash = Sqlite3.sqlite3_column_int(statement, 5),
-                        Flags = (TLStickerSet.Flag)Sqlite3.sqlite3_column_int(statement, 6)
+                        Flags = (TLStickerSetFlag)Sqlite3.sqlite3_column_int(statement, 6)
                     }
                 });
             }
@@ -461,7 +461,7 @@ namespace Unigram.Core
             var result = new List<TLDocument>();
             while (Sqlite3.sqlite3_step(statement) == SQLiteResult.Row)
             {
-                result.Add(new TLDocument
+                result.Add(new ITLDocument
                 {
                     Id = Sqlite3.sqlite3_column_int64(statement, 0),
                     AccessHash = Sqlite3.sqlite3_column_int64(statement, 1),

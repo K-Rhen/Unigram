@@ -15,7 +15,7 @@ namespace Unigram.ViewModels.Channels
     public class ChannelKickedViewModel : ChannelParticipantsViewModelBase
     {
         public ChannelKickedViewModel(IMTProtoService protoService, ICacheService cacheService, ITelegramEventAggregator aggregator) 
-            : base(protoService, cacheService, aggregator, new TLChannelParticipantsKicked())
+            : base(protoService, cacheService, aggregator, new ITLChannelParticipantsKicked())
         {
         }
     }

@@ -60,7 +60,7 @@ namespace Unigram.ViewModels
         //    {
         //        return;
         //    }
-        //    var result = await ProtoService.GetFullUserAsync(new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash.Value });
+        //    var result = await ProtoService.GetFullUserAsync(new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash.Value });
         //    if (result.IsSucceeded)
         //    {
         //        var userFull = result.Result;

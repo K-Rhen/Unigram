@@ -158,7 +158,7 @@
     <Compile Include="TL\Core\ITLTransferable.cs" />
     <Compile Include="TL\Core\TLActionInfo.cs" />
     <Compile Include="TL\Core\TLInt.cs" />
-    <Compile Include="TL\Core\TLMessageActionUnreadMessages.cs" />
+    <Compile Include="TL\Local\TLMessageActionUnreadMessages.cs" />
     <Compile Include="TL\Core\TLTuple.cs" />
     <Compile Include="TL\Local\TLMessageActionDate.cs" />
     <Compile Include="TL\Local\TLMessagesContainer.cs" />
@@ -396,20 +396,13 @@
     <Compile Include="TL\Partial\TLMessageMediaContact.Partial.cs" />
     <Compile Include="TL\Partial\TLMessageMediaDocument.Partial.cs" />
     <Compile Include="TL\Partial\TLMessageMediaPhoto.Partial.cs" />
-    <Compile Include="TL\Partial\TLMessagesAllStickers.Partial.cs" />
-    <Compile Include="TL\Partial\TLMessagesArchivedStickers.Partial.cs" />
-    <Compile Include="TL\Partial\TLMessagesFeaturedStickers.Partial.cs" />
     <Compile Include="TL\Partial\TLMessagesStickerSet.Partial.cs" />
-    <Compile Include="TL\Partial\TLMessagesStickerSetInstallResultArchive.Partial.cs" />
     <Compile Include="TL\Partial\TLPeerBase.Partial.cs" />
     <Compile Include="TL\Partial\TLChannel.Partial.cs" />
     <Compile Include="TL\Partial\TLChat.Partial.cs" />
-    <Compile Include="TL\Partial\TLChatPhoto.Partial.cs" />
     <Compile Include="TL\Partial\TLChatPhotoBase.Partial.cs" />
     <Compile Include="TL\Partial\TLConfig.Partial.cs" />
-    <Compile Include="TL\Partial\TLContactsContacts.cs" />
     <Compile Include="TL\Partial\TLContactsContactsBase.Partial.cs" />
-    <Compile Include="TL\Partial\TLContactsContactsNotModified.cs" />
     <Compile Include="TL\Partial\TLContactsImportedContacts.Partial.cs" />
     <Compile Include="TL\Partial\TLDCOption.Partial.cs" />
     <Compile Include="TL\Partial\TLDialog.Partial.cs" />
@@ -421,7 +414,6 @@
     <Compile Include="TL\Partial\TLPhoto.Partial.cs" />
     <Compile Include="TL\Partial\TLPhotoBase.Partial.cs" />
     <Compile Include="TL\Partial\TLRPCError.Partial.cs" />
-    <Compile Include="TL\Partial\TLStickerSet.Partial.cs" />
     <Compile Include="TL\Partial\TLUpdateBase.Partial.cs" />
     <Compile Include="TL\Partial\TLUpdatesBase.Partial.cs" />
     <Compile Include="TL\Partial\TLUpdatesDifferenceBase.Partial.cs" />
@@ -501,9 +493,7 @@
     <Compile Include="TL\Core\TLVector.cs" />
     <Compile Include="TL\Partial\TLChatFullBase.Partial.cs" />
     <Compile Include="TL\Partial\TLMessageBase.Partial.cs" />
-    <Compile Include="TL\Partial\TLUserProfilePhoto.Partial.cs" />
     <Compile Include="TL\Partial\TLUserProfilePhotoBase.Partial.cs" />
-    <Compile Include="TL\Partial\TLWebPageBase.Partial.cs" />
     <Compile Include="TL\TLAccountAuthorizations.cs" />
     <Compile Include="TL\TLAccountDaysTTL.cs" />
     <Compile Include="TL\TLAccountNoPassword.cs" />

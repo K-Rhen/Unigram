@@ -67,10 +67,10 @@ namespace Unigram.ViewModels.Payments
                         RaisePropertyChanged("Navigate");
                     }
 
-                    //var info = PaymentForm.HasSavedInfo ? PaymentForm.SavedInfo : new TLPaymentRequestedInfo();
+                    //var info = PaymentForm.HasSavedInfo ? PaymentForm.SavedInfo : new ITLPaymentRequestedInfo();
                     //if (info.ShippingAddress == null)
                     //{
-                    //    info.ShippingAddress = new TLPostAddress();
+                    //    info.ShippingAddress = new ITLPostAddress();
                     //}
 
                     //Info = info;
@@ -290,7 +290,7 @@ namespace Unigram.ViewModels.Payments
             }
 
             //var save = _isSave ?? false;
-            //var info = new TLPaymentRequestedInfo();
+            //var info = new ITLPaymentRequestedInfo();
             //if (_paymentForm.Invoice.IsNameRequested)
             //{
             //    info.Name = _info.Name;

@@ -85,7 +85,7 @@ namespace Telegram.Api.Helpers
                             randomStream = memoryStream;
                         }
 
-                        var fileLocation = new TLFileLocation
+                        var fileLocation = new ITLFileLocation
                         {
                             VolumeId = TLLong.Random(),
                             LocalId = TLInt.Random(),
@@ -104,7 +104,7 @@ namespace Telegram.Api.Helpers
                             stream.Dispose();
                         }
 
-                        var result = new TLPhotoSize
+                        var result = new ITLPhotoSize
                         {
                             W = originalWidth,
                             H = originalHeight,

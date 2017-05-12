@@ -56,7 +56,7 @@ namespace Unigram.ViewModels.Settings
                 {
                 }
 
-                await ProtoService.UpdateNotifySettingsAsync(new TLInputNotifyUsers(), new TLInputPeerNotifySettings
+                await ProtoService.UpdateNotifySettingsAsync(new ITLInputNotifyUsers(), new ITLInputPeerNotifySettings
                 {
                     MuteUntil = _privateAlert ? 0 : int.MaxValue,
                     IsShowPreviews = _privatePreview,
@@ -69,7 +69,7 @@ namespace Unigram.ViewModels.Settings
                 {
                 }
 
-                await ProtoService.UpdateNotifySettingsAsync(new TLInputNotifyChats(), new TLInputPeerNotifySettings
+                await ProtoService.UpdateNotifySettingsAsync(new ITLInputNotifyChats(), new ITLInputPeerNotifySettings
                 {
                     MuteUntil = _groupAlert ? 0 : int.MaxValue,
                     IsShowPreviews = _groupPreview,
@@ -222,7 +222,7 @@ namespace Unigram.ViewModels.Settings
 
         private async Task UpdateAsync()
         {
-            ProtoService.GetNotifySettingsAsync(new TLInputNotifyUsers(), result =>
+            ProtoService.GetNotifySettingsAsync(new ITLInputNotifyUsers(), result =>
             {
 
                 var settings = result as TLPeerNotifySettings;
@@ -242,7 +242,7 @@ namespace Unigram.ViewModels.Settings
                 //this.SaveSettings();
             });
 
-            ProtoService.GetNotifySettingsAsync(new TLInputNotifyChats(), result =>
+            ProtoService.GetNotifySettingsAsync(new ITLInputNotifyChats(), result =>
             {
 
                 var settings = result as TLPeerNotifySettings;

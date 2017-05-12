@@ -6,15 +6,27 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLContactsImportedContacts
+#if !PORTABLE
+    public partial interface TLContactsImportedContacts
+    {
+        TLContactsImportedContacts GetEmptyObject();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLContactsImportedContacts
     {
         public TLContactsImportedContacts GetEmptyObject()
         {
-            return new TLContactsImportedContacts
+            return new ITLContactsImportedContacts
             {
-                Imported = new TLVector<TLImportedContact>(Imported.Count),
-                RetryContacts = new TLVector<long>(RetryContacts.Count),
-                Users = new TLVector<TLUserBase>(Users.Count)
+                Imported = new ITLVector<TLImportedContact>(Imported.Count),
+                RetryContacts = new ITLVector<long>(RetryContacts.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count)
             };
         }
     }

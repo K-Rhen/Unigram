@@ -4,18 +4,26 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLWallPaperBase : TLObject, ITLWallPaperBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLWallPaperBase : ITLObject, TLWallPaperBase
 	{
 		public Int32 Id { get; set; }
 		public String Title { get; set; }
 		public Int32 Color { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0xecf4728b, 0x253e, 0x9a15, 0x80, 0x03, 0x8a, 0x41, 0xde, 0x03, 0xd9, 0x7b)]
-	public partial interface ITLWallPaperBase : TLObject
+	public partial interface TLWallPaperBase : TLObject
 	{
 		Int32 Id { get; set; }
 		String Title { get; set; }
 		Int32 Color { get; set; }
 	}
+#endif
+
 }

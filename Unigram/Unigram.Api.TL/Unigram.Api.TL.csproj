@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -32,7 +32,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -40,7 +40,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -50,7 +50,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -62,7 +62,7 @@
     <PlatformTarget>ARM</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
@@ -72,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
     <OutputPath>bin\ARM\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -84,7 +84,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -94,7 +94,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;PORTABLE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -106,8 +106,2849 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Unigram.Api\TL\**\*.*">
-      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    <Compile Include="..\Unigram.Api\TL\Core\TLActionInfo.cs">
+      <Link>Core\TLActionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLInt128.cs">
+      <Link>Core\TLInt128.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLInt256.cs">
+      <Link>Core\TLInt256.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLObject.cs">
+      <Link>Core\TLObject.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLRPCReqError.cs">
+      <Link>Core\TLRPCReqError.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLRPCResult.cs">
+      <Link>Core\TLRPCResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLTuple.cs">
+      <Link>Core\TLTuple.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Core\TLVector.cs">
+      <Link>Core\TLVector.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Local\TLMessageActionDate.cs">
+      <Link>Local\TLMessageActionDate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Local\TLMessageActionUnreadMessages.cs">
+      <Link>Local\TLMessageActionUnreadMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Local\TLMessagesContainer.cs">
+      <Link>Local\TLMessagesContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountChangePhone.cs">
+      <Link>Methods\Account\TLAccountChangePhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountCheckUsername.cs">
+      <Link>Methods\Account\TLAccountCheckUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountConfirmPhone.cs">
+      <Link>Methods\Account\TLAccountConfirmPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountDeleteAccount.cs">
+      <Link>Methods\Account\TLAccountDeleteAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetAccountTTL.cs">
+      <Link>Methods\Account\TLAccountGetAccountTTL.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetAuthorizations.cs">
+      <Link>Methods\Account\TLAccountGetAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetNotifySettings.cs">
+      <Link>Methods\Account\TLAccountGetNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetPassword.cs">
+      <Link>Methods\Account\TLAccountGetPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetPasswordSettings.cs">
+      <Link>Methods\Account\TLAccountGetPasswordSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetPrivacy.cs">
+      <Link>Methods\Account\TLAccountGetPrivacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetTmpPassword.cs">
+      <Link>Methods\Account\TLAccountGetTmpPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountGetWallPapers.cs">
+      <Link>Methods\Account\TLAccountGetWallPapers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountRegisterDevice.cs">
+      <Link>Methods\Account\TLAccountRegisterDevice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountReportPeer.cs">
+      <Link>Methods\Account\TLAccountReportPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountResetAuthorization.cs">
+      <Link>Methods\Account\TLAccountResetAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountResetNotifySettings.cs">
+      <Link>Methods\Account\TLAccountResetNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountSendChangePhoneCode.cs">
+      <Link>Methods\Account\TLAccountSendChangePhoneCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountSendConfirmPhoneCode.cs">
+      <Link>Methods\Account\TLAccountSendConfirmPhoneCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountSetAccountTTL.cs">
+      <Link>Methods\Account\TLAccountSetAccountTTL.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountSetPrivacy.cs">
+      <Link>Methods\Account\TLAccountSetPrivacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUnregisterDevice.cs">
+      <Link>Methods\Account\TLAccountUnregisterDevice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUpdateDeviceLocked.cs">
+      <Link>Methods\Account\TLAccountUpdateDeviceLocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUpdateNotifySettings.cs">
+      <Link>Methods\Account\TLAccountUpdateNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUpdatePasswordSettings.cs">
+      <Link>Methods\Account\TLAccountUpdatePasswordSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUpdateProfile.cs">
+      <Link>Methods\Account\TLAccountUpdateProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUpdateStatus.cs">
+      <Link>Methods\Account\TLAccountUpdateStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Account\TLAccountUpdateUsername.cs">
+      <Link>Methods\Account\TLAccountUpdateUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthBindTempAuthKey.cs">
+      <Link>Methods\Auth\TLAuthBindTempAuthKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthCancelCode.cs">
+      <Link>Methods\Auth\TLAuthCancelCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthCheckPassword.cs">
+      <Link>Methods\Auth\TLAuthCheckPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthCheckPhone.cs">
+      <Link>Methods\Auth\TLAuthCheckPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthDropTempAuthKeys.cs">
+      <Link>Methods\Auth\TLAuthDropTempAuthKeys.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthExportAuthorization.cs">
+      <Link>Methods\Auth\TLAuthExportAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthImportAuthorization.cs">
+      <Link>Methods\Auth\TLAuthImportAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthImportBotAuthorization.cs">
+      <Link>Methods\Auth\TLAuthImportBotAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthLogOut.cs">
+      <Link>Methods\Auth\TLAuthLogOut.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthRecoverPassword.cs">
+      <Link>Methods\Auth\TLAuthRecoverPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthRequestPasswordRecovery.cs">
+      <Link>Methods\Auth\TLAuthRequestPasswordRecovery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthResendCode.cs">
+      <Link>Methods\Auth\TLAuthResendCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthResetAuthorizations.cs">
+      <Link>Methods\Auth\TLAuthResetAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthSendCode.cs">
+      <Link>Methods\Auth\TLAuthSendCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthSendInvites.cs">
+      <Link>Methods\Auth\TLAuthSendInvites.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthSignIn.cs">
+      <Link>Methods\Auth\TLAuthSignIn.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Auth\TLAuthSignUp.cs">
+      <Link>Methods\Auth\TLAuthSignUp.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Bots\TLBotsAnswerWebhookJSONQuery.cs">
+      <Link>Methods\Bots\TLBotsAnswerWebhookJSONQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Bots\TLBotsSendCustomRequest.cs">
+      <Link>Methods\Bots\TLBotsSendCustomRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsCheckUsername.cs">
+      <Link>Methods\Channels\TLChannelsCheckUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsCreateChannel.cs">
+      <Link>Methods\Channels\TLChannelsCreateChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsDeleteChannel.cs">
+      <Link>Methods\Channels\TLChannelsDeleteChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsDeleteMessages.cs">
+      <Link>Methods\Channels\TLChannelsDeleteMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsDeleteUserHistory.cs">
+      <Link>Methods\Channels\TLChannelsDeleteUserHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsEditAbout.cs">
+      <Link>Methods\Channels\TLChannelsEditAbout.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsEditAdmin.cs">
+      <Link>Methods\Channels\TLChannelsEditAdmin.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsEditPhoto.cs">
+      <Link>Methods\Channels\TLChannelsEditPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsEditTitle.cs">
+      <Link>Methods\Channels\TLChannelsEditTitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsExportInvite.cs">
+      <Link>Methods\Channels\TLChannelsExportInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsExportMessageLink.cs">
+      <Link>Methods\Channels\TLChannelsExportMessageLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsGetAdminedPublicChannels.cs">
+      <Link>Methods\Channels\TLChannelsGetAdminedPublicChannels.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsGetChannels.cs">
+      <Link>Methods\Channels\TLChannelsGetChannels.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsGetFullChannel.cs">
+      <Link>Methods\Channels\TLChannelsGetFullChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsGetMessages.cs">
+      <Link>Methods\Channels\TLChannelsGetMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsGetParticipant.cs">
+      <Link>Methods\Channels\TLChannelsGetParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsGetParticipants.cs">
+      <Link>Methods\Channels\TLChannelsGetParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsInviteToChannel.cs">
+      <Link>Methods\Channels\TLChannelsInviteToChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsJoinChannel.cs">
+      <Link>Methods\Channels\TLChannelsJoinChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsKickFromChannel.cs">
+      <Link>Methods\Channels\TLChannelsKickFromChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsLeaveChannel.cs">
+      <Link>Methods\Channels\TLChannelsLeaveChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsReadHistory.cs">
+      <Link>Methods\Channels\TLChannelsReadHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsReportSpam.cs">
+      <Link>Methods\Channels\TLChannelsReportSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsToggleInvites.cs">
+      <Link>Methods\Channels\TLChannelsToggleInvites.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsToggleSignatures.cs">
+      <Link>Methods\Channels\TLChannelsToggleSignatures.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsUpdatePinnedMessage.cs">
+      <Link>Methods\Channels\TLChannelsUpdatePinnedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Channels\TLChannelsUpdateUsername.cs">
+      <Link>Methods\Channels\TLChannelsUpdateUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsBlock.cs">
+      <Link>Methods\Contacts\TLContactsBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsDeleteContact.cs">
+      <Link>Methods\Contacts\TLContactsDeleteContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsDeleteContacts.cs">
+      <Link>Methods\Contacts\TLContactsDeleteContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsExportCard.cs">
+      <Link>Methods\Contacts\TLContactsExportCard.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsGetBlocked.cs">
+      <Link>Methods\Contacts\TLContactsGetBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsGetContacts.cs">
+      <Link>Methods\Contacts\TLContactsGetContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsGetStatuses.cs">
+      <Link>Methods\Contacts\TLContactsGetStatuses.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsGetTopPeers.cs">
+      <Link>Methods\Contacts\TLContactsGetTopPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsImportCard.cs">
+      <Link>Methods\Contacts\TLContactsImportCard.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsImportContacts.cs">
+      <Link>Methods\Contacts\TLContactsImportContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsResetTopPeerRating.cs">
+      <Link>Methods\Contacts\TLContactsResetTopPeerRating.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsResolveUsername.cs">
+      <Link>Methods\Contacts\TLContactsResolveUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsSearch.cs">
+      <Link>Methods\Contacts\TLContactsSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contacts\TLContactsUnblock.cs">
+      <Link>Methods\Contacts\TLContactsUnblock.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Contest\TLContestSaveDeveloperInfo.cs">
+      <Link>Methods\Contest\TLContestSaveDeveloperInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetAppChangelog.cs">
+      <Link>Methods\Help\TLHelpGetAppChangelog.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetAppUpdate.cs">
+      <Link>Methods\Help\TLHelpGetAppUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetConfig.cs">
+      <Link>Methods\Help\TLHelpGetConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetInviteText.cs">
+      <Link>Methods\Help\TLHelpGetInviteText.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetNearestDC.cs">
+      <Link>Methods\Help\TLHelpGetNearestDC.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetSupport.cs">
+      <Link>Methods\Help\TLHelpGetSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpGetTermsOfService.cs">
+      <Link>Methods\Help\TLHelpGetTermsOfService.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpSaveAppLog.cs">
+      <Link>Methods\Help\TLHelpSaveAppLog.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Help\TLHelpSetBotUpdatesStatus.cs">
+      <Link>Methods\Help\TLHelpSetBotUpdatesStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesAcceptEncryption.cs">
+      <Link>Methods\Messages\TLMessagesAcceptEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesAddChatUser.cs">
+      <Link>Methods\Messages\TLMessagesAddChatUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesCheckChatInvite.cs">
+      <Link>Methods\Messages\TLMessagesCheckChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesClearRecentStickers.cs">
+      <Link>Methods\Messages\TLMessagesClearRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesCreateChat.cs">
+      <Link>Methods\Messages\TLMessagesCreateChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesDeleteChatUser.cs">
+      <Link>Methods\Messages\TLMessagesDeleteChatUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesDeleteHistory.cs">
+      <Link>Methods\Messages\TLMessagesDeleteHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesDeleteMessages.cs">
+      <Link>Methods\Messages\TLMessagesDeleteMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesDiscardEncryption.cs">
+      <Link>Methods\Messages\TLMessagesDiscardEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesEditChatAdmin.cs">
+      <Link>Methods\Messages\TLMessagesEditChatAdmin.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesEditChatPhoto.cs">
+      <Link>Methods\Messages\TLMessagesEditChatPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesEditChatTitle.cs">
+      <Link>Methods\Messages\TLMessagesEditChatTitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesEditInlineBotMessage.cs">
+      <Link>Methods\Messages\TLMessagesEditInlineBotMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesEditMessage.cs">
+      <Link>Methods\Messages\TLMessagesEditMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesExportChatInvite.cs">
+      <Link>Methods\Messages\TLMessagesExportChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesForwardMessage.cs">
+      <Link>Methods\Messages\TLMessagesForwardMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesForwardMessages.cs">
+      <Link>Methods\Messages\TLMessagesForwardMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetAllChats.cs">
+      <Link>Methods\Messages\TLMessagesGetAllChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetAllDrafts.cs">
+      <Link>Methods\Messages\TLMessagesGetAllDrafts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetAllStickers.cs">
+      <Link>Methods\Messages\TLMessagesGetAllStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetArchivedStickers.cs">
+      <Link>Methods\Messages\TLMessagesGetArchivedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetAttachedStickers.cs">
+      <Link>Methods\Messages\TLMessagesGetAttachedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetBotCallbackAnswer.cs">
+      <Link>Methods\Messages\TLMessagesGetBotCallbackAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetChats.cs">
+      <Link>Methods\Messages\TLMessagesGetChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetCommonChats.cs">
+      <Link>Methods\Messages\TLMessagesGetCommonChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetDHConfig.cs">
+      <Link>Methods\Messages\TLMessagesGetDHConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetDialogs.cs">
+      <Link>Methods\Messages\TLMessagesGetDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetDocumentByHash.cs">
+      <Link>Methods\Messages\TLMessagesGetDocumentByHash.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetFeaturedStickers.cs">
+      <Link>Methods\Messages\TLMessagesGetFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetFullChat.cs">
+      <Link>Methods\Messages\TLMessagesGetFullChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetGameHighScores.cs">
+      <Link>Methods\Messages\TLMessagesGetGameHighScores.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetHistory.cs">
+      <Link>Methods\Messages\TLMessagesGetHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetInlineBotResults.cs">
+      <Link>Methods\Messages\TLMessagesGetInlineBotResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetInlineGameHighScores.cs">
+      <Link>Methods\Messages\TLMessagesGetInlineGameHighScores.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetMaskStickers.cs">
+      <Link>Methods\Messages\TLMessagesGetMaskStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetMessageEditData.cs">
+      <Link>Methods\Messages\TLMessagesGetMessageEditData.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetMessages.cs">
+      <Link>Methods\Messages\TLMessagesGetMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetMessagesViews.cs">
+      <Link>Methods\Messages\TLMessagesGetMessagesViews.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetPeerDialogs.cs">
+      <Link>Methods\Messages\TLMessagesGetPeerDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetPeerSettings.cs">
+      <Link>Methods\Messages\TLMessagesGetPeerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetPinnedDialogs.cs">
+      <Link>Methods\Messages\TLMessagesGetPinnedDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetRecentStickers.cs">
+      <Link>Methods\Messages\TLMessagesGetRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetSavedGifs.cs">
+      <Link>Methods\Messages\TLMessagesGetSavedGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetStickerSet.cs">
+      <Link>Methods\Messages\TLMessagesGetStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetWebPage.cs">
+      <Link>Methods\Messages\TLMessagesGetWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesGetWebPagePreview.cs">
+      <Link>Methods\Messages\TLMessagesGetWebPagePreview.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesHideReportSpam.cs">
+      <Link>Methods\Messages\TLMessagesHideReportSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesImportChatInvite.cs">
+      <Link>Methods\Messages\TLMessagesImportChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesInstallStickerSet.cs">
+      <Link>Methods\Messages\TLMessagesInstallStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesMigrateChat.cs">
+      <Link>Methods\Messages\TLMessagesMigrateChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReadEncryptedHistory.cs">
+      <Link>Methods\Messages\TLMessagesReadEncryptedHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReadFeaturedStickers.cs">
+      <Link>Methods\Messages\TLMessagesReadFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReadHistory.cs">
+      <Link>Methods\Messages\TLMessagesReadHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReadMessageContents.cs">
+      <Link>Methods\Messages\TLMessagesReadMessageContents.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReceivedMessages.cs">
+      <Link>Methods\Messages\TLMessagesReceivedMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReceivedQueue.cs">
+      <Link>Methods\Messages\TLMessagesReceivedQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReorderPinnedDialogs.cs">
+      <Link>Methods\Messages\TLMessagesReorderPinnedDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReorderStickerSets.cs">
+      <Link>Methods\Messages\TLMessagesReorderStickerSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReportEncryptedSpam.cs">
+      <Link>Methods\Messages\TLMessagesReportEncryptedSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesReportSpam.cs">
+      <Link>Methods\Messages\TLMessagesReportSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesRequestEncryption.cs">
+      <Link>Methods\Messages\TLMessagesRequestEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSaveDraft.cs">
+      <Link>Methods\Messages\TLMessagesSaveDraft.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSaveGif.cs">
+      <Link>Methods\Messages\TLMessagesSaveGif.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSaveRecentSticker.cs">
+      <Link>Methods\Messages\TLMessagesSaveRecentSticker.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSearch.cs">
+      <Link>Methods\Messages\TLMessagesSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSearchGifs.cs">
+      <Link>Methods\Messages\TLMessagesSearchGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSearchGlobal.cs">
+      <Link>Methods\Messages\TLMessagesSearchGlobal.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSendEncrypted.cs">
+      <Link>Methods\Messages\TLMessagesSendEncrypted.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSendEncryptedFile.cs">
+      <Link>Methods\Messages\TLMessagesSendEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSendEncryptedService.cs">
+      <Link>Methods\Messages\TLMessagesSendEncryptedService.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSendInlineBotResult.cs">
+      <Link>Methods\Messages\TLMessagesSendInlineBotResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSendMedia.cs">
+      <Link>Methods\Messages\TLMessagesSendMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSendMessage.cs">
+      <Link>Methods\Messages\TLMessagesSendMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetBotCallbackAnswer.cs">
+      <Link>Methods\Messages\TLMessagesSetBotCallbackAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetBotPrecheckoutResults.cs">
+      <Link>Methods\Messages\TLMessagesSetBotPrecheckoutResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetBotShippingResults.cs">
+      <Link>Methods\Messages\TLMessagesSetBotShippingResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetEncryptedTyping.cs">
+      <Link>Methods\Messages\TLMessagesSetEncryptedTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetGameScore.cs">
+      <Link>Methods\Messages\TLMessagesSetGameScore.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetInlineBotResults.cs">
+      <Link>Methods\Messages\TLMessagesSetInlineBotResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetInlineGameScore.cs">
+      <Link>Methods\Messages\TLMessagesSetInlineGameScore.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesSetTyping.cs">
+      <Link>Methods\Messages\TLMessagesSetTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesStartBot.cs">
+      <Link>Methods\Messages\TLMessagesStartBot.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesToggleChatAdmins.cs">
+      <Link>Methods\Messages\TLMessagesToggleChatAdmins.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesToggleDialogPin.cs">
+      <Link>Methods\Messages\TLMessagesToggleDialogPin.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Messages\TLMessagesUninstallStickerSet.cs">
+      <Link>Methods\Messages\TLMessagesUninstallStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Payments\TLPaymentsClearSavedInfo.cs">
+      <Link>Methods\Payments\TLPaymentsClearSavedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Payments\TLPaymentsGetPaymentForm.cs">
+      <Link>Methods\Payments\TLPaymentsGetPaymentForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Payments\TLPaymentsGetPaymentReceipt.cs">
+      <Link>Methods\Payments\TLPaymentsGetPaymentReceipt.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Payments\TLPaymentsGetSavedInfo.cs">
+      <Link>Methods\Payments\TLPaymentsGetSavedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Payments\TLPaymentsSendPaymentForm.cs">
+      <Link>Methods\Payments\TLPaymentsSendPaymentForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Payments\TLPaymentsValidateRequestedInfo.cs">
+      <Link>Methods\Payments\TLPaymentsValidateRequestedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneAcceptCall.cs">
+      <Link>Methods\Phone\TLPhoneAcceptCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneConfirmCall.cs">
+      <Link>Methods\Phone\TLPhoneConfirmCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneDiscardCall.cs">
+      <Link>Methods\Phone\TLPhoneDiscardCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneGetCallConfig.cs">
+      <Link>Methods\Phone\TLPhoneGetCallConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneReceivedCall.cs">
+      <Link>Methods\Phone\TLPhoneReceivedCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneRequestCall.cs">
+      <Link>Methods\Phone\TLPhoneRequestCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneSaveCallDebug.cs">
+      <Link>Methods\Phone\TLPhoneSaveCallDebug.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Phone\TLPhoneSetCallRating.cs">
+      <Link>Methods\Phone\TLPhoneSetCallRating.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Photos\TLPhotosDeletePhotos.cs">
+      <Link>Methods\Photos\TLPhotosDeletePhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Photos\TLPhotosGetUserPhotos.cs">
+      <Link>Methods\Photos\TLPhotosGetUserPhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Photos\TLPhotosUpdateProfilePhoto.cs">
+      <Link>Methods\Photos\TLPhotosUpdateProfilePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Photos\TLPhotosUploadProfilePhoto.cs">
+      <Link>Methods\Photos\TLPhotosUploadProfilePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLDestroyAuthKey.cs">
+      <Link>Methods\TLDestroyAuthKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLDestroySession.cs">
+      <Link>Methods\TLDestroySession.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLGetFutureSalts.cs">
+      <Link>Methods\TLGetFutureSalts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLInitConnection.cs">
+      <Link>Methods\TLInitConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLInvokeAfterMsg.cs">
+      <Link>Methods\TLInvokeAfterMsg.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLInvokeAfterMsgs.cs">
+      <Link>Methods\TLInvokeAfterMsgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLInvokeWithLayer.cs">
+      <Link>Methods\TLInvokeWithLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLInvokeWithoutUpdates.cs">
+      <Link>Methods\TLInvokeWithoutUpdates.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLPing.cs">
+      <Link>Methods\TLPing.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLPingDelayDisconnect.cs">
+      <Link>Methods\TLPingDelayDisconnect.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLReqDHParams.cs">
+      <Link>Methods\TLReqDHParams.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLReqPQ.cs">
+      <Link>Methods\TLReqPQ.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLRPCDropAnswer.cs">
+      <Link>Methods\TLRPCDropAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\TLSetClientDHParams.cs">
+      <Link>Methods\TLSetClientDHParams.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Updates\TLUpdatesGetChannelDifference.cs">
+      <Link>Methods\Updates\TLUpdatesGetChannelDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Updates\TLUpdatesGetDifference.cs">
+      <Link>Methods\Updates\TLUpdatesGetDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Updates\TLUpdatesGetState.cs">
+      <Link>Methods\Updates\TLUpdatesGetState.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Upload\TLUploadGetFile.cs">
+      <Link>Methods\Upload\TLUploadGetFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Upload\TLUploadGetWebFile.cs">
+      <Link>Methods\Upload\TLUploadGetWebFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Upload\TLUploadSaveBigFilePart.cs">
+      <Link>Methods\Upload\TLUploadSaveBigFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Upload\TLUploadSaveFilePart.cs">
+      <Link>Methods\Upload\TLUploadSaveFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Users\TLUsersGetFullUser.cs">
+      <Link>Methods\Users\TLUsersGetFullUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Methods\Users\TLUsersGetUsers.cs">
+      <Link>Methods\Users\TLUsersGetUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLAuthorization.Partial.cs">
+      <Link>Partial\TLAuthorization.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLBotInlineResultBase.Partial.cs">
+      <Link>Partial\TLBotInlineResultBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChannel.Partial.cs">
+      <Link>Partial\TLChannel.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChannelParticipantBase.Partial.cs">
+      <Link>Partial\TLChannelParticipantBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChat.Partial.cs">
+      <Link>Partial\TLChat.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChatBase.Partial.cs">
+      <Link>Partial\TLChatBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChatFullBase.Partial.cs">
+      <Link>Partial\TLChatFullBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChatParticipantBase.Partial.cs">
+      <Link>Partial\TLChatParticipantBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLChatPhotoBase.Partial.cs">
+      <Link>Partial\TLChatPhotoBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLConfig.Partial.cs">
+      <Link>Partial\TLConfig.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLContactsContactsBase.Partial.cs">
+      <Link>Partial\TLContactsContactsBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLContactsImportedContacts.Partial.cs">
+      <Link>Partial\TLContactsImportedContacts.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLDCOption.Partial.cs">
+      <Link>Partial\TLDCOption.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLDialog.Partial.cs">
+      <Link>Partial\TLDialog.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLDocument.Partial.cs">
+      <Link>Partial\TLDocument.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLDocumentBase.Partial.cs">
+      <Link>Partial\TLDocumentBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLDraftMessageBase.Partial.cs">
+      <Link>Partial\TLDraftMessageBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLFileLocation.Partial.cs">
+      <Link>Partial\TLFileLocation.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLFileLocationBase.Partial.cs">
+      <Link>Partial\TLFileLocationBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLInputFileLocationBase.Partial.cs">
+      <Link>Partial\TLInputFileLocationBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLInputPeerBase.Partial.cs">
+      <Link>Partial\TLInputPeerBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLMessageBase.Partial.cs">
+      <Link>Partial\TLMessageBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLMessageMediaBase.Partial.cs">
+      <Link>Partial\TLMessageMediaBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLMessageMediaContact.Partial.cs">
+      <Link>Partial\TLMessageMediaContact.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLMessagesDialogsBase.Partial.cs">
+      <Link>Partial\TLMessagesDialogsBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLMessagesMessagesBase.Partial.cs">
+      <Link>Partial\TLMessagesMessagesBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLMessagesStickerSet.Partial.cs">
+      <Link>Partial\TLMessagesStickerSet.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLPeerBase.Partial.cs">
+      <Link>Partial\TLPeerBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLPhoto.Partial.cs">
+      <Link>Partial\TLPhoto.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLPhotoBase.Partial.cs">
+      <Link>Partial\TLPhotoBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLRichTextBase.Partial.cs">
+      <Link>Partial\TLRichTextBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLRPCError.Partial.cs">
+      <Link>Partial\TLRPCError.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUpdateBase.Partial.cs">
+      <Link>Partial\TLUpdateBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUpdatesBase.Partial.cs">
+      <Link>Partial\TLUpdatesBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUpdatesDifferenceBase.Partial.cs">
+      <Link>Partial\TLUpdatesDifferenceBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUser.Partial.cs">
+      <Link>Partial\TLUser.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUserBase.Partial.cs">
+      <Link>Partial\TLUserBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUserFull.Partial.cs">
+      <Link>Partial\TLUserFull.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\Partial\TLUserProfilePhotoBase.Partial.cs">
+      <Link>Partial\TLUserProfilePhotoBase.Partial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountAuthorizations.cs">
+      <Link>TLAccountAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountDaysTTL.cs">
+      <Link>TLAccountDaysTTL.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountNoPassword.cs">
+      <Link>TLAccountNoPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountPassword.cs">
+      <Link>TLAccountPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountPasswordBase.cs">
+      <Link>TLAccountPasswordBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountPasswordInputSettings.cs">
+      <Link>TLAccountPasswordInputSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountPasswordSettings.cs">
+      <Link>TLAccountPasswordSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountPrivacyRules.cs">
+      <Link>TLAccountPrivacyRules.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAccountTmpPassword.cs">
+      <Link>TLAccountTmpPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthAuthorization.cs">
+      <Link>TLAuthAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthCheckedPhone.cs">
+      <Link>TLAuthCheckedPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthCodeTypeBase.cs">
+      <Link>TLAuthCodeTypeBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthCodeTypeCall.cs">
+      <Link>TLAuthCodeTypeCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthCodeTypeFlashCall.cs">
+      <Link>TLAuthCodeTypeFlashCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthCodeTypeSms.cs">
+      <Link>TLAuthCodeTypeSms.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthExportedAuthorization.cs">
+      <Link>TLAuthExportedAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthorization.cs">
+      <Link>TLAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthPasswordRecovery.cs">
+      <Link>TLAuthPasswordRecovery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthSentCode.cs">
+      <Link>TLAuthSentCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthSentCodeTypeApp.cs">
+      <Link>TLAuthSentCodeTypeApp.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthSentCodeTypeBase.cs">
+      <Link>TLAuthSentCodeTypeBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthSentCodeTypeCall.cs">
+      <Link>TLAuthSentCodeTypeCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthSentCodeTypeFlashCall.cs">
+      <Link>TLAuthSentCodeTypeFlashCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLAuthSentCodeTypeSms.cs">
+      <Link>TLAuthSentCodeTypeSms.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBadMsgNotification.cs">
+      <Link>TLBadMsgNotification.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBadMsgNotificationBase.cs">
+      <Link>TLBadMsgNotificationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBadServerSalt.cs">
+      <Link>TLBadServerSalt.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotCommand.cs">
+      <Link>TLBotCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInfo.cs">
+      <Link>TLBotInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMediaResult.cs">
+      <Link>TLBotInlineMediaResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMessageBase.cs">
+      <Link>TLBotInlineMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMessageMediaAuto.cs">
+      <Link>TLBotInlineMessageMediaAuto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMessageMediaContact.cs">
+      <Link>TLBotInlineMessageMediaContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMessageMediaGeo.cs">
+      <Link>TLBotInlineMessageMediaGeo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMessageMediaVenue.cs">
+      <Link>TLBotInlineMessageMediaVenue.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineMessageText.cs">
+      <Link>TLBotInlineMessageText.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineResult.cs">
+      <Link>TLBotInlineResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLBotInlineResultBase.cs">
+      <Link>TLBotInlineResultBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannel.cs">
+      <Link>TLChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelForbidden.cs">
+      <Link>TLChannelForbidden.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelFull.cs">
+      <Link>TLChannelFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelMessagesFilter.cs">
+      <Link>TLChannelMessagesFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelMessagesFilterBase.cs">
+      <Link>TLChannelMessagesFilterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelMessagesFilterEmpty.cs">
+      <Link>TLChannelMessagesFilterEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipant.cs">
+      <Link>TLChannelParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantBase.cs">
+      <Link>TLChannelParticipantBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantCreator.cs">
+      <Link>TLChannelParticipantCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantEditor.cs">
+      <Link>TLChannelParticipantEditor.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantKicked.cs">
+      <Link>TLChannelParticipantKicked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantModerator.cs">
+      <Link>TLChannelParticipantModerator.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantRoleBase.cs">
+      <Link>TLChannelParticipantRoleBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantsAdmins.cs">
+      <Link>TLChannelParticipantsAdmins.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantsBots.cs">
+      <Link>TLChannelParticipantsBots.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantSelf.cs">
+      <Link>TLChannelParticipantSelf.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantsFilterBase.cs">
+      <Link>TLChannelParticipantsFilterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantsKicked.cs">
+      <Link>TLChannelParticipantsKicked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelParticipantsRecent.cs">
+      <Link>TLChannelParticipantsRecent.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelRoleEditor.cs">
+      <Link>TLChannelRoleEditor.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelRoleEmpty.cs">
+      <Link>TLChannelRoleEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelRoleModerator.cs">
+      <Link>TLChannelRoleModerator.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelsChannelParticipant.cs">
+      <Link>TLChannelsChannelParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChannelsChannelParticipants.cs">
+      <Link>TLChannelsChannelParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChat.cs">
+      <Link>TLChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatBase.cs">
+      <Link>TLChatBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatEmpty.cs">
+      <Link>TLChatEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatForbidden.cs">
+      <Link>TLChatForbidden.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatFull.cs">
+      <Link>TLChatFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatFullBase.cs">
+      <Link>TLChatFullBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatInvite.cs">
+      <Link>TLChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatInviteAlready.cs">
+      <Link>TLChatInviteAlready.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatInviteBase.cs">
+      <Link>TLChatInviteBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatInviteEmpty.cs">
+      <Link>TLChatInviteEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatInviteExported.cs">
+      <Link>TLChatInviteExported.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipant.cs">
+      <Link>TLChatParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipantAdmin.cs">
+      <Link>TLChatParticipantAdmin.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipantBase.cs">
+      <Link>TLChatParticipantBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipantCreator.cs">
+      <Link>TLChatParticipantCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipants.cs">
+      <Link>TLChatParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipantsBase.cs">
+      <Link>TLChatParticipantsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatParticipantsForbidden.cs">
+      <Link>TLChatParticipantsForbidden.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatPhoto.cs">
+      <Link>TLChatPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatPhotoBase.cs">
+      <Link>TLChatPhotoBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLChatPhotoEmpty.cs">
+      <Link>TLChatPhotoEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLClientDHInnerData.cs">
+      <Link>TLClientDHInnerData.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLConfig.cs">
+      <Link>TLConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContact.cs">
+      <Link>TLContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactBlocked.cs">
+      <Link>TLContactBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactLinkBase.cs">
+      <Link>TLContactLinkBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactLinkContact.cs">
+      <Link>TLContactLinkContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactLinkHasPhone.cs">
+      <Link>TLContactLinkHasPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactLinkNone.cs">
+      <Link>TLContactLinkNone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactLinkUnknown.cs">
+      <Link>TLContactLinkUnknown.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsBlocked.cs">
+      <Link>TLContactsBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsBlockedBase.cs">
+      <Link>TLContactsBlockedBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsBlockedSlice.cs">
+      <Link>TLContactsBlockedSlice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsContacts.cs">
+      <Link>TLContactsContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsContactsBase.cs">
+      <Link>TLContactsContactsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsContactsNotModified.cs">
+      <Link>TLContactsContactsNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsFound.cs">
+      <Link>TLContactsFound.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsImportedContacts.cs">
+      <Link>TLContactsImportedContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsLink.cs">
+      <Link>TLContactsLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsResolvedPeer.cs">
+      <Link>TLContactsResolvedPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactStatus.cs">
+      <Link>TLContactStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsTopPeers.cs">
+      <Link>TLContactsTopPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsTopPeersBase.cs">
+      <Link>TLContactsTopPeersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLContactsTopPeersNotModified.cs">
+      <Link>TLContactsTopPeersNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDataJSON.cs">
+      <Link>TLDataJSON.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDCOption.cs">
+      <Link>TLDCOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroyAuthKeyFail.cs">
+      <Link>TLDestroyAuthKeyFail.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroyAuthKeyNone.cs">
+      <Link>TLDestroyAuthKeyNone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroyAuthKeyOk.cs">
+      <Link>TLDestroyAuthKeyOk.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroyAuthKeyResBase.cs">
+      <Link>TLDestroyAuthKeyResBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroySessionNone.cs">
+      <Link>TLDestroySessionNone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroySessionOk.cs">
+      <Link>TLDestroySessionOk.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDestroySessionResBase.cs">
+      <Link>TLDestroySessionResBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDHGenFail.cs">
+      <Link>TLDHGenFail.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDHGenOk.cs">
+      <Link>TLDHGenOk.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDHGenRetry.cs">
+      <Link>TLDHGenRetry.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDialog.cs">
+      <Link>TLDialog.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDisabledFeature.cs">
+      <Link>TLDisabledFeature.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocument.cs">
+      <Link>TLDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeAnimated.cs">
+      <Link>TLDocumentAttributeAnimated.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeAudio.cs">
+      <Link>TLDocumentAttributeAudio.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeBase.cs">
+      <Link>TLDocumentAttributeBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeFilename.cs">
+      <Link>TLDocumentAttributeFilename.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeHasStickers.cs">
+      <Link>TLDocumentAttributeHasStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeImageSize.cs">
+      <Link>TLDocumentAttributeImageSize.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeSticker.cs">
+      <Link>TLDocumentAttributeSticker.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentAttributeVideo.cs">
+      <Link>TLDocumentAttributeVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentBase.cs">
+      <Link>TLDocumentBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDocumentEmpty.cs">
+      <Link>TLDocumentEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDraftMessage.cs">
+      <Link>TLDraftMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDraftMessageBase.cs">
+      <Link>TLDraftMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLDraftMessageEmpty.cs">
+      <Link>TLDraftMessageEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedChat.cs">
+      <Link>TLEncryptedChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedChatBase.cs">
+      <Link>TLEncryptedChatBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedChatDiscarded.cs">
+      <Link>TLEncryptedChatDiscarded.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedChatEmpty.cs">
+      <Link>TLEncryptedChatEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedChatRequested.cs">
+      <Link>TLEncryptedChatRequested.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedChatWaiting.cs">
+      <Link>TLEncryptedChatWaiting.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedFile.cs">
+      <Link>TLEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedFileBase.cs">
+      <Link>TLEncryptedFileBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedFileEmpty.cs">
+      <Link>TLEncryptedFileEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedMessage.cs">
+      <Link>TLEncryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedMessageBase.cs">
+      <Link>TLEncryptedMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLEncryptedMessageService.cs">
+      <Link>TLEncryptedMessageService.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLError.cs">
+      <Link>TLError.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLExportedChatInviteBase.cs">
+      <Link>TLExportedChatInviteBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLExportedMessageLink.cs">
+      <Link>TLExportedMessageLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFileLocation.cs">
+      <Link>TLFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFileLocationBase.cs">
+      <Link>TLFileLocationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFileLocationUnavailable.cs">
+      <Link>TLFileLocationUnavailable.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFoundGif.cs">
+      <Link>TLFoundGif.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFoundGifBase.cs">
+      <Link>TLFoundGifBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFoundGifCached.cs">
+      <Link>TLFoundGifCached.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFutureSalt.cs">
+      <Link>TLFutureSalt.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLFutureSalts.cs">
+      <Link>TLFutureSalts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLGame.cs">
+      <Link>TLGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLGeoPoint.cs">
+      <Link>TLGeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLGeoPointBase.cs">
+      <Link>TLGeoPointBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLGeoPointEmpty.cs">
+      <Link>TLGeoPointEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHelpAppUpdate.cs">
+      <Link>TLHelpAppUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHelpAppUpdateBase.cs">
+      <Link>TLHelpAppUpdateBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHelpInviteText.cs">
+      <Link>TLHelpInviteText.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHelpNoAppUpdate.cs">
+      <Link>TLHelpNoAppUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHelpSupport.cs">
+      <Link>TLHelpSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHelpTermsOfService.cs">
+      <Link>TLHelpTermsOfService.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHighScore.cs">
+      <Link>TLHighScore.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLHttpWait.cs">
+      <Link>TLHttpWait.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLImportedContact.cs">
+      <Link>TLImportedContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInlineBotSwitchPM.cs">
+      <Link>TLInlineBotSwitchPM.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputAppEvent.cs">
+      <Link>TLInputAppEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageBase.cs">
+      <Link>TLInputBotInlineMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageGame.cs">
+      <Link>TLInputBotInlineMessageGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageID.cs">
+      <Link>TLInputBotInlineMessageID.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageMediaAuto.cs">
+      <Link>TLInputBotInlineMessageMediaAuto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageMediaContact.cs">
+      <Link>TLInputBotInlineMessageMediaContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageMediaGeo.cs">
+      <Link>TLInputBotInlineMessageMediaGeo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageMediaVenue.cs">
+      <Link>TLInputBotInlineMessageMediaVenue.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineMessageText.cs">
+      <Link>TLInputBotInlineMessageText.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineResult.cs">
+      <Link>TLInputBotInlineResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineResultBase.cs">
+      <Link>TLInputBotInlineResultBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineResultDocument.cs">
+      <Link>TLInputBotInlineResultDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineResultGame.cs">
+      <Link>TLInputBotInlineResultGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputBotInlineResultPhoto.cs">
+      <Link>TLInputBotInlineResultPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChannel.cs">
+      <Link>TLInputChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChannelBase.cs">
+      <Link>TLInputChannelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChannelEmpty.cs">
+      <Link>TLInputChannelEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChatPhoto.cs">
+      <Link>TLInputChatPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChatPhotoBase.cs">
+      <Link>TLInputChatPhotoBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChatPhotoEmpty.cs">
+      <Link>TLInputChatPhotoEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputChatUploadedPhoto.cs">
+      <Link>TLInputChatUploadedPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputContactBase.cs">
+      <Link>TLInputContactBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputDocument.cs">
+      <Link>TLInputDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputDocumentBase.cs">
+      <Link>TLInputDocumentBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputDocumentEmpty.cs">
+      <Link>TLInputDocumentEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputDocumentFileLocation.cs">
+      <Link>TLInputDocumentFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedChat.cs">
+      <Link>TLInputEncryptedChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedFile.cs">
+      <Link>TLInputEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedFileBase.cs">
+      <Link>TLInputEncryptedFileBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedFileBigUploaded.cs">
+      <Link>TLInputEncryptedFileBigUploaded.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedFileEmpty.cs">
+      <Link>TLInputEncryptedFileEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedFileLocation.cs">
+      <Link>TLInputEncryptedFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputEncryptedFileUploaded.cs">
+      <Link>TLInputEncryptedFileUploaded.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputFile.cs">
+      <Link>TLInputFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputFileBase.cs">
+      <Link>TLInputFileBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputFileBig.cs">
+      <Link>TLInputFileBig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputFileLocation.cs">
+      <Link>TLInputFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputFileLocationBase.cs">
+      <Link>TLInputFileLocationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputGameBase.cs">
+      <Link>TLInputGameBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputGameID.cs">
+      <Link>TLInputGameID.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputGameShortName.cs">
+      <Link>TLInputGameShortName.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputGeoPoint.cs">
+      <Link>TLInputGeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputGeoPointBase.cs">
+      <Link>TLInputGeoPointBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputGeoPointEmpty.cs">
+      <Link>TLInputGeoPointEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaBase.cs">
+      <Link>TLInputMediaBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaContact.cs">
+      <Link>TLInputMediaContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaDocument.cs">
+      <Link>TLInputMediaDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaDocumentExternal.cs">
+      <Link>TLInputMediaDocumentExternal.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaEmpty.cs">
+      <Link>TLInputMediaEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaGame.cs">
+      <Link>TLInputMediaGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaGeoPoint.cs">
+      <Link>TLInputMediaGeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaGifExternal.cs">
+      <Link>TLInputMediaGifExternal.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaInvoice.cs">
+      <Link>TLInputMediaInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaPhoto.cs">
+      <Link>TLInputMediaPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaPhotoExternal.cs">
+      <Link>TLInputMediaPhotoExternal.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaUploadedDocument.cs">
+      <Link>TLInputMediaUploadedDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaUploadedPhoto.cs">
+      <Link>TLInputMediaUploadedPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaUploadedThumbDocument.cs">
+      <Link>TLInputMediaUploadedThumbDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMediaVenue.cs">
+      <Link>TLInputMediaVenue.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessageEntityMentionName.cs">
+      <Link>TLInputMessageEntityMentionName.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterChatPhotos.cs">
+      <Link>TLInputMessagesFilterChatPhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterDocument.cs">
+      <Link>TLInputMessagesFilterDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterEmpty.cs">
+      <Link>TLInputMessagesFilterEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterGif.cs">
+      <Link>TLInputMessagesFilterGif.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterMusic.cs">
+      <Link>TLInputMessagesFilterMusic.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterPhoneCalls.cs">
+      <Link>TLInputMessagesFilterPhoneCalls.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterPhotos.cs">
+      <Link>TLInputMessagesFilterPhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterPhotoVideo.cs">
+      <Link>TLInputMessagesFilterPhotoVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterPhotoVideoDocuments.cs">
+      <Link>TLInputMessagesFilterPhotoVideoDocuments.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterUrl.cs">
+      <Link>TLInputMessagesFilterUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterVideo.cs">
+      <Link>TLInputMessagesFilterVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputMessagesFilterVoice.cs">
+      <Link>TLInputMessagesFilterVoice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputNotifyAll.cs">
+      <Link>TLInputNotifyAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputNotifyChats.cs">
+      <Link>TLInputNotifyChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputNotifyPeer.cs">
+      <Link>TLInputNotifyPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputNotifyPeerBase.cs">
+      <Link>TLInputNotifyPeerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputNotifyUsers.cs">
+      <Link>TLInputNotifyUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPaymentCredentials.cs">
+      <Link>TLInputPaymentCredentials.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPaymentCredentialsBase.cs">
+      <Link>TLInputPaymentCredentialsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPaymentCredentialsSaved.cs">
+      <Link>TLInputPaymentCredentialsSaved.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerBase.cs">
+      <Link>TLInputPeerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerChannel.cs">
+      <Link>TLInputPeerChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerChat.cs">
+      <Link>TLInputPeerChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerEmpty.cs">
+      <Link>TLInputPeerEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerNotifyEventsAll.cs">
+      <Link>TLInputPeerNotifyEventsAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerNotifyEventsBase.cs">
+      <Link>TLInputPeerNotifyEventsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerNotifyEventsEmpty.cs">
+      <Link>TLInputPeerNotifyEventsEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerNotifySettings.cs">
+      <Link>TLInputPeerNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerSelf.cs">
+      <Link>TLInputPeerSelf.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPeerUser.cs">
+      <Link>TLInputPeerUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPhoneCall.cs">
+      <Link>TLInputPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPhoneContact.cs">
+      <Link>TLInputPhoneContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPhoto.cs">
+      <Link>TLInputPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPhotoBase.cs">
+      <Link>TLInputPhotoBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPhotoEmpty.cs">
+      <Link>TLInputPhotoEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyKeyBase.cs">
+      <Link>TLInputPrivacyKeyBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyKeyChatInvite.cs">
+      <Link>TLInputPrivacyKeyChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyKeyPhoneCall.cs">
+      <Link>TLInputPrivacyKeyPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyKeyStatusTimestamp.cs">
+      <Link>TLInputPrivacyKeyStatusTimestamp.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyRuleBase.cs">
+      <Link>TLInputPrivacyRuleBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyValueAllowAll.cs">
+      <Link>TLInputPrivacyValueAllowAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyValueAllowContacts.cs">
+      <Link>TLInputPrivacyValueAllowContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyValueAllowUsers.cs">
+      <Link>TLInputPrivacyValueAllowUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyValueDisallowAll.cs">
+      <Link>TLInputPrivacyValueDisallowAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyValueDisallowContacts.cs">
+      <Link>TLInputPrivacyValueDisallowContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputPrivacyValueDisallowUsers.cs">
+      <Link>TLInputPrivacyValueDisallowUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputReportReasonOther.cs">
+      <Link>TLInputReportReasonOther.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputReportReasonPornography.cs">
+      <Link>TLInputReportReasonPornography.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputReportReasonSpam.cs">
+      <Link>TLInputReportReasonSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputReportReasonViolence.cs">
+      <Link>TLInputReportReasonViolence.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickeredMediaBase.cs">
+      <Link>TLInputStickeredMediaBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickeredMediaDocument.cs">
+      <Link>TLInputStickeredMediaDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickeredMediaPhoto.cs">
+      <Link>TLInputStickeredMediaPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickerSetBase.cs">
+      <Link>TLInputStickerSetBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickerSetEmpty.cs">
+      <Link>TLInputStickerSetEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickerSetID.cs">
+      <Link>TLInputStickerSetID.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputStickerSetShortName.cs">
+      <Link>TLInputStickerSetShortName.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputUser.cs">
+      <Link>TLInputUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputUserBase.cs">
+      <Link>TLInputUserBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputUserEmpty.cs">
+      <Link>TLInputUserEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputUserSelf.cs">
+      <Link>TLInputUserSelf.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputWebDocument.cs">
+      <Link>TLInputWebDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInputWebFileLocation.cs">
+      <Link>TLInputWebFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLInvoice.cs">
+      <Link>TLInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButton.cs">
+      <Link>TLKeyboardButton.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonBase.cs">
+      <Link>TLKeyboardButtonBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonBuy.cs">
+      <Link>TLKeyboardButtonBuy.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonCallback.cs">
+      <Link>TLKeyboardButtonCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonGame.cs">
+      <Link>TLKeyboardButtonGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonRequestGeoLocation.cs">
+      <Link>TLKeyboardButtonRequestGeoLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonRequestPhone.cs">
+      <Link>TLKeyboardButtonRequestPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonRow.cs">
+      <Link>TLKeyboardButtonRow.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonSwitchInline.cs">
+      <Link>TLKeyboardButtonSwitchInline.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLKeyboardButtonUrl.cs">
+      <Link>TLKeyboardButtonUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLLabeledPrice.cs">
+      <Link>TLLabeledPrice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMaskCoords.cs">
+      <Link>TLMaskCoords.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessage.cs">
+      <Link>TLMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionBase.cs">
+      <Link>TLMessageActionBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChannelCreate.cs">
+      <Link>TLMessageActionChannelCreate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChannelMigrateFrom.cs">
+      <Link>TLMessageActionChannelMigrateFrom.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatAddUser.cs">
+      <Link>TLMessageActionChatAddUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatCreate.cs">
+      <Link>TLMessageActionChatCreate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatDeletePhoto.cs">
+      <Link>TLMessageActionChatDeletePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatDeleteUser.cs">
+      <Link>TLMessageActionChatDeleteUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatEditPhoto.cs">
+      <Link>TLMessageActionChatEditPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatEditTitle.cs">
+      <Link>TLMessageActionChatEditTitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatJoinedByLink.cs">
+      <Link>TLMessageActionChatJoinedByLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionChatMigrateTo.cs">
+      <Link>TLMessageActionChatMigrateTo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionEmpty.cs">
+      <Link>TLMessageActionEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionGameScore.cs">
+      <Link>TLMessageActionGameScore.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionHistoryClear.cs">
+      <Link>TLMessageActionHistoryClear.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionPaymentSent.cs">
+      <Link>TLMessageActionPaymentSent.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionPaymentSentMe.cs">
+      <Link>TLMessageActionPaymentSentMe.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionPhoneCall.cs">
+      <Link>TLMessageActionPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageActionPinMessage.cs">
+      <Link>TLMessageActionPinMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageBase.cs">
+      <Link>TLMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageCommonBase.cs">
+      <Link>TLMessageCommonBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEmpty.cs">
+      <Link>TLMessageEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityBase.cs">
+      <Link>TLMessageEntityBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityBold.cs">
+      <Link>TLMessageEntityBold.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityBotCommand.cs">
+      <Link>TLMessageEntityBotCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityCode.cs">
+      <Link>TLMessageEntityCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityEmail.cs">
+      <Link>TLMessageEntityEmail.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityHashtag.cs">
+      <Link>TLMessageEntityHashtag.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityItalic.cs">
+      <Link>TLMessageEntityItalic.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityMention.cs">
+      <Link>TLMessageEntityMention.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityMentionName.cs">
+      <Link>TLMessageEntityMentionName.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityPre.cs">
+      <Link>TLMessageEntityPre.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityTextUrl.cs">
+      <Link>TLMessageEntityTextUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityUnknown.cs">
+      <Link>TLMessageEntityUnknown.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageEntityUrl.cs">
+      <Link>TLMessageEntityUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageFwdHeader.cs">
+      <Link>TLMessageFwdHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaBase.cs">
+      <Link>TLMessageMediaBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaContact.cs">
+      <Link>TLMessageMediaContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaDocument.cs">
+      <Link>TLMessageMediaDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaEmpty.cs">
+      <Link>TLMessageMediaEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaGame.cs">
+      <Link>TLMessageMediaGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaGeo.cs">
+      <Link>TLMessageMediaGeo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaInvoice.cs">
+      <Link>TLMessageMediaInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaPhoto.cs">
+      <Link>TLMessageMediaPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaUnsupported.cs">
+      <Link>TLMessageMediaUnsupported.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaVenue.cs">
+      <Link>TLMessageMediaVenue.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageMediaWebPage.cs">
+      <Link>TLMessageMediaWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageRange.cs">
+      <Link>TLMessageRange.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesAffectedHistory.cs">
+      <Link>TLMessagesAffectedHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesAffectedMessages.cs">
+      <Link>TLMessagesAffectedMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesAllStickers.cs">
+      <Link>TLMessagesAllStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesAllStickersBase.cs">
+      <Link>TLMessagesAllStickersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesAllStickersNotModified.cs">
+      <Link>TLMessagesAllStickersNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesArchivedStickers.cs">
+      <Link>TLMessagesArchivedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesBotCallbackAnswer.cs">
+      <Link>TLMessagesBotCallbackAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesBotResults.cs">
+      <Link>TLMessagesBotResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesChannelMessages.cs">
+      <Link>TLMessagesChannelMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesChatFull.cs">
+      <Link>TLMessagesChatFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesChats.cs">
+      <Link>TLMessagesChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesChatsBase.cs">
+      <Link>TLMessagesChatsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesChatsSlice.cs">
+      <Link>TLMessagesChatsSlice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesDHConfig.cs">
+      <Link>TLMessagesDHConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesDHConfigBase.cs">
+      <Link>TLMessagesDHConfigBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesDHConfigNotModified.cs">
+      <Link>TLMessagesDHConfigNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesDialogs.cs">
+      <Link>TLMessagesDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesDialogsBase.cs">
+      <Link>TLMessagesDialogsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesDialogsSlice.cs">
+      <Link>TLMessagesDialogsSlice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessageService.cs">
+      <Link>TLMessageService.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesFeaturedStickers.cs">
+      <Link>TLMessagesFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesFeaturedStickersBase.cs">
+      <Link>TLMessagesFeaturedStickersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesFeaturedStickersNotModified.cs">
+      <Link>TLMessagesFeaturedStickersNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesFilterBase.cs">
+      <Link>TLMessagesFilterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesFoundGifs.cs">
+      <Link>TLMessagesFoundGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesHighScores.cs">
+      <Link>TLMessagesHighScores.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesMessageEditData.cs">
+      <Link>TLMessagesMessageEditData.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesMessages.cs">
+      <Link>TLMessagesMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesMessagesBase.cs">
+      <Link>TLMessagesMessagesBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesMessagesSlice.cs">
+      <Link>TLMessagesMessagesSlice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesPeerDialogs.cs">
+      <Link>TLMessagesPeerDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesRecentStickers.cs">
+      <Link>TLMessagesRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesRecentStickersBase.cs">
+      <Link>TLMessagesRecentStickersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesRecentStickersNotModified.cs">
+      <Link>TLMessagesRecentStickersNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesSavedGifs.cs">
+      <Link>TLMessagesSavedGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesSavedGifsBase.cs">
+      <Link>TLMessagesSavedGifsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesSavedGifsNotModified.cs">
+      <Link>TLMessagesSavedGifsNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesSentEncryptedFile.cs">
+      <Link>TLMessagesSentEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesSentEncryptedMessage.cs">
+      <Link>TLMessagesSentEncryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesSentEncryptedMessageBase.cs">
+      <Link>TLMessagesSentEncryptedMessageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickers.cs">
+      <Link>TLMessagesStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickersBase.cs">
+      <Link>TLMessagesStickersBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickerSet.cs">
+      <Link>TLMessagesStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickerSetInstallResultArchive.cs">
+      <Link>TLMessagesStickerSetInstallResultArchive.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickerSetInstallResultBase.cs">
+      <Link>TLMessagesStickerSetInstallResultBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickerSetInstallResultSuccess.cs">
+      <Link>TLMessagesStickerSetInstallResultSuccess.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMessagesStickersNotModified.cs">
+      <Link>TLMessagesStickersNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgDetailedInfo.cs">
+      <Link>TLMsgDetailedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgDetailedInfoBase.cs">
+      <Link>TLMsgDetailedInfoBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgNewDetailedInfo.cs">
+      <Link>TLMsgNewDetailedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgResendReq.cs">
+      <Link>TLMsgResendReq.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgsAck.cs">
+      <Link>TLMsgsAck.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgsAllInfo.cs">
+      <Link>TLMsgsAllInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgsStateInfo.cs">
+      <Link>TLMsgsStateInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLMsgsStateReq.cs">
+      <Link>TLMsgsStateReq.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNearestDC.cs">
+      <Link>TLNearestDC.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNewSessionBase.cs">
+      <Link>TLNewSessionBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNewSessionCreated.cs">
+      <Link>TLNewSessionCreated.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNotifyAll.cs">
+      <Link>TLNotifyAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNotifyChats.cs">
+      <Link>TLNotifyChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNotifyPeer.cs">
+      <Link>TLNotifyPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNotifyPeerBase.cs">
+      <Link>TLNotifyPeerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLNotifyUsers.cs">
+      <Link>TLNotifyUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBase.cs">
+      <Link>TLPageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockAnchor.cs">
+      <Link>TLPageBlockAnchor.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockAuthorDate.cs">
+      <Link>TLPageBlockAuthorDate.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockBase.cs">
+      <Link>TLPageBlockBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockBlockquote.cs">
+      <Link>TLPageBlockBlockquote.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockCollage.cs">
+      <Link>TLPageBlockCollage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockCover.cs">
+      <Link>TLPageBlockCover.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockDivider.cs">
+      <Link>TLPageBlockDivider.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockEmbed.cs">
+      <Link>TLPageBlockEmbed.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockEmbedPost.cs">
+      <Link>TLPageBlockEmbedPost.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockFooter.cs">
+      <Link>TLPageBlockFooter.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockHeader.cs">
+      <Link>TLPageBlockHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockList.cs">
+      <Link>TLPageBlockList.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockParagraph.cs">
+      <Link>TLPageBlockParagraph.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockPhoto.cs">
+      <Link>TLPageBlockPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockPreformatted.cs">
+      <Link>TLPageBlockPreformatted.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockPullquote.cs">
+      <Link>TLPageBlockPullquote.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockSlideshow.cs">
+      <Link>TLPageBlockSlideshow.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockSubheader.cs">
+      <Link>TLPageBlockSubheader.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockSubtitle.cs">
+      <Link>TLPageBlockSubtitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockTitle.cs">
+      <Link>TLPageBlockTitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockUnsupported.cs">
+      <Link>TLPageBlockUnsupported.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageBlockVideo.cs">
+      <Link>TLPageBlockVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPageFull.cs">
+      <Link>TLPageFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPagePart.cs">
+      <Link>TLPagePart.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentCharge.cs">
+      <Link>TLPaymentCharge.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentRequestedInfo.cs">
+      <Link>TLPaymentRequestedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentSavedCredentialsBase.cs">
+      <Link>TLPaymentSavedCredentialsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentSavedCredentialsCard.cs">
+      <Link>TLPaymentSavedCredentialsCard.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsPaymentForm.cs">
+      <Link>TLPaymentsPaymentForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsPaymentReceipt.cs">
+      <Link>TLPaymentsPaymentReceipt.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsPaymentResult.cs">
+      <Link>TLPaymentsPaymentResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsPaymentResultBase.cs">
+      <Link>TLPaymentsPaymentResultBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsPaymentVerficationNeeded.cs">
+      <Link>TLPaymentsPaymentVerficationNeeded.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsSavedInfo.cs">
+      <Link>TLPaymentsSavedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPaymentsValidatedRequestedInfo.cs">
+      <Link>TLPaymentsValidatedRequestedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerBase.cs">
+      <Link>TLPeerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerChannel.cs">
+      <Link>TLPeerChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerChat.cs">
+      <Link>TLPeerChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerNotifyEventsAll.cs">
+      <Link>TLPeerNotifyEventsAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerNotifyEventsBase.cs">
+      <Link>TLPeerNotifyEventsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerNotifyEventsEmpty.cs">
+      <Link>TLPeerNotifyEventsEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerNotifySettings.cs">
+      <Link>TLPeerNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerNotifySettingsBase.cs">
+      <Link>TLPeerNotifySettingsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerNotifySettingsEmpty.cs">
+      <Link>TLPeerNotifySettingsEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerSettings.cs">
+      <Link>TLPeerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPeerUser.cs">
+      <Link>TLPeerUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCall.cs">
+      <Link>TLPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallAccepted.cs">
+      <Link>TLPhoneCallAccepted.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallBase.cs">
+      <Link>TLPhoneCallBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallDiscarded.cs">
+      <Link>TLPhoneCallDiscarded.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallDiscardReasonBase.cs">
+      <Link>TLPhoneCallDiscardReasonBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallDiscardReasonBusy.cs">
+      <Link>TLPhoneCallDiscardReasonBusy.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallDiscardReasonDisconnect.cs">
+      <Link>TLPhoneCallDiscardReasonDisconnect.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallDiscardReasonHangup.cs">
+      <Link>TLPhoneCallDiscardReasonHangup.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallDiscardReasonMissed.cs">
+      <Link>TLPhoneCallDiscardReasonMissed.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallEmpty.cs">
+      <Link>TLPhoneCallEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallProtocol.cs">
+      <Link>TLPhoneCallProtocol.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallRequested.cs">
+      <Link>TLPhoneCallRequested.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneCallWaiting.cs">
+      <Link>TLPhoneCallWaiting.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoneConnection.cs">
+      <Link>TLPhoneConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhonePhoneCall.cs">
+      <Link>TLPhonePhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhoto.cs">
+      <Link>TLPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotoBase.cs">
+      <Link>TLPhotoBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotoCachedSize.cs">
+      <Link>TLPhotoCachedSize.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotoEmpty.cs">
+      <Link>TLPhotoEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotoSize.cs">
+      <Link>TLPhotoSize.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotoSizeBase.cs">
+      <Link>TLPhotoSizeBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotoSizeEmpty.cs">
+      <Link>TLPhotoSizeEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotosPhoto.cs">
+      <Link>TLPhotosPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotosPhotos.cs">
+      <Link>TLPhotosPhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotosPhotosBase.cs">
+      <Link>TLPhotosPhotosBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPhotosPhotosSlice.cs">
+      <Link>TLPhotosPhotosSlice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPong.cs">
+      <Link>TLPong.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPostAddress.cs">
+      <Link>TLPostAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPQInnerData.cs">
+      <Link>TLPQInnerData.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyKeyBase.cs">
+      <Link>TLPrivacyKeyBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyKeyChatInvite.cs">
+      <Link>TLPrivacyKeyChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyKeyPhoneCall.cs">
+      <Link>TLPrivacyKeyPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyKeyStatusTimestamp.cs">
+      <Link>TLPrivacyKeyStatusTimestamp.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyRuleBase.cs">
+      <Link>TLPrivacyRuleBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyValueAllowAll.cs">
+      <Link>TLPrivacyValueAllowAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyValueAllowContacts.cs">
+      <Link>TLPrivacyValueAllowContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyValueAllowUsers.cs">
+      <Link>TLPrivacyValueAllowUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyValueDisallowAll.cs">
+      <Link>TLPrivacyValueDisallowAll.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyValueDisallowContacts.cs">
+      <Link>TLPrivacyValueDisallowContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLPrivacyValueDisallowUsers.cs">
+      <Link>TLPrivacyValueDisallowUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReceivedNotifyMessage.cs">
+      <Link>TLReceivedNotifyMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReplyInlineMarkup.cs">
+      <Link>TLReplyInlineMarkup.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReplyKeyboardForceReply.cs">
+      <Link>TLReplyKeyboardForceReply.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReplyKeyboardHide.cs">
+      <Link>TLReplyKeyboardHide.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReplyKeyboardMarkup.cs">
+      <Link>TLReplyKeyboardMarkup.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReplyMarkupBase.cs">
+      <Link>TLReplyMarkupBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLReportReasonBase.cs">
+      <Link>TLReportReasonBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLResPQ.cs">
+      <Link>TLResPQ.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLRichTextBase.cs">
+      <Link>TLRichTextBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLRPCAnswerDropped.cs">
+      <Link>TLRPCAnswerDropped.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLRPCAnswerDroppedRunning.cs">
+      <Link>TLRPCAnswerDroppedRunning.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLRPCAnswerUnknown.cs">
+      <Link>TLRPCAnswerUnknown.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLRPCDropAnswerBase.cs">
+      <Link>TLRPCDropAnswerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLRPCError.cs">
+      <Link>TLRPCError.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageActionBase.cs">
+      <Link>TLSendMessageActionBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageCancelAction.cs">
+      <Link>TLSendMessageCancelAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageChooseContactAction.cs">
+      <Link>TLSendMessageChooseContactAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageGamePlayAction.cs">
+      <Link>TLSendMessageGamePlayAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageGeoLocationAction.cs">
+      <Link>TLSendMessageGeoLocationAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageRecordAudioAction.cs">
+      <Link>TLSendMessageRecordAudioAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageRecordVideoAction.cs">
+      <Link>TLSendMessageRecordVideoAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageTypingAction.cs">
+      <Link>TLSendMessageTypingAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageUploadAudioAction.cs">
+      <Link>TLSendMessageUploadAudioAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageUploadDocumentAction.cs">
+      <Link>TLSendMessageUploadDocumentAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageUploadPhotoAction.cs">
+      <Link>TLSendMessageUploadPhotoAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSendMessageUploadVideoAction.cs">
+      <Link>TLSendMessageUploadVideoAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLServerDHInnerData.cs">
+      <Link>TLServerDHInnerData.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLServerDHParamsBase.cs">
+      <Link>TLServerDHParamsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLServerDHParamsFail.cs">
+      <Link>TLServerDHParamsFail.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLServerDHParamsOk.cs">
+      <Link>TLServerDHParamsOk.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLSetClientDHParamsAnswerBase.cs">
+      <Link>TLSetClientDHParamsAnswerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLShippingOption.cs">
+      <Link>TLShippingOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStickerPack.cs">
+      <Link>TLStickerPack.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStickerSet.cs">
+      <Link>TLStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStickerSetCovered.cs">
+      <Link>TLStickerSetCovered.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStickerSetCoveredBase.cs">
+      <Link>TLStickerSetCoveredBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStickerSetMultiCovered.cs">
+      <Link>TLStickerSetMultiCovered.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileGif.cs">
+      <Link>TLStorageFileGif.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileJpeg.cs">
+      <Link>TLStorageFileJpeg.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileMov.cs">
+      <Link>TLStorageFileMov.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileMp3.cs">
+      <Link>TLStorageFileMp3.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileMp4.cs">
+      <Link>TLStorageFileMp4.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFilePartial.cs">
+      <Link>TLStorageFilePartial.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFilePdf.cs">
+      <Link>TLStorageFilePdf.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFilePng.cs">
+      <Link>TLStorageFilePng.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileTypeBase.cs">
+      <Link>TLStorageFileTypeBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileUnknown.cs">
+      <Link>TLStorageFileUnknown.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLStorageFileWebp.cs">
+      <Link>TLStorageFileWebp.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextBold.cs">
+      <Link>TLTextBold.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextConcat.cs">
+      <Link>TLTextConcat.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextEmail.cs">
+      <Link>TLTextEmail.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextEmpty.cs">
+      <Link>TLTextEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextFixed.cs">
+      <Link>TLTextFixed.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextItalic.cs">
+      <Link>TLTextItalic.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextPlain.cs">
+      <Link>TLTextPlain.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextStrike.cs">
+      <Link>TLTextStrike.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextUnderline.cs">
+      <Link>TLTextUnderline.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTextUrl.cs">
+      <Link>TLTextUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeer.cs">
+      <Link>TLTopPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryBase.cs">
+      <Link>TLTopPeerCategoryBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryBotsInline.cs">
+      <Link>TLTopPeerCategoryBotsInline.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryBotsPM.cs">
+      <Link>TLTopPeerCategoryBotsPM.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryChannels.cs">
+      <Link>TLTopPeerCategoryChannels.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryCorrespondents.cs">
+      <Link>TLTopPeerCategoryCorrespondents.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryGroups.cs">
+      <Link>TLTopPeerCategoryGroups.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLTopPeerCategoryPeers.cs">
+      <Link>TLTopPeerCategoryPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBase.cs">
+      <Link>TLUpdateBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotCallbackQuery.cs">
+      <Link>TLUpdateBotCallbackQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotInlineQuery.cs">
+      <Link>TLUpdateBotInlineQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotInlineSend.cs">
+      <Link>TLUpdateBotInlineSend.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotPrecheckoutQuery.cs">
+      <Link>TLUpdateBotPrecheckoutQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotShippingQuery.cs">
+      <Link>TLUpdateBotShippingQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotWebhookJSON.cs">
+      <Link>TLUpdateBotWebhookJSON.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateBotWebhookJSONQuery.cs">
+      <Link>TLUpdateBotWebhookJSONQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChannel.cs">
+      <Link>TLUpdateChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChannelMessageViews.cs">
+      <Link>TLUpdateChannelMessageViews.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChannelPinnedMessage.cs">
+      <Link>TLUpdateChannelPinnedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChannelTooLong.cs">
+      <Link>TLUpdateChannelTooLong.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChannelWebPage.cs">
+      <Link>TLUpdateChannelWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChatAdmins.cs">
+      <Link>TLUpdateChatAdmins.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChatParticipantAdd.cs">
+      <Link>TLUpdateChatParticipantAdd.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChatParticipantAdmin.cs">
+      <Link>TLUpdateChatParticipantAdmin.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChatParticipantDelete.cs">
+      <Link>TLUpdateChatParticipantDelete.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChatParticipants.cs">
+      <Link>TLUpdateChatParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateChatUserTyping.cs">
+      <Link>TLUpdateChatUserTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateConfig.cs">
+      <Link>TLUpdateConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateContactLink.cs">
+      <Link>TLUpdateContactLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateContactRegistered.cs">
+      <Link>TLUpdateContactRegistered.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateDCOptions.cs">
+      <Link>TLUpdateDCOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateDeleteChannelMessages.cs">
+      <Link>TLUpdateDeleteChannelMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateDeleteMessages.cs">
+      <Link>TLUpdateDeleteMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateDialogPinned.cs">
+      <Link>TLUpdateDialogPinned.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateDraftMessage.cs">
+      <Link>TLUpdateDraftMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateEditChannelMessage.cs">
+      <Link>TLUpdateEditChannelMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateEditMessage.cs">
+      <Link>TLUpdateEditMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateEncryptedChatTyping.cs">
+      <Link>TLUpdateEncryptedChatTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateEncryptedMessagesRead.cs">
+      <Link>TLUpdateEncryptedMessagesRead.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateEncryption.cs">
+      <Link>TLUpdateEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateInlineBotCallbackQuery.cs">
+      <Link>TLUpdateInlineBotCallbackQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateMessageID.cs">
+      <Link>TLUpdateMessageID.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateNewChannelMessage.cs">
+      <Link>TLUpdateNewChannelMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateNewEncryptedMessage.cs">
+      <Link>TLUpdateNewEncryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateNewMessage.cs">
+      <Link>TLUpdateNewMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateNewStickerSet.cs">
+      <Link>TLUpdateNewStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateNotifySettings.cs">
+      <Link>TLUpdateNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatePhoneCall.cs">
+      <Link>TLUpdatePhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatePinnedDialogs.cs">
+      <Link>TLUpdatePinnedDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatePrivacy.cs">
+      <Link>TLUpdatePrivacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatePtsChanged.cs">
+      <Link>TLUpdatePtsChanged.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateReadChannelInbox.cs">
+      <Link>TLUpdateReadChannelInbox.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateReadChannelOutbox.cs">
+      <Link>TLUpdateReadChannelOutbox.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateReadFeaturedStickers.cs">
+      <Link>TLUpdateReadFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateReadHistoryInbox.cs">
+      <Link>TLUpdateReadHistoryInbox.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateReadHistoryOutbox.cs">
+      <Link>TLUpdateReadHistoryOutbox.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateReadMessagesContents.cs">
+      <Link>TLUpdateReadMessagesContents.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateRecentStickers.cs">
+      <Link>TLUpdateRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdates.cs">
+      <Link>TLUpdates.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateSavedGifs.cs">
+      <Link>TLUpdateSavedGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesBase.cs">
+      <Link>TLUpdatesBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesChannelDifference.cs">
+      <Link>TLUpdatesChannelDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesChannelDifferenceBase.cs">
+      <Link>TLUpdatesChannelDifferenceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesChannelDifferenceEmpty.cs">
+      <Link>TLUpdatesChannelDifferenceEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesChannelDifferenceTooLong.cs">
+      <Link>TLUpdatesChannelDifferenceTooLong.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesCombined.cs">
+      <Link>TLUpdatesCombined.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesDifference.cs">
+      <Link>TLUpdatesDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesDifferenceBase.cs">
+      <Link>TLUpdatesDifferenceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesDifferenceEmpty.cs">
+      <Link>TLUpdatesDifferenceEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesDifferenceSlice.cs">
+      <Link>TLUpdatesDifferenceSlice.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesDifferenceTooLong.cs">
+      <Link>TLUpdatesDifferenceTooLong.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateServiceNotification.cs">
+      <Link>TLUpdateServiceNotification.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateShort.cs">
+      <Link>TLUpdateShort.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateShortChatMessage.cs">
+      <Link>TLUpdateShortChatMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateShortMessage.cs">
+      <Link>TLUpdateShortMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateShortSentMessage.cs">
+      <Link>TLUpdateShortSentMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesState.cs">
+      <Link>TLUpdatesState.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateStickerSets.cs">
+      <Link>TLUpdateStickerSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateStickerSetsOrder.cs">
+      <Link>TLUpdateStickerSetsOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdatesTooLong.cs">
+      <Link>TLUpdatesTooLong.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateUserBlocked.cs">
+      <Link>TLUpdateUserBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateUserName.cs">
+      <Link>TLUpdateUserName.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateUserPhone.cs">
+      <Link>TLUpdateUserPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateUserPhoto.cs">
+      <Link>TLUpdateUserPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateUserStatus.cs">
+      <Link>TLUpdateUserStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateUserTyping.cs">
+      <Link>TLUpdateUserTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUpdateWebPage.cs">
+      <Link>TLUpdateWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUploadFile.cs">
+      <Link>TLUploadFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUploadWebFile.cs">
+      <Link>TLUploadWebFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUser.cs">
+      <Link>TLUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserBase.cs">
+      <Link>TLUserBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserEmpty.cs">
+      <Link>TLUserEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserFull.cs">
+      <Link>TLUserFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserProfilePhoto.cs">
+      <Link>TLUserProfilePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserProfilePhotoBase.cs">
+      <Link>TLUserProfilePhotoBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserProfilePhotoEmpty.cs">
+      <Link>TLUserProfilePhotoEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusBase.cs">
+      <Link>TLUserStatusBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusEmpty.cs">
+      <Link>TLUserStatusEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusLastMonth.cs">
+      <Link>TLUserStatusLastMonth.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusLastWeek.cs">
+      <Link>TLUserStatusLastWeek.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusOffline.cs">
+      <Link>TLUserStatusOffline.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusOnline.cs">
+      <Link>TLUserStatusOnline.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLUserStatusRecently.cs">
+      <Link>TLUserStatusRecently.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWallPaper.cs">
+      <Link>TLWallPaper.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWallPaperBase.cs">
+      <Link>TLWallPaperBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWallPaperSolid.cs">
+      <Link>TLWallPaperSolid.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWebDocument.cs">
+      <Link>TLWebDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWebPage.cs">
+      <Link>TLWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWebPageBase.cs">
+      <Link>TLWebPageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWebPageEmpty.cs">
+      <Link>TLWebPageEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWebPageNotModified.cs">
+      <Link>TLWebPageNotModified.cs</Link>
+    </Compile>
+    <Compile Include="..\Unigram.Api\TL\TLWebPagePending.cs">
+      <Link>TLWebPagePending.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Unigram.Api.TL.rd.xml" />

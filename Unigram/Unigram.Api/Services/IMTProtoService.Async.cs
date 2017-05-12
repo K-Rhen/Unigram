@@ -68,7 +68,7 @@ namespace Telegram.Api.Services
         Task<MTProtoResponse<TLUpdatesDifferenceBase>> GetDifferenceWithoutUpdatesAsync(int pts, int date, int qts);
         Task<MTProtoResponse<bool>> UpdatePasswordSettingsAsync(byte[] currentPasswordHash, TLAccountPasswordInputSettings newSettings);
         Task<MTProtoResponse<bool>> ReadHistoryAsync(TLChannel channel, int maxId);
-        Task<MTProtoResponse<TLContactsTopPeersBase>> GetTopPeersAsync(TLContactsGetTopPeers.Flag flags, int offset, int limit, int hash);
+        Task<MTProtoResponse<TLContactsTopPeersBase>> GetTopPeersAsync(TLContactsGetTopPeersFlag flags, int offset, int limit, int hash);
         Task<MTProtoResponse<TLUpdatesBase>> EditChatTitleAsync(int chatId, string title);
         Task<MTProtoResponse<bool>> CheckUsernameAsync(string username);
         Task<MTProtoResponse<bool>> ResetAuthorizationsAsync();
@@ -137,7 +137,7 @@ namespace Telegram.Api.Services
         Task<MTProtoResponse<TLUpdatesBase>> MigrateChatAsync(int chatId);
         Task<MTProtoResponse<TLUpdatesBase>> EditMessageAsync(TLInputPeerBase peer, int id, string message, TLVector<TLMessageEntityBase> entities, TLReplyMarkupBase replyMarkup, bool noWebPage);
         Task<MTProtoResponse<TLMessagesAffectedMessages>> DeleteMessagesAsync(TLInputChannelBase channel, TLVector<int> id);
-        Task<MTProtoResponse<TLUpdatesBase>> CreateChannelAsync(TLChannelsCreateChannel.Flag flags, string title, string about);
+        Task<MTProtoResponse<TLUpdatesBase>> CreateChannelAsync(TLChannelsCreateChannelFlag flags, string title, string about);
         Task<MTProtoResponse<TLMessagesMessagesBase>> GetMessagesAsync(TLVector<int> id);
         Task<MTProtoResponse<bool>> CancelCodeAsync(string phoneNumber, string phoneCodeHash);
         Task<MTProtoResponse<TLUpdatesBase>> EditTitleAsync(TLChannel channel, string title);

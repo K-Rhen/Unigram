@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-    public class TLInt128 : TLObject
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    class ITLInt128 : ITLObject, TLInt128
     {
-        public long Low;
-        public long High;
+        public long Low { get; set; }
+        public long High { get; set; }
 
-        public TLInt128() { }
-        public TLInt128(TLBinaryReader from)
+        public ITLInt128() { }
+        public ITLInt128(TLBinaryReader from)
         {
             Read(from);
         }
@@ -31,20 +37,20 @@ namespace Telegram.Api.TL
             to.Write(High);
         }
 
-        #region Operators
-        public static bool operator ==(TLInt128 a, TLInt128 b)
+#region Operators
+        public static bool operator ==(ITLInt128 a, ITLInt128 b)
         {
             return a.Low == b.Low && a.High == b.High;
         }
 
-        public static bool operator !=(TLInt128 a, TLInt128 b)
+        public static bool operator !=(ITLInt128 a, ITLInt128 b)
         {
             return a.Low != b.Low || a.High != b.High;
         }
 
         public override bool Equals(object obj)
         {
-            var b = obj as TLInt128;
+            var b = obj as ITLInt128;
             if ((object)b == null)
             {
                 return false;
@@ -57,7 +63,7 @@ namespace Telegram.Api.TL
         {
             return Low.GetHashCode() ^ High.GetHashCode();
         }
-        #endregion
+#endregion
 
         public static TLInt128 Random()
         {
@@ -68,7 +74,17 @@ namespace Telegram.Api.TL
             var l = BitConverter.ToInt64(nonce, 0);
             var h = BitConverter.ToInt64(nonce, 8);
 
-            return new TLInt128 { Low = l, High = h };
+            return new ITLInt128 { Low = l, High = h };
         }
     }
+
+#if !PORTABLE
+    [Guid(0x364ab97f, 0x1a98, 0x3051, 0x56, 0x77, 0xed, 0xa6, 0x7b, 0xc4, 0xba, 0xc1)]
+    public partial interface TLInt128 : TLObject
+    {
+        long Low { get; set; }
+        long High { get; set; }
+    }
+#endif
+
 }

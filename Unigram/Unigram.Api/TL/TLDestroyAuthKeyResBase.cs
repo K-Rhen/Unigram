@@ -4,12 +4,20 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLDestroyAuthKeyResBase : TLObject, ITLDestroyAuthKeyResBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLDestroyAuthKeyResBase : ITLObject, TLDestroyAuthKeyResBase
 	{
 	}
 
+#if !PORTABLE
 	[Guid(0x7c1a4932, 0x400c, 0xfecf, 0xc8, 0x9a, 0x73, 0xb4, 0x7e, 0xa6, 0x35, 0xc0)]
-	public partial interface ITLDestroyAuthKeyResBase : TLObject
+	public partial interface TLDestroyAuthKeyResBase : TLObject
 	{
 	}
+#endif
+
 }

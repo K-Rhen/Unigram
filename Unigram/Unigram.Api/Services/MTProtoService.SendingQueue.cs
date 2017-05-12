@@ -114,7 +114,7 @@ namespace Telegram.Api.Services
                 messageId = _activeTransport.GenerateMessageId(true);
             }
 
-            var transportMessage = new TLContainerTransportMessage
+            var transportMessage = new ITLContainerTransportMessage
             {
                 MsgId = messageId,
                 SeqNo = sequenceNumber,
@@ -258,7 +258,7 @@ namespace Telegram.Api.Services
                 }
             }
 
-            var actions = new TLVector<TLObject>();
+            var actions = new ITLVector<TLObject>();
             for (var i = 0; i < itemsToRemove.Count; i++)
             {
                 actions.Add(itemsToRemove[i].Object);
@@ -269,7 +269,7 @@ namespace Telegram.Api.Services
             {
                 foreach (var item in itemsToRemove)
                 {
-                    item.FaultQueueCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.CleanupQueue" });
+                    item.FaultQueueCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.CleanupQueue" });
                 }
             });
         }
@@ -303,7 +303,7 @@ namespace Telegram.Api.Services
                 }
             }
 
-            var actions = new TLVector<TLObject>();
+            var actions = new ITLVector<TLObject>();
             for (var i = 0; i < itemsToRemove.Count; i++)
             {
                 actions.Add(itemsToRemove[i].Object);
@@ -315,7 +315,7 @@ namespace Telegram.Api.Services
             {
                 foreach (var item in itemsToRemove)
                 {
-                    item.FaultQueueCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.CleanupQueue" });
+                    item.FaultQueueCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.CleanupQueue" });
                 }
             });
         }
@@ -364,15 +364,14 @@ namespace Telegram.Api.Services
         private readonly object _actionInfoSyncRoot = new object();
 
         private TLVector<TLActionInfo> _actionInfo;
-
-        public TLVector<TLActionInfo> GetActionInfoFromFile()
+        private TLVector<TLActionInfo> GetActionInfoFromFile()
         {
             if (_actionInfo != null)
             {
                 return _actionInfo;
             }
 
-            _actionInfo = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLActionInfo>>(_actionsSyncRoot, Constants.ActionQueueFileName) ?? new TLVector<TLActionInfo>();
+            _actionInfo = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLActionInfo>>(_actionsSyncRoot, Constants.ActionQueueFileName) ?? new ITLVector<TLActionInfo>();
 
             return _actionInfo;
         }
@@ -495,12 +494,12 @@ namespace Telegram.Api.Services
         {
             lock (_actionInfoSyncRoot)
             {
-                var actions = new TLVector<TLActionInfo>();
+                var actions = new ITLVector<TLActionInfo>();
                 SaveActionInfoToFile(actions);
             }
         }
 
-        private static TLMsgContainer CreateContainer(IList<HistoryItem> items)
+        private static ITLMsgContainer CreateContainer(IList<HistoryItem> items)
         {
             var messages = new List<TLContainerTransportMessage>();
 
@@ -511,7 +510,7 @@ namespace Telegram.Api.Services
                 var transportMessage = (TLContainerTransportMessage)item.Message;
                 if (item.InvokeAfter != null)
                 {
-                    transportMessage.Query = new TLInvokeAfterMsg
+                    transportMessage.Query = new ITLInvokeAfterMsg
                     {
                         MsgId = item.InvokeAfter.Message.MsgId,
                         Query = item.Object
@@ -523,7 +522,7 @@ namespace Telegram.Api.Services
                 messages.Add(transportMessage);
             }
 
-            var container = new TLMsgContainer
+            var container = new ITLMsgContainer
             {
                 Messages = new List<TLContainerTransportMessage> (messages)
             };

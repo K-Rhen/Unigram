@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLMessageActionDate : TLMessageActionBase
+#if PORTABLE
+    public partial class TLMessageActionDate : ITLMessageActionBase
     {
         public Int32 Date { get; set; }
 
@@ -31,4 +32,5 @@ namespace Telegram.Api.TL
             to.Write(Date);
         }
     }
+#endif
 }

@@ -10,7 +10,12 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract class TLObject
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract class ITLObject : TLObject
     {
         public virtual TLType TypeId
         {
@@ -58,4 +63,19 @@ namespace Telegram.Api.TL
             return (!(lambdaExpression.Body is UnaryExpression) ? (MemberExpression)lambdaExpression.Body : (MemberExpression)((UnaryExpression)lambdaExpression.Body).Operand).Member;
         }
     }
+
+#if !PORTABLE
+    public interface TLObject
+    {
+        TLType TypeId { get; }
+
+        void Read(TLBinaryReader from);
+        void Write(TLBinaryWriter to);
+
+        byte[] ToArray();
+
+        void RaisePropertyChanged([CallerMemberName] string propertyName = "");
+        void RaisePropertyChanged<TProperty>(Expression<Func<TProperty>> property);
+    }
+#endif
 }

@@ -4,7 +4,12 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLMessageCommonBase : TLMessageBase, ITLMessageCommonBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLMessageCommonBase : ITLMessageBase, TLMessageCommonBase
 	{
 		public abstract bool IsOut { get; set; }
 		public abstract bool IsMentioned { get; set; }
@@ -13,13 +18,16 @@ namespace Telegram.Api.TL
 		public abstract bool IsPost { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0xfbf501df, 0x2941, 0xc23a, 0x4c, 0x21, 0x44, 0x09, 0xfe, 0x3e, 0x26, 0x48)]
-	public partial interface ITLMessageCommonBase : TLMessageBase
+	public partial interface TLMessageCommonBase : TLMessageBase
 	{
-		abstract bool IsOut { get; set; }
-		abstract bool IsMentioned { get; set; }
-		abstract bool IsMediaUnread { get; set; }
-		abstract bool IsSilent { get; set; }
-		abstract bool IsPost { get; set; }
+		bool IsOut { get; set; }
+		bool IsMentioned { get; set; }
+		bool IsMediaUnread { get; set; }
+		bool IsSilent { get; set; }
+		bool IsPost { get; set; }
 	}
+#endif
+
 }

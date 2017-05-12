@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-    public class TLInt256 : TLObject
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    class ITLInt256 : ITLObject, TLInt256
     {
-        public TLInt128 Low;
-        public TLInt128 High;
+        public TLInt128 Low { get; set; }
+        public TLInt128 High { get; set; }
 
-        public TLInt256()
+        public ITLInt256()
         {
-            Low = new TLInt128();
-            High = new TLInt128();
+            Low = new ITLInt128();
+            High = new ITLInt128();
         }
 
-        public TLInt256(TLBinaryReader from)
+        public ITLInt256(TLBinaryReader from)
         {
-            Low = new TLInt128();
-            High = new TLInt128();
+            Low = new ITLInt128();
+            High = new ITLInt128();
 
             Read(from);
         }
@@ -40,19 +46,19 @@ namespace Telegram.Api.TL
         }
 
         #region Operators
-        public static bool operator ==(TLInt256 a, TLInt256 b)
+        public static bool operator ==(ITLInt256 a, ITLInt256 b)
         {
             return a.Low == b.Low && a.High == b.High;
         }
 
-        public static bool operator !=(TLInt256 a, TLInt256 b)
+        public static bool operator !=(ITLInt256 a, ITLInt256 b)
         {
             return a.Low != b.Low || a.High != b.High;
         }
 
         public override bool Equals(object obj)
         {
-            var b = obj as TLInt256;
+            var b = obj as ITLInt256;
             if ((object)b == null)
             {
                 return false;
@@ -69,11 +75,21 @@ namespace Telegram.Api.TL
 
         public static TLInt256 Random()
         {
-            return new TLInt256
+            return new ITLInt256
             {
-                Low = TLInt128.Random(),
-                High = TLInt128.Random()
+                Low = ITLInt128.Random(),
+                High = ITLInt128.Random()
             };
         }
     }
+
+#if !PORTABLE
+    [Guid(0x042b981a, 0x1451, 0xb6a0, 0xb4, 0x88, 0x66, 0x2e, 0x8d, 0xc6, 0xfc, 0x52)]
+    public partial interface TLInt256 : TLObject
+    {
+        TLInt128 Low { get; set; }
+        TLInt128 High { get; set; }
+    }
+#endif
+
 }

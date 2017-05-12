@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLMsgContainer : TLObject
+    internal class ITLMsgContainer : ITLObject
     {
         public List<TLContainerTransportMessage> Messages { get; set; }
 
-        public TLMsgContainer() { }
-        public TLMsgContainer(TLBinaryReader from)
+        public ITLMsgContainer() { }
+        public ITLMsgContainer(TLBinaryReader from)
         {
             Read(from);
         }
@@ -25,7 +25,7 @@ namespace Telegram.Api.TL
             var count = from.ReadUInt32();
             for (int i = 0; i < count; i++)
             {
-                Messages.Add(new TLContainerTransportMessage(from));
+                Messages.Add(new ITLContainerTransportMessage(from));
             }
         }
 

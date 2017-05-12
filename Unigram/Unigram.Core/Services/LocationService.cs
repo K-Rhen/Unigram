@@ -67,12 +67,12 @@ namespace Unigram.Core.Services
                     var result = new List<TLMessageMediaVenue>();
                     foreach (var item in json.response.venues)
                     {
-                        var venue = new TLMessageMediaVenue();
+                        var venue = new ITLMessageMediaVenue();
                         venue.VenueId = item.id;
                         venue.Title = item.name;
                         venue.Address = item.location.address ?? item.location.city ?? item.location.country;
                         venue.Provider = "foursquare";
-                        venue.Geo = new TLGeoPoint { Lat = item.location.lat, Long = item.location.lng };
+                        venue.Geo = new ITLGeoPoint { Lat = item.location.lat, Long = item.location.lng };
                         result.Add(venue);
                     }
 

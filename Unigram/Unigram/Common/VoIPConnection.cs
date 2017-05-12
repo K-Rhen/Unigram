@@ -93,7 +93,7 @@ namespace Unigram.Common
                         }
                         else
                         {
-                            await args.Request.SendResponseAsync(new ValueSet { { "error", TLSerializationService.Current.Serialize(new TLRPCError { ErrorMessage = "USER_NOT_FOUND", ErrorCode = 404 }) } });
+                            await args.Request.SendResponseAsync(new ValueSet { { "error", TLSerializationService.Current.Serialize(new ITLRPCError { ErrorMessage = "USER_NOT_FOUND", ErrorCode = 404 }) } });
                         }
                     }
                     else if (caption.Equals("voip.getConfig"))

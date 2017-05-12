@@ -4,16 +4,24 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLServerDHParamsBase : TLObject, ITLServerDHParamsBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLServerDHParamsBase : ITLObject, TLServerDHParamsBase
 	{
 		public TLInt128 Nonce { get; set; }
 		public TLInt128 ServerNonce { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0xf0257dbc, 0x2538, 0x9fe9, 0xfb, 0xef, 0x40, 0x12, 0x6e, 0x75, 0x53, 0xe3)]
-	public partial interface ITLServerDHParamsBase : TLObject
+	public partial interface TLServerDHParamsBase : TLObject
 	{
 		TLInt128 Nonce { get; set; }
 		TLInt128 ServerNonce { get; set; }
 	}
+#endif
+
 }

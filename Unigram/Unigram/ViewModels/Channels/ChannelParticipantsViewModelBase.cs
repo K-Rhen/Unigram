@@ -82,7 +82,7 @@ namespace Unigram.ViewModels.Channels
                     return response.Result.Participants;
                 }
 
-                return new TLChannelParticipantBase[0];
+                return new ITLChannelParticipantBase[0];
             }
         }
     }

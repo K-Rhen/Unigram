@@ -4,12 +4,20 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLMessagesStickerSetInstallResultBase : TLObject, ITLMessagesStickerSetInstallResultBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLMessagesStickerSetInstallResultBase : ITLObject, TLMessagesStickerSetInstallResultBase
 	{
 	}
 
+#if !PORTABLE
 	[Guid(0xa22fcd0b, 0x1ce4, 0xa45d, 0xed, 0x7c, 0xfe, 0x72, 0xf0, 0x4b, 0x2b, 0xce)]
-	public partial interface ITLMessagesStickerSetInstallResultBase : TLObject
+	public partial interface TLMessagesStickerSetInstallResultBase : TLObject
 	{
 	}
+#endif
+
 }

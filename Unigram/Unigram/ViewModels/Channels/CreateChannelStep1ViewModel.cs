@@ -52,7 +52,7 @@ namespace Unigram.ViewModels.Channels
         public RelayCommand SendCommand => _sendCommand = _sendCommand ?? new RelayCommand(SendExecute, () => !string.IsNullOrWhiteSpace(Title));
         private async void SendExecute()
         {
-            var response = await ProtoService.CreateChannelAsync(TLChannelsCreateChannel.Flag.Broadcast, _title, _about);
+            var response = await ProtoService.CreateChannelAsync(TLChannelsCreateChannelFlag.Broadcast, _title, _about);
             if (response.IsSucceeded)
             {
                 if (response.Result is TLUpdates updates)

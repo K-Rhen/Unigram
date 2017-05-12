@@ -159,7 +159,7 @@ namespace Unigram.ViewModels.Users
         {
             if (Item is TLUser user)
             {
-                NavigationService.Navigate(typeof(DialogPage), new TLPeerUser { UserId = user.Id });
+                NavigationService.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = user.Id });
             }
         }
 
@@ -168,7 +168,7 @@ namespace Unigram.ViewModels.Users
         {
             if (Item is TLUser user && user.HasAccessHash)
             {
-                NavigationService.Navigate(typeof(DialogSharedMediaPage), new TLInputPeerUser { UserId = user.Id, AccessHash = user.AccessHash.Value });
+                NavigationService.Navigate(typeof(DialogSharedMediaPage), new ITLInputPeerUser { UserId = user.Id, AccessHash = user.AccessHash.Value });
             }
         }
 
@@ -177,7 +177,7 @@ namespace Unigram.ViewModels.Users
         {
             if (Item is TLUser user && user.HasAccessHash)
             {
-                NavigationService.Navigate(typeof(UserCommonChatsPage), new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash.Value });
+                NavigationService.Navigate(typeof(UserCommonChatsPage), new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash.Value });
             }
         }
 
@@ -274,7 +274,7 @@ namespace Unigram.ViewModels.Users
                 if (result.IsSucceeded && result.Result)
                 {
                     CacheService.Commit();
-                    Aggregator.Publish(new TLUpdateUserBlocked { UserId = user.Id, Blocked = true });
+                    Aggregator.Publish(new ITLUpdateUserBlocked { UserId = user.Id, Blocked = true });
                 }
             }
         }
@@ -289,7 +289,7 @@ namespace Unigram.ViewModels.Users
                 if (result.IsSucceeded && result.Result)
                 {
                     CacheService.Commit();
-                    Aggregator.Publish(new TLUpdateUserBlocked { UserId = user.Id, Blocked = false });
+                    Aggregator.Publish(new ITLUpdateUserBlocked { UserId = user.Id, Blocked = false });
 
                     if (user.IsBot)
                     {
@@ -327,12 +327,12 @@ namespace Unigram.ViewModels.Users
                 if (dialogResult == ContentDialogResult.Primary)
                 {
                     var reason = opt1.IsChecked == true
-                        ? new TLInputReportReasonSpam()
+                        ? new ITLInputReportReasonSpam()
                         : (opt2.IsChecked == true
-                            ? new TLInputReportReasonViolence()
+                            ? new ITLInputReportReasonViolence()
                             : (opt3.IsChecked == true
-                                ? new TLInputReportReasonPornography()
-                                : (TLReportReasonBase)new TLInputReportReasonOther()));
+                                ? new ITLInputReportReasonPornography()
+                                : (TLReportReasonBase)new ITLInputReportReasonOther()));
 
                     if (reason.TypeId == TLType.InputReportReasonOther)
                     {
@@ -347,7 +347,7 @@ namespace Unigram.ViewModels.Users
                         var inputResult = await input.ShowAsync();
                         if (inputResult == ContentDialogResult.Primary)
                         {
-                            reason = new TLInputReportReasonOther { Text = input.Text };
+                            reason = new ITLInputReportReasonOther { Text = input.Text };
                         }
                         else
                         {

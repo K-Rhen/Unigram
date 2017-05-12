@@ -4,7 +4,12 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLMessagesDialogsBase : TLObject, ITLMessagesDialogsBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLMessagesDialogsBase : ITLObject, TLMessagesDialogsBase
 	{
 		public TLVector<TLDialog> Dialogs { get; set; }
 		public TLVector<TLMessageBase> Messages { get; set; }
@@ -12,12 +17,15 @@ namespace Telegram.Api.TL
 		public TLVector<TLUserBase> Users { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0xb2d2132c, 0x8bee, 0x5ad8, 0xb5, 0x83, 0xff, 0x4f, 0x5a, 0x1d, 0xfe, 0x27)]
-	public partial interface ITLMessagesDialogsBase : TLObject
+	public partial interface TLMessagesDialogsBase : TLObject
 	{
 		TLVector<TLDialog> Dialogs { get; set; }
 		TLVector<TLMessageBase> Messages { get; set; }
 		TLVector<TLChatBase> Chats { get; set; }
 		TLVector<TLUserBase> Users { get; set; }
 	}
+#endif
+
 }

@@ -39,7 +39,7 @@ namespace Unigram.ViewModels.Payments
             return Task.CompletedTask;
         }
 
-        private TLMessageMediaInvoice _invoice = new TLMessageMediaInvoice();
+        private TLMessageMediaInvoice _invoice = new ITLMessageMediaInvoice();
         public TLMessageMediaInvoice Invoice
         {
             get
@@ -52,7 +52,7 @@ namespace Unigram.ViewModels.Payments
             }
         }
 
-        private TLPaymentsPaymentReceipt _receipt = new TLPaymentsPaymentReceipt { Info = new TLPaymentRequestedInfo() };
+        private TLPaymentsPaymentReceipt _receipt = new ITLPaymentsPaymentReceipt { Info = new ITLPaymentRequestedInfo() };
         public TLPaymentsPaymentReceipt Receipt
         {
             get

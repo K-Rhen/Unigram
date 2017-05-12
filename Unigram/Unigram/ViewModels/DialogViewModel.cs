@@ -393,7 +393,7 @@ namespace Unigram.ViewModels
             var offset = -1;
             var limit = 1;
 
-            var obj = new TLMessagesGetHistory { Peer = Peer, OffsetId = 0, OffsetDate = dateOffset - 1, AddOffset = offset, Limit = limit, MaxId = 0, MinId = 0 };
+            var obj = new ITLMessagesGetHistory { Peer = Peer, OffsetId = 0, OffsetDate = dateOffset - 1, AddOffset = offset, Limit = limit, MaxId = 0, MinId = 0 };
             ProtoService.SendRequestAsync<TLMessagesMessagesBase>("messages.getHistory", obj, result =>
             {
                 Execute.BeginOnUIThread(async () =>
@@ -445,7 +445,7 @@ namespace Unigram.ViewModels
 
                     if (item.Id > maxId && lastRead && message != null && !message.IsOut)
                     {
-                        var serviceMessage = new TLMessageService
+                        var serviceMessage = new ITLMessageService
                         {
                             FromId = SettingsHelper.UserId,
                             ToId = Peer.ToPeer(),
@@ -486,7 +486,7 @@ namespace Unigram.ViewModels
 
         public async void ProcessReplies(IList<TLMessageBase> messages)
         {
-            var replyIds = new TLVector<int>();
+            var replyIds = new ITLVector<int>();
             var replyToMsgs = new List<TLMessageCommonBase>();
 
             for (int i = 0; i < messages.Count; i++)
@@ -544,7 +544,7 @@ namespace Unigram.ViewModels
                     else
                     {
                         var peer = Peer as TLInputPeerChannel;
-                        task = ProtoService.GetMessagesAsync(new TLInputChannel { ChannelId = peer.ChannelId, AccessHash = peer.AccessHash }, replyIds);
+                        task = ProtoService.GetMessagesAsync(new ITLInputChannel { ChannelId = peer.ChannelId, AccessHash = peer.AccessHash }, replyIds);
                     }
                 }
                 else
@@ -597,10 +597,10 @@ namespace Unigram.ViewModels
             var participant = GetParticipant(parameter as TLPeerBase);
             if (participant is TLUser user)
             {
-                var full = await ProtoService.GetFullUserAsync(new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 });
+                var full = await ProtoService.GetFullUserAsync(new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 });
 
                 With = user;
-                Peer = new TLInputPeerUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 };
+                Peer = new ITLInputPeerUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 };
             }
             else if (participant is TLChannel channel)
             {
@@ -617,16 +617,16 @@ namespace Unigram.ViewModels
                 }
 
                 With = channel;
-                Peer = new TLInputPeerChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash ?? 0 };
+                Peer = new ITLInputPeerChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash ?? 0 };
 
-                var input = new TLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash ?? 0 };
+                var input = new ITLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash ?? 0 };
                 var channelDetails = await ProtoService.GetFullChannelAsync(input);
                 if (channelDetails.IsSucceeded)
                 {
                     var channelFull = channelDetails.Result.FullChat as TLChannelFull;
                     if (channelFull.HasPinnedMsgId)
                     {
-                        var y = await ProtoService.GetMessagesAsync(input, new TLVector<int>() { channelFull.PinnedMsgId ?? 0 });
+                        var y = await ProtoService.GetMessagesAsync(input, new ITLVector<int>() { channelFull.PinnedMsgId ?? 0 });
                         if (y.IsSucceeded)
                         {
                             PinnedMessage = y.Result.Messages.FirstOrDefault();
@@ -666,7 +666,7 @@ namespace Unigram.ViewModels
             else if (participant is TLChat chat)
             {
                 With = chat;
-                Peer = new TLInputPeerChat { ChatId = chat.Id };
+                Peer = new ITLInputPeerChat { ChatId = chat.Id };
 
                 //var chatDetails = await ProtoService.GetFullChatAsync(chat.Id);
                 //if (chatDetails.IsSucceeded)
@@ -690,7 +690,7 @@ namespace Unigram.ViewModels
             else if (participant is TLChatForbidden forbiddenChat)
             {
                 With = forbiddenChat;
-                Peer = new TLInputPeerChat { ChatId = forbiddenChat.Id };
+                Peer = new ITLInputPeerChat { ChatId = forbiddenChat.Id };
             }
 
             _currentDialog = _currentDialog ?? CacheService.GetDialog(Peer.ToPeer());
@@ -700,7 +700,7 @@ namespace Unigram.ViewModels
             {
                 if (dialog.Draft is TLDraftMessage draft)
                 {
-                    Aggregator.Publish(new TLUpdateDraftMessage { Draft = draft, Peer = Peer.ToPeer() });
+                    Aggregator.Publish(new ITLUpdateDraftMessage { Draft = draft, Peer = Peer.ToPeer() });
                     ProcessDraftReply(draft);
                 }
             }
@@ -751,7 +751,7 @@ namespace Unigram.ViewModels
 
             if (App.InMemoryState.ForwardMessages != null)
             {
-                Reply = new TLMessagesContainter { FwdMessages = new TLVector<TLMessage>(App.InMemoryState.ForwardMessages) };
+                Reply = new TLMessagesContainter { FwdMessages = new ITLVector<TLMessage>(App.InMemoryState.ForwardMessages) };
             }
         }
 
@@ -778,7 +778,7 @@ namespace Unigram.ViewModels
                     return;
                 }
 
-                var respponse = await ProtoService.GetMessagesAsync(channel.ToInputChannel(), new TLVector<int> { channel.PinnedMsgId.Value });
+                var respponse = await ProtoService.GetMessagesAsync(channel.ToInputChannel(), new ITLVector<int> { channel.PinnedMsgId.Value });
                 if (respponse.IsSucceeded)
                 {
                     PinnedMessage = respponse.Result.Messages.FirstOrDefault(x => x.Id == channel.PinnedMsgId.Value);
@@ -871,17 +871,17 @@ namespace Unigram.ViewModels
                     //var first = replyToMsgs.FirstOrDefault();
                     //if (first.ToId is TLPeerChat)
                     //{
-                    //    task = ProtoService.GetMessagesAsync(new TLVector<int> { draft.ReplyToMsgId.Value });
+                    //    task = ProtoService.GetMessagesAsync(new ITLVector<int> { draft.ReplyToMsgId.Value });
                     //}
                     //else
                     {
                         var peer = Peer as TLInputPeerChannel;
-                        task = ProtoService.GetMessagesAsync(new TLInputChannel { ChannelId = peer.ChannelId, AccessHash = peer.AccessHash }, new TLVector<int> { draft.ReplyToMsgId.Value });
+                        task = ProtoService.GetMessagesAsync(new ITLInputChannel { ChannelId = peer.ChannelId, AccessHash = peer.AccessHash }, new ITLVector<int> { draft.ReplyToMsgId.Value });
                     }
                 }
                 else
                 {
-                    task = ProtoService.GetMessagesAsync(new TLVector<int> { draft.ReplyToMsgId.Value });
+                    task = ProtoService.GetMessagesAsync(new ITLVector<int> { draft.ReplyToMsgId.Value });
                 }
 
                 var result = await task;
@@ -1006,9 +1006,9 @@ namespace Unigram.ViewModels
 
             var messageText = Text?.Replace("\r\n", "\n").Replace('\v', '\n').Replace('\r', '\n');
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
-            var message = TLUtils.GetMessage(SettingsHelper.UserId, Peer.ToPeer(), TLMessageState.Sending, true, true, date, messageText, new TLMessageMediaEmpty(), TLLong.Random(), null);
+            var message = TLUtils.GetMessage(SettingsHelper.UserId, Peer.ToPeer(), TLMessageState.Sending, true, true, date, messageText, new ITLMessageMediaEmpty(), TLLong.Random(), null);
 
-            message.Entities = entities != null ? new TLVector<TLMessageEntityBase>(entities) : null;
+            message.Entities = entities != null ? new ITLVector<TLMessageEntityBase>(entities) : null;
             message.HasEntities = entities != null;
 
             MessageHelper.PreprocessEntities(ref message);
@@ -1106,8 +1106,8 @@ namespace Unigram.ViewModels
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
             TLInputPeerBase fromPeer = null;
-            var msgs = new TLVector<TLMessage>();
-            var msgIds = new TLVector<int>();
+            var msgs = new ITLVector<TLMessage>();
+            var msgIds = new ITLVector<int>();
 
             foreach (var fwdMessage in forwardMessages)
             {
@@ -1130,7 +1130,7 @@ namespace Unigram.ViewModels
                 if (clone.Media == null)
                 {
                     clone.HasMedia = true;
-                    clone.Media = new TLMessageMediaEmpty();
+                    clone.Media = new ITLMessageMediaEmpty();
                 }
 
                 if (With is TLChannel channel)
@@ -1173,7 +1173,7 @@ namespace Unigram.ViewModels
                         if (fwdChannel != null && fwdChannel.IsMegaGroup)
                         {
                             clone.HasFwdFrom = true;
-                            clone.FwdFrom = new TLMessageFwdHeader
+                            clone.FwdFrom = new ITLMessageFwdHeader
                             {
                                 HasFromId = true,
                                 FromId = fwdMessage.FromId,
@@ -1183,7 +1183,7 @@ namespace Unigram.ViewModels
                         else
                         {
                             clone.HasFwdFrom = true;
-                            clone.FwdFrom = new TLMessageFwdHeader
+                            clone.FwdFrom = new ITLMessageFwdHeader
                             {
                                 HasFromId = fwdMessage.HasFromId,
                                 FromId = fwdMessage.FromId,
@@ -1201,7 +1201,7 @@ namespace Unigram.ViewModels
                     else
                     {
                         clone.HasFwdFrom = true;
-                        clone.FwdFrom = new TLMessageFwdHeader
+                        clone.FwdFrom = new ITLMessageFwdHeader
                         {
                             HasFromId = true,
                             FromId = fwdMessage.FromId,
@@ -1225,7 +1225,7 @@ namespace Unigram.ViewModels
         public RelayCommand<TLDocument> SendStickerCommand => new RelayCommand<TLDocument>(SendStickerExecute);
         public void SendStickerExecute(TLDocument document)
         {
-            var media = new TLMessageMediaDocument { Document = document };
+            var media = new ITLMessageMediaDocument { Document = document };
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
             var message = TLUtils.GetMessage(SettingsHelper.UserId, Peer.ToPeer(), TLMessageState.Sending, true, true, date, string.Empty, media, TLLong.Random(), null);
 
@@ -1240,9 +1240,9 @@ namespace Unigram.ViewModels
             var previousMessage = InsertSendingMessage(message, false);
             CacheService.SyncSendingMessage(message, previousMessage, async (m) =>
             {
-                var input = new TLInputMediaDocument
+                var input = new ITLInputMediaDocument
                 {
-                    Id = new TLInputDocument
+                    Id = new ITLInputDocument
                     {
                         Id = document.Id,
                         AccessHash = document.AccessHash
@@ -1256,7 +1256,7 @@ namespace Unigram.ViewModels
         public RelayCommand<TLDocument> SendGifCommand => new RelayCommand<TLDocument>(SendGifExecute);
         public void SendGifExecute(TLDocument document)
         {
-            var media = new TLMessageMediaDocument { Document = document };
+            var media = new ITLMessageMediaDocument { Document = document };
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
             var message = TLUtils.GetMessage(SettingsHelper.UserId, Peer.ToPeer(), TLMessageState.Sending, true, true, date, string.Empty, media, TLLong.Random(), null);
 
@@ -1271,9 +1271,9 @@ namespace Unigram.ViewModels
             var previousMessage = InsertSendingMessage(message, false);
             CacheService.SyncSendingMessage(message, previousMessage, async (m) =>
             {
-                var input = new TLInputMediaDocument
+                var input = new ITLInputMediaDocument
                 {
-                    Id = new TLInputDocument
+                    Id = new ITLInputDocument
                     {
                         Id = document.Id,
                         AccessHash = document.AccessHash,
@@ -1318,7 +1318,7 @@ namespace Unigram.ViewModels
 
         private async Task SendFileAsync(StorageFile file, string caption)
         {
-            var fileLocation = new TLFileLocation
+            var fileLocation = new ITLFileLocation
             {
                 VolumeId = TLLong.Random(),
                 LocalId = TLInt.Random(),
@@ -1341,23 +1341,23 @@ namespace Unigram.ViewModels
             {
                 var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-                var document = new TLDocument
+                var document = new ITLDocument
                 {
                     Id = 0,
                     AccessHash = 0,
                     Date = date,
                     Size = (int)basicProps.Size,
                     MimeType = fileCache.ContentType,
-                    Attributes = new TLVector<TLDocumentAttributeBase>
+                    Attributes = new ITLVector<TLDocumentAttributeBase>
                 {
-                    new TLDocumentAttributeFilename
+                    new ITLDocumentAttributeFilename
                     {
                         FileName = file.Name
                     }
                 }
                 };
 
-                var media = new TLMessageMediaDocument
+                var media = new ITLMessageMediaDocument
                 {
                     Document = document,
                     Caption = caption
@@ -1380,14 +1380,14 @@ namespace Unigram.ViewModels
                     var upload = await _uploadDocumentManager.UploadFileAsync(fileId, fileName, false).AsTask(media.Document.Upload());
                     if (upload != null)
                     {
-                        var inputMedia = new TLInputMediaUploadedDocument
+                        var inputMedia = new ITLInputMediaUploadedDocument
                         {
                             File = upload.ToInputFile(),
                             MimeType = document.MimeType,
                             Caption = media.Caption,
-                            Attributes = new TLVector<TLDocumentAttributeBase>
+                            Attributes = new ITLVector<TLDocumentAttributeBase>
                             {
-                                new TLDocumentAttributeFilename
+                                new ITLDocumentAttributeFilename
                                 {
                                     FileName = file.Name
                                 }
@@ -1423,7 +1423,7 @@ namespace Unigram.ViewModels
 
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-            var document = new TLDocument
+            var document = new ITLDocument
             {
                 Id = 0,
                 AccessHash = 0,
@@ -1431,16 +1431,16 @@ namespace Unigram.ViewModels
                 Size = (int)basicProps.Size,
                 MimeType = fileCache.ContentType,
                 Thumb = thumbnail,
-                Attributes = new TLVector<TLDocumentAttributeBase>
+                Attributes = new ITLVector<TLDocumentAttributeBase>
                 {
-                    new TLDocumentAttributeFilename
+                    new ITLDocumentAttributeFilename
                     {
                         FileName = file.Name
                     }
                 }
             };
 
-            var media = new TLMessageMediaDocument
+            var media = new ITLMessageMediaDocument
             {
                 Document = document,
                 Caption = caption
@@ -1467,15 +1467,15 @@ namespace Unigram.ViewModels
                     var thumbUpload = await _uploadDocumentManager.UploadFileAsync(thumbFileId, desiredName);
                     if (thumbUpload != null)
                     {
-                        var inputMedia = new TLInputMediaUploadedThumbDocument
+                        var inputMedia = new ITLInputMediaUploadedThumbDocument
                         {
                             File = upload.ToInputFile(),
                             Thumb = thumbUpload.ToInputFile(),
                             MimeType = document.MimeType,
                             Caption = media.Caption,
-                            Attributes = new TLVector<TLDocumentAttributeBase>
+                            Attributes = new ITLVector<TLDocumentAttributeBase>
                             {
-                                new TLDocumentAttributeFilename
+                                new ITLDocumentAttributeFilename
                                 {
                                     FileName = file.Name
                                 }
@@ -1570,7 +1570,7 @@ namespace Unigram.ViewModels
 
         private async Task SendPhotoAsync(StorageFile file, string caption)
         {
-            var fileLocation = new TLFileLocation
+            var fileLocation = new ITLFileLocation
             {
                 VolumeId = TLLong.Random(),
                 LocalId = TLInt.Random(),
@@ -1595,7 +1595,7 @@ namespace Unigram.ViewModels
 
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-            var photoSize = new TLPhotoSize
+            var photoSize = new ITLPhotoSize
             {
                 Type = "y",
                 W = (int)imageProps.Width,
@@ -1604,15 +1604,15 @@ namespace Unigram.ViewModels
                 Size = (int)basicProps.Size
             };
 
-            var photo = new TLPhoto
+            var photo = new ITLPhoto
             {
                 Id = 0,
                 AccessHash = 0,
                 Date = date,
-                Sizes = new TLVector<TLPhotoSizeBase> { photoSize }
+                Sizes = new ITLVector<TLPhotoSizeBase> { photoSize }
             };
 
-            var media = new TLMessageMediaPhoto
+            var media = new ITLMessageMediaPhoto
             {
                 Photo = photo,
                 Caption = caption
@@ -1635,7 +1635,7 @@ namespace Unigram.ViewModels
                 var upload = await _uploadFileManager.UploadFileAsync(fileId, fileCache.Name, false).AsTask(media.Photo.Upload());
                 if (upload != null)
                 {
-                    var inputMedia = new TLInputMediaUploadedPhoto
+                    var inputMedia = new ITLInputMediaUploadedPhoto
                     {
                         Caption = media.Caption,
                         File = upload.ToInputFile()
@@ -1648,7 +1648,7 @@ namespace Unigram.ViewModels
 
         private async Task SendGifAsync(StorageFile file, string caption)
         {
-            var fileLocation = new TLFileLocation
+            var fileLocation = new ITLFileLocation
             {
                 VolumeId = TLLong.Random(),
                 LocalId = TLInt.Random(),
@@ -1666,7 +1666,7 @@ namespace Unigram.ViewModels
 
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-            var media = new TLMessageMediaDocument
+            var media = new ITLMessageMediaDocument
             {
                 // TODO: Document = ...
                 Caption = caption
@@ -1689,15 +1689,15 @@ namespace Unigram.ViewModels
                 var upload = await _uploadDocumentManager.UploadFileAsync(fileId, fileName, false).AsTask(media.Document.Upload());
                 if (upload != null)
                 {
-                    var inputMedia = new TLInputMediaUploadedDocument
+                    var inputMedia = new ITLInputMediaUploadedDocument
                     {
                         File = upload.ToInputFile(),
                         MimeType = "image/gif",
                         Caption = media.Caption,
-                        Attributes = new TLVector<TLDocumentAttributeBase>
+                        Attributes = new ITLVector<TLDocumentAttributeBase>
                         {
-                            new TLDocumentAttributeAnimated(),
-                            new TLDocumentAttributeImageSize
+                            new ITLDocumentAttributeAnimated(),
+                            new ITLDocumentAttributeImageSize
                             {
                                 W = (int)imageProps.Width,
                                 H = (int)imageProps.Height,
@@ -1712,7 +1712,7 @@ namespace Unigram.ViewModels
 
         public async Task SendAudioAsync(StorageFile file, int duration, bool voice, string title, string performer, string caption)
         {
-            var fileLocation = new TLFileLocation
+            var fileLocation = new ITLFileLocation
             {
                 VolumeId = TLLong.Random(),
                 LocalId = TLInt.Random(),
@@ -1730,25 +1730,25 @@ namespace Unigram.ViewModels
 
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-            var media = new TLMessageMediaDocument
+            var media = new ITLMessageMediaDocument
             {
                 Caption = caption,
-                Document = new TLDocument
+                Document = new ITLDocument
                 {
                     Id = TLLong.Random(),
                     AccessHash = TLLong.Random(),
                     Date = date,
                     MimeType = "audio/ogg",
                     Size = (int)basicProps.Size,
-                    Thumb = new TLPhotoSizeEmpty
+                    Thumb = new ITLPhotoSizeEmpty
                     {
                         Type = string.Empty
                     },
                     Version = 0,
                     DCId = 0,
-                    Attributes = new TLVector<TLDocumentAttributeBase>
+                    Attributes = new ITLVector<TLDocumentAttributeBase>
                     {
-                        new TLDocumentAttributeAudio
+                        new ITLDocumentAttributeAudio
                         {
                             IsVoice = voice,
                             Duration = duration,
@@ -1776,14 +1776,14 @@ namespace Unigram.ViewModels
                 var upload = await _uploadAudioManager.UploadFileAsync(fileId, fileName, false).AsTask(media.Document.Upload());
                 if (upload != null)
                 {
-                    var inputMedia = new TLInputMediaUploadedDocument
+                    var inputMedia = new ITLInputMediaUploadedDocument
                     {
                         File = upload.ToInputFile(),
                         MimeType = "audio/ogg",
                         Caption = media.Caption,
-                        Attributes = new TLVector<TLDocumentAttributeBase>
+                        Attributes = new ITLVector<TLDocumentAttributeBase>
                         {
-                            new TLDocumentAttributeAudio
+                            new ITLDocumentAttributeAudio
                             {
                                 IsVoice = voice,
                                 Duration = duration,
@@ -1803,7 +1803,7 @@ namespace Unigram.ViewModels
             var tsc = new TaskCompletionSource<bool>();
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-            var media = new TLMessageMediaContact
+            var media = new ITLMessageMediaContact
             {
                 PhoneNumber = user.Phone,
                 FirstName = user.FirstName,
@@ -1824,7 +1824,7 @@ namespace Unigram.ViewModels
             var previousMessage = InsertSendingMessage(message);
             CacheService.SyncSendingMessage(message, previousMessage, async (m) =>
             {
-                var inputMedia = new TLInputMediaContact
+                var inputMedia = new ITLInputMediaContact
                 {
                     PhoneNumber = user.Phone,
                     FirstName = user.FirstName,
@@ -1856,9 +1856,9 @@ namespace Unigram.ViewModels
             var tsc = new TaskCompletionSource<bool>();
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
 
-            var media = new TLMessageMediaGeo
+            var media = new ITLMessageMediaGeo
             {
-                Geo = new TLGeoPoint
+                Geo = new ITLGeoPoint
                 {
                     Lat = latitude,
                     Long = longitude
@@ -1878,9 +1878,9 @@ namespace Unigram.ViewModels
             var previousMessage = InsertSendingMessage(message);
             CacheService.SyncSendingMessage(message, previousMessage, async (m) =>
             {
-                var inputMedia = new TLInputMediaGeoPoint
+                var inputMedia = new ITLInputMediaGeoPoint
                 {
-                    GeoPoint = new TLInputGeoPoint
+                    GeoPoint = new ITLInputGeoPoint
                     {
                         Lat = latitude,
                         Long = longitude
@@ -2046,7 +2046,7 @@ namespace Unigram.ViewModels
                 if (notifySettings != null)
                 {
                     var muteUntil = notifySettings.MuteUntil == int.MaxValue ? 0 : int.MaxValue;
-                    var settings = new TLInputPeerNotifySettings
+                    var settings = new ITLInputPeerNotifySettings
                     {
                         MuteUntil = muteUntil,
                         IsShowPreviews = notifySettings.IsShowPreviews,
@@ -2054,7 +2054,7 @@ namespace Unigram.ViewModels
                         Sound = notifySettings.Sound
                     };
 
-                    var response = await ProtoService.UpdateNotifySettingsAsync(new TLInputNotifyPeer { Peer = Peer }, settings);
+                    var response = await ProtoService.UpdateNotifySettingsAsync(new ITLInputNotifyPeer { Peer = Peer }, settings);
                     if (response.IsSucceeded)
                     {
                         notifySettings.MuteUntil = muteUntil;
@@ -2103,7 +2103,7 @@ namespace Unigram.ViewModels
                 if (notifySettings != null)
                 {
                     var silent = !notifySettings.IsSilent;
-                    var settings = new TLInputPeerNotifySettings
+                    var settings = new ITLInputPeerNotifySettings
                     {
                         MuteUntil = notifySettings.MuteUntil,
                         IsShowPreviews = notifySettings.IsShowPreviews,
@@ -2111,7 +2111,7 @@ namespace Unigram.ViewModels
                         Sound = notifySettings.Sound
                     };
 
-                    var response = await ProtoService.UpdateNotifySettingsAsync(new TLInputNotifyPeer { Peer = Peer }, settings);
+                    var response = await ProtoService.UpdateNotifySettingsAsync(new ITLInputNotifyPeer { Peer = Peer }, settings);
                     if (response.IsSucceeded)
                     {
                         notifySettings.IsSilent = silent;
@@ -2225,12 +2225,12 @@ namespace Unigram.ViewModels
 
                 var g_a = MTProtoService.GetGB(salt, dh.G, dh.P);
 
-                var request = new TLPhoneRequestCall
+                var request = new ITLPhoneRequestCall
                 {
-                    UserId = new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 },
+                    UserId = new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash ?? 0 },
                     RandomId = TLInt.Random(),
                     GAHash = Utils.ComputeSHA256(g_a),
-                    Protocol = new TLPhoneCallProtocol
+                    Protocol = new ITLPhoneCallProtocol
                     {
                         IsUdpP2p = true,
                         IsUdpReflector = true,
@@ -2293,7 +2293,7 @@ namespace Unigram.ViewModels
                 if (previousDate.Date != itemDate.Date)
                 {
                     var timestamp = (int)Utils.DateTimeToUnixTimestamp(previousDate.Date);
-                    var service = new TLMessageService
+                    var service = new ITLMessageService
                     {
                         Date = timestamp,
                         FromId = SettingsHelper.UserId,
@@ -2387,7 +2387,7 @@ namespace Unigram.ViewModels
             //    var message = item as TLMessage;
             //    if (message != null && !message.IsPost && !message.IsOut)
             //    {
-            //        base.InsertItem(index, new TLMessageEmpty { Date = item.Date, FromId = item.FromId, Id = item.Id, ToId = item.ToId });
+            //        base.InsertItem(index, new ITLMessageEmpty { Date = item.Date, FromId = item.FromId, Id = item.Id, ToId = item.ToId });
             //    }
             //}
 

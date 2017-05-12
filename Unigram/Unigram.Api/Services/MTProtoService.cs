@@ -354,7 +354,7 @@ namespace Telegram.Api.Services
                         try
                         {
                             item.FaultCallback?.Invoke(
-                                new TLRPCError
+                                new ITLRPCError
                                 {
                                     ErrorCode = (int)TLErrorCode.TIMEOUT,
                                     ErrorMessage = "MTProtoService: operation timed out (" + timeout + "s)"
@@ -399,7 +399,7 @@ namespace Telegram.Api.Services
                         try
                         {
                             item.FaultCallback?.Invoke(
-                                new TLRPCError
+                                new ITLRPCError
                                 {
                                     ErrorCode = (int)TLErrorCode.TIMEOUT,
                                     ErrorMessage = "MTProtoService: operation timed out (" + delayedTimeout + "s)"
@@ -435,7 +435,7 @@ namespace Telegram.Api.Services
                             try
                             {
                                 item.FaultCallback?.Invoke(
-                                    new TLRPCError
+                                    new ITLRPCError
                                     {
                                         ErrorCode = (int)TLErrorCode.TIMEOUT,
                                         ErrorMessage = "MTProtoService: operation timed out (" + timeout + "s)"
@@ -506,7 +506,7 @@ namespace Telegram.Api.Services
 
         public void UpdateTransportInfoAsync(int dcId, string dcIpAddress, int dcPort, Action<bool> callback)
         {
-            var dcOption = new TLDCOption
+            var dcOption = new ITLDCOption
             {
                 Id = dcId,
                 Hostname = string.Empty,
@@ -515,7 +515,7 @@ namespace Telegram.Api.Services
             };
 
             var args = new DCOptionsUpdatedEventArgs();
-            args.Update = new TLUpdateDCOptions{DCOptions = new TLVector<TLDCOption>{ dcOption }};
+            args.Update = new ITLUpdateDCOptions{DCOptions = new ITLVector<TLDCOption>{ dcOption }};
 
             OnDCOptionsUpdated(this, args);
 
@@ -592,7 +592,7 @@ namespace Telegram.Api.Services
                         // fix readonly array of dcOption
                         var list = _config.DCOptions.ToList();
                         list.Add(newOption); 
-                        _config.DCOptions = new TLVector<TLDCOption>(list);
+                        _config.DCOptions = new ITLVector<TLDCOption>(list);
                     }
                 }
                 SaveConfig();
@@ -755,7 +755,7 @@ namespace Telegram.Api.Services
 #endif
                         _delayedItems.Remove(canceledItem);
 
-                        canceledItem.FaultCallback?.Invoke(new TLRPCError { ErrorCode = 404 });
+                        canceledItem.FaultCallback?.Invoke(new ITLRPCError { ErrorCode = 404 });
                     }
                 }
             });
@@ -1053,15 +1053,15 @@ namespace Telegram.Api.Services
 
         private void SendAcknowledgments(TLTransportMessage response)
         {
-            var ids = new TLVector<long>();
+            var ids = new ITLVector<long>();
 
             if (response.SeqNo % 2 == 1)
             {
                 ids.Add(response.MsgId);
             }
-            if (response.Query is TLMsgContainer)
+            if (response.Query is ITLMsgContainer)
             {
-                var container = (TLMsgContainer)response.Query;
+                var container = (ITLMsgContainer)response.Query;
                 foreach (var message in container.Messages)
                 {
                     if (message.SeqNo % 2 == 1)
@@ -1079,15 +1079,15 @@ namespace Telegram.Api.Services
 
         private void SendAcknowledgmentsByTransport(ITransport transport, TLTransportMessage response)
         {
-            var ids = new TLVector<long>();
+            var ids = new ITLVector<long>();
 
             if (response.SeqNo % 2 == 1)
             {
                 ids.Add(response.MsgId);
             }
-            if (response.Query is TLMsgContainer)
+            if (response.Query is ITLMsgContainer)
             {
-                var container = (TLMsgContainer)response.Query;
+                var container = (ITLMsgContainer)response.Query;
                 foreach (var message in container.Messages)
                 {
                     if (message.SeqNo % 2 == 1)
@@ -1126,7 +1126,7 @@ namespace Telegram.Api.Services
                 //}
 
                 //var position = 0;
-                //var encryptedMessage = (TLEncryptedTransportMessage)new TLEncryptedTransportMessage().FromBytes(bytes, ref position);
+                //var encryptedMessage = (TLEncryptedTransportMessage)new ITLEncryptedTransportMessage().FromBytes(bytes, ref position);
 
                 //byte[] authKey2 = null;
                 //lock (_authKeysRoot)
@@ -1155,7 +1155,7 @@ namespace Telegram.Api.Services
                 }
 
                 //var position = 0;
-                //var encryptedMessage = (TLEncryptedTransportMessage)new TLEncryptedTransportMessage().FromBytes(bytes, ref position);
+                //var encryptedMessage = (TLEncryptedTransportMessage)new ITLEncryptedTransportMessage().FromBytes(bytes, ref position);
                 var encryptedMessage = new TLEncryptedTransportMessage();
                 using (var reader = new TLBinaryReader(bytes))
                 {
@@ -1222,7 +1222,7 @@ namespace Telegram.Api.Services
                     }
 
                     // get acknowledgments
-                    foreach (var acknowledgment in TLUtils.FindInnerObjects<TLMsgsAck>(transportMessage))
+                    foreach (var acknowledgment in TLUtils.FindInnerObjects<ITLMsgsAck>(transportMessage))
                     {
                         var ids = acknowledgment.MsgIds;
                         lock (_historyRoot)
@@ -1244,7 +1244,7 @@ namespace Telegram.Api.Services
                     _updatesService.ProcessTransportMessage(transportMessage);
 
                     // bad messages
-                    foreach (var badMessage in TLUtils.FindInnerObjects<TLBadMsgNotification>(transportMessage))
+                    foreach (var badMessage in TLUtils.FindInnerObjects<ITLBadMsgNotification>(transportMessage))
                     {
 
                         HistoryItem item = null;
@@ -1266,7 +1266,7 @@ namespace Telegram.Api.Services
                     }
 
                     // bad server salts
-                    foreach (var badServerSalt in TLUtils.FindInnerObjects<TLBadServerSalt>(transportMessage))
+                    foreach (var badServerSalt in TLUtils.FindInnerObjects<ITLBadServerSalt>(transportMessage))
                     {
 
                         lock (_activeTransportRoot)
@@ -1302,7 +1302,7 @@ namespace Telegram.Api.Services
                     }
 
                     // new session created
-                    foreach (var newSessionCreated in TLUtils.FindInnerObjects<TLNewSessionCreated>(transportMessage))
+                    foreach (var newSessionCreated in TLUtils.FindInnerObjects<ITLNewSessionCreated>(transportMessage))
                     {
                         TLUtils.WritePerformance(string.Format("NEW SESSION CREATED: {0} (old {1})", transportMessage.SessionId, _activeTransport.SessionId));
                         lock (_activeTransportRoot)
@@ -1312,7 +1312,7 @@ namespace Telegram.Api.Services
                         }
                     }
 
-                    foreach (var pong in TLUtils.FindInnerObjects<TLPong>(transportMessage))
+                    foreach (var pong in TLUtils.FindInnerObjects<ITLPong>(transportMessage))
                     {
                         HistoryItem item;
                         lock (_historyRoot)
@@ -1339,7 +1339,7 @@ namespace Telegram.Api.Services
                     }
 
                     // rpcresults
-                    foreach (var result in TLUtils.FindInnerObjects<TLRPCResult>(transportMessage))
+                    foreach (var result in TLUtils.FindInnerObjects<ITLRPCResult>(transportMessage))
                     {
                         HistoryItem historyItem = null;
                         
@@ -1388,7 +1388,7 @@ namespace Telegram.Api.Services
                         //            var attributeAudio = inputMedia.Attributes.FirstOrDefault(x => x is TLDocumentAttributeAudio46) as TLDocumentAttributeAudio46;
                         //            if (attributeAudio != null && attributeAudio.Voice)
                         //            {
-                        //                result.Object = new TLRPCError{Code = 500, Message = new TLString("RPC_CALL_FAILED")};
+                        //                result.Object = new ITLRPCError{Code = 500, Message = new ITLString("RPC_CALL_FAILED")};
                         //                Execute.ShowDebugMessage("Mockup TLRPCError");
                         //            }
                         //        }
@@ -1404,7 +1404,7 @@ namespace Telegram.Api.Services
                         if (error != null)
                         {
                             string errorString;
-                            var reqError = error as TLRPCReqError;
+                            var reqError = error as ITLRPCReqError;
                             if (reqError != null)
                             {
                                 errorString = string.Format("RPCReqError {1} {2} (query_id={0})", reqError.QueryId, reqError.ErrorCode, reqError.ErrorMessage);
@@ -1422,9 +1422,9 @@ namespace Telegram.Api.Services
                         else
                         {
                             var messageData = result.Query;
-                            if (messageData is TLGzipPacked)
+                            if (messageData is ITLGzipPacked)
                             {
-                                messageData = ((TLGzipPacked) messageData).Query;
+                                messageData = ((ITLGzipPacked) messageData).Query;
                             }
 
                             if (/*messageData is TLSentMessageBase
@@ -1442,18 +1442,18 @@ namespace Telegram.Api.Services
                             if (historyItem.Caption == "messages.getDialogs")
                             {
 #if DEBUG_UPDATEDCOPTIONS
-                                var dcOption = new TLDCOption
+                                var dcOption = new ITLDCOption
                                 {
-                                    Hostname = new TLString(""),
+                                    Hostname = new ITLString(""),
                                     Id = 2,
-                                    IpAddress = new TLString("109.239.131.193"),
+                                    IpAddress = new ITLString("109.239.131.193"),
                                     Port = 80
                                 };
-                                var dcOptions = new TLVector<TLDCOption> {dcOption};
-                                var update = new TLUpdateDCOptions {DCOptions = dcOptions};
-                                var updateShort = new TLUpdatesShort {Date = 0, Update = update};
+                                var dcOptions = new ITLVector<TLDCOption> {dcOption};
+                                var update = new ITLUpdateDCOptions {DCOptions = dcOptions};
+                                var updateShort = new ITLUpdatesShort {Date = 0, Update = update};
 
-                                _updatesService.ProcessTransportMessage(new TLTransportMessage{MessageData = updateShort});
+                                _updatesService.ProcessTransportMessage(new ITLTransportMessage{MessageData = updateShort});
 #endif
                             }
                             try
@@ -1544,7 +1544,7 @@ namespace Telegram.Api.Services
             {
                 foreach (var keyValue in history)
                 {
-                    keyValue.FaultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.ClearHistory " + caption/*TODO: , Exception = e*/});
+                    keyValue.FaultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.ClearHistory " + caption/*TODO: , Exception = e*/});
                 }
             });
         }
@@ -1588,7 +1588,7 @@ namespace Telegram.Api.Services
             {
                 foreach (var keyValue in history)
                 {
-                    keyValue.FaultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.ClearHistory " + caption/* TODO:, Exception = e*/ });
+                    keyValue.FaultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = "MTProtoService.ClearHistory " + caption/* TODO:, Exception = e*/ });
                 }
             });
         }
@@ -2153,7 +2153,7 @@ namespace Telegram.Api.Services
     #if DEBUG
                             RaisePropertyChanged(() => History);
     #endif
-                            faultCallback?.Invoke(new TLRPCError { ErrorCode = 404 });
+                            faultCallback?.Invoke(new ITLRPCError { ErrorCode = 404 });
                         });
                     
                     break;
@@ -2340,7 +2340,7 @@ namespace Telegram.Api.Services
                     Debug.WriteLine("@{0} {1} result {2}", historyItem.Caption, transportMessage.MsgId, result);
 	                
                 },//ReceiveBytesAsync(result, authKey)}, 
-                error => { faultCallback?.Invoke(new TLRPCError()); });
+                error => { faultCallback?.Invoke(new ITLRPCError()); });
         }
 
 

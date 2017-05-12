@@ -4,12 +4,20 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLMessagesSavedGifsBase : TLObject, ITLMessagesSavedGifsBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLMessagesSavedGifsBase : ITLObject, TLMessagesSavedGifsBase
 	{
 	}
 
+#if !PORTABLE
 	[Guid(0x9513f32f, 0xeb51, 0xb5b4, 0x61, 0xec, 0x80, 0x66, 0xfd, 0xa0, 0xdc, 0xc3)]
-	public partial interface ITLMessagesSavedGifsBase : TLObject
+	public partial interface TLMessagesSavedGifsBase : TLObject
 	{
 	}
+#endif
+
 }

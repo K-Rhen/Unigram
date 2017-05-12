@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLBotInlineResultBase
+#if !PORTABLE
+    public partial interface TLBotInlineResultBase
+    {
+        Int64 QueryId { get; set; }
+    }
+#endif
+
+#if !PORTABLE
+    internal 
+#else
+    public
+#endif
+    abstract partial class ITLBotInlineResultBase
     {
         public Int64 QueryId { get; set; }
     }

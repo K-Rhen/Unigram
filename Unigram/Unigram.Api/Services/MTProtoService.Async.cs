@@ -749,7 +749,7 @@ namespace Telegram.Api.Services
         }
 
         [DebuggerStepThrough]
-        public Task<MTProtoResponse<TLContactsTopPeersBase>> GetTopPeersAsync(TLContactsGetTopPeers.Flag flags, int offset, int limit, int hash)
+        public Task<MTProtoResponse<TLContactsTopPeersBase>> GetTopPeersAsync(TLContactsGetTopPeersFlag flags, int offset, int limit, int hash)
         {
             var tsc = new TaskCompletionSource<MTProtoResponse<TLContactsTopPeersBase>>();
             GetTopPeersAsync(flags, offset, limit, hash, (callback) =>
@@ -1715,7 +1715,7 @@ namespace Telegram.Api.Services
         }
 
         [DebuggerStepThrough]
-        public Task<MTProtoResponse<TLUpdatesBase>> CreateChannelAsync(TLChannelsCreateChannel.Flag flags, string title, string about)
+        public Task<MTProtoResponse<TLUpdatesBase>> CreateChannelAsync(TLChannelsCreateChannelFlag flags, string title, string about)
         {
             var tsc = new TaskCompletionSource<MTProtoResponse<TLUpdatesBase>>();
             CreateChannelAsync(flags, title, about, (callback) =>

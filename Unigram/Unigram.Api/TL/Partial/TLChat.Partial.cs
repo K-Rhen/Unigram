@@ -8,7 +8,19 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLChat : ITLReadMaxId
+#if !PORTABLE
+    public partial interface TLChat : ITLReadMaxId
+    {
+
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChat : ITLReadMaxId
     {
         public override void Update(TLChatBase chatBase)
         {

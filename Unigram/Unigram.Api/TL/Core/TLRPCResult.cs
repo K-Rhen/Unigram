@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLRPCResult : TLObject
+    internal class ITLRPCResult : ITLObject
     {
         public long RequestMsgId { get; set; }
         public object Query { get; set; }
         //public TLObject Query { get; set; }
 
-        public TLRPCResult() { }
-        public TLRPCResult(TLBinaryReader from)
+        public ITLRPCResult() { }
+        public ITLRPCResult(TLBinaryReader from)
         {
             Read(from);
         }

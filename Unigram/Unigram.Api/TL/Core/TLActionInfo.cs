@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLActionInfo : TLObject
+    internal class TLActionInfo : ITLObject
     {
         public Int32 SendBefore { get; set; }
         public TLObject Action { get; set; }

@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLChatFullBase
+#if !PORTABLE
+    public partial interface TLChatFullBase
+    {
+        void Update(TLChatFullBase chatFull);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLChatFullBase
     {
         public virtual void Update(TLChatFullBase chatFull)
         {
@@ -38,7 +50,12 @@ namespace Telegram.Api.TL
         //}
     }
 
-    public partial class TLChatFull
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChatFull
     {
         public override void Update(TLChatFullBase chatFull)
         {
@@ -51,7 +68,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLChannelFull
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChannelFull
     {
         public override void Update(TLChatFullBase chatFull)
         {

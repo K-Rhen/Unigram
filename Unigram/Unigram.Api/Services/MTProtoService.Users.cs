@@ -9,7 +9,7 @@ namespace Telegram.Api.Services
 	{
         public void GetUsersAsync(TLVector<TLInputUserBase> id, Action<TLVector<TLUserBase>> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUsersGetUsers { Id = id };
+            var obj = new ITLUsersGetUsers { Id = id };
 
             const string caption = "users.getUsers";
             SendInformativeMessage<TLVector<TLUserBase>>(caption, obj, result =>
@@ -21,7 +21,7 @@ namespace Telegram.Api.Services
 
         public void GetFullUserAsync(TLInputUserBase id, Action<TLUserFull> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUsersGetFullUser { Id = id };
+            var obj = new ITLUsersGetFullUser { Id = id };
 
             const string caption = "users.getFullUser";
             SendInformativeMessage<TLUserFull>(caption, obj, userFull =>

@@ -10,7 +10,19 @@ using Telegram.Api.Services.Cache;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLMessageMediaBase : INotifyPropertyChanged
+#if !PORTABLE
+    public partial interface TLMessageMediaBase : INotifyPropertyChanged
+    {
+
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLMessageMediaBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public override void RaisePropertyChanged(string propertyName)

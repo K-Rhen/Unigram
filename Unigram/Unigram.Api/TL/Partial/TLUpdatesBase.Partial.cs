@@ -6,14 +6,33 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLUpdatesBase
+#if !PORTABLE
+    public partial interface TLUpdatesBase
+    {
+        IList<int> GetSeq();
+
+        IList<int> GetPts();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLUpdatesBase
     {
         public abstract IList<int> GetSeq();
 
         public abstract IList<int> GetPts();
     }
 
-    public partial class TLUpdatesTooLong
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatesTooLong
     {
         public override IList<int> GetSeq()
         {
@@ -26,7 +45,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateShortSentMessage
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateShortSentMessage
     {
         public override IList<int> GetSeq()
         {
@@ -39,7 +63,19 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateShortMessage
+#if !PORTABLE
+    public partial interface TLUpdateShortMessage
+    {
+        bool IsUnread { get; set; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateShortMessage
     {
         public bool IsUnread { get; set; } = true;
 
@@ -54,7 +90,19 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateShortChatMessage
+#if !PORTABLE
+    public partial interface TLUpdateShortChatMessage
+    {
+        bool IsUnread { get; set; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateShortChatMessage
     {
         public bool IsUnread { get; set; } = true;
 
@@ -69,7 +117,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateShort
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateShort
     {
         public override IList<int> GetSeq()
         {
@@ -82,7 +135,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdates
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdates
     {
         public override IList<int> GetSeq()
         {
@@ -95,7 +153,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdatesCombined
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatesCombined
     {
         public override IList<int> GetSeq()
         {

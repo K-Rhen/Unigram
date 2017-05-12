@@ -1096,13 +1096,13 @@ namespace Unigram.Controls
 
         private void HandleBoldText()
         {
-            _entities.Push(new TLMessageEntityBold { Offset = _length, Length = _groupText.Length });
+            _entities.Push(new ITLMessageEntityBold { Offset = _length, Length = _groupText.Length });
             _length += _groupText.Length;
         }
 
         private void HandleItalicText()
         {
-            _entities.Push(new TLMessageEntityItalic { Offset = _length, Length = _groupText.Length });
+            _entities.Push(new ITLMessageEntityItalic { Offset = _length, Length = _groupText.Length });
             _length += _groupText.Length;
         }
 
@@ -1112,7 +1112,7 @@ namespace Unigram.Controls
             var user = InMemoryCacheService.Current.GetUser(userId) as TLUser;
             if (user != null && user.HasAccessHash)
             {
-                _entities.Push(new TLInputMessageEntityMentionName { UserId = new TLInputUser { UserId = user.Id, AccessHash = user.AccessHash.Value } });
+                _entities.Push(new ITLInputMessageEntityMentionName { UserId = new ITLInputUser { UserId = user.Id, AccessHash = user.AccessHash.Value } });
             }
         }
 

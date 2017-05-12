@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLRPCReqError : TLRPCError
+    internal class ITLRPCReqError : ITLRPCError
     {
         public Int64 QueryId;
 
-        public TLRPCReqError() { }
-        public TLRPCReqError(TLBinaryReader from)
+        public ITLRPCReqError() { }
+        public ITLRPCReqError(TLBinaryReader from)
         {
             Read(from);
         }

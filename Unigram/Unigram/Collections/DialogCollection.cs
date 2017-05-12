@@ -348,7 +348,7 @@ namespace Unigram.Collections
             {
                 var lastDate = 0;
                 var lastMsgId = 0;
-                var lastPeer = (TLInputPeerBase)new TLInputPeerEmpty();
+                var lastPeer = (TLInputPeerBase)new ITLInputPeerEmpty();
 
                 var last = this.LastOrDefault();
                 if (last != null && last.TopMessageItem != null)
@@ -358,15 +358,15 @@ namespace Unigram.Collections
 
                     if (last.Peer is TLPeerUser)
                     {
-                        lastPeer = new TLInputPeerUser { UserId = last.Peer.Id };
+                        lastPeer = new ITLInputPeerUser { UserId = last.Peer.Id };
                     }
                     else if (last.Peer is TLPeerChat)
                     {
-                        lastPeer = new TLInputPeerChat { ChatId = last.Peer.Id };
+                        lastPeer = new ITLInputPeerChat { ChatId = last.Peer.Id };
                     }
                     else if (last.Peer is TLPeerChannel)
                     {
-                        lastPeer = new TLInputPeerChannel { ChannelId = last.Peer.Id };
+                        lastPeer = new ITLInputPeerChannel { ChannelId = last.Peer.Id };
                     }
                 }
 
@@ -462,9 +462,9 @@ namespace Unigram.Collections
                 }
                 else
                 {
-                    var response = await _protoService.GetDialogsAsync(0, 0, new TLInputPeerEmpty(), 20);
+                    var response = await _protoService.GetDialogsAsync(0, 0, new ITLInputPeerEmpty(), 20);
                     var result = response.Result;
-                    result.Dialogs = new TLVector<TLDialog>(result.Dialogs.OrderByDescending(x => x.GetDateIndexWithDraft()));
+                    result.Dialogs = new ITLVector<TLDialog>(result.Dialogs.OrderByDescending(x => x.GetDateIndexWithDraft()));
 
                     foreach (var dialog in result.Dialogs)
                     {
@@ -531,9 +531,9 @@ namespace Unigram.Collections
         {
             //base.IsWorking = true;
 
-            var response = await _protoService.GetDialogsAsync(0, 0, new TLInputPeerEmpty(), limit);
+            var response = await _protoService.GetDialogsAsync(0, 0, new ITLInputPeerEmpty(), limit);
             var result = response.Result;
-            result.Dialogs = new TLVector<TLDialog>(result.Dialogs.OrderByDescending(x => x.GetDateIndexWithDraft()));
+            result.Dialogs = new ITLVector<TLDialog>(result.Dialogs.OrderByDescending(x => x.GetDateIndexWithDraft()));
 
             Execute.BeginOnUIThread(() =>
             {
@@ -671,7 +671,7 @@ namespace Unigram.Collections
         {
             //var lastDate = 0;
             //var lastMsgId = 0;
-            //var lastPeer = (TLInputPeerBase)new TLInputPeerEmpty();
+            //var lastPeer = (TLInputPeerBase)new ITLInputPeerEmpty();
 
             //var last = this.LastOrDefault();
             //if (last != null)
@@ -681,23 +681,23 @@ namespace Unigram.Collections
 
             //    if (last.Peer is TLPeerUser)
             //    {
-            //        lastPeer = new TLInputPeerUser { UserId = last.Peer.Id };
+            //        lastPeer = new ITLInputPeerUser { UserId = last.Peer.Id };
             //    }
             //    else if (last.Peer is TLPeerChat)
             //    {
-            //        lastPeer = new TLInputPeerChat { ChatId = last.Peer.Id };
+            //        lastPeer = new ITLInputPeerChat { ChatId = last.Peer.Id };
             //    }
             //    else if (last.Peer is TLPeerChannel)
             //    {
-            //        lastPeer = new TLInputPeerChannel { ChannelId = last.Peer.Id };
+            //        lastPeer = new ITLInputPeerChannel { ChannelId = last.Peer.Id };
             //    }
             //}
 
-            var response = await _protoService.GetDialogsAsync(0, 0, new TLInputPeerEmpty(), count);
+            var response = await _protoService.GetDialogsAsync(0, 0, new ITLInputPeerEmpty(), count);
             if (response.IsSucceeded)
             {
                 var result = response.Result;
-                var vector = new TLVector<TLDialog>(result.Dialogs.Count);
+                var vector = new ITLVector<TLDialog>(result.Dialogs.Count);
                 foreach (var dialog in result.Dialogs.OrderBy(x => x.GetDateIndex()))
                 {
                     vector.Add(dialog);

@@ -28,7 +28,7 @@ namespace Unigram.ViewModels.Settings
                     var result = await ProtoService.BlockAsync(item.ToInputUser());
                     if (result.IsSucceeded)
                     {
-                        //Aggregator.Publish(new TLUpdateUserBlocked { UserId = item.Id, Blocked = true });
+                        //Aggregator.Publish(new ITLUpdateUserBlocked { UserId = item.Id, Blocked = true });
                     }
                 }
             }

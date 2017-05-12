@@ -490,7 +490,7 @@ namespace Unigram.Views
             var message = control.DataContext as TLMessage;
             if (message != null && message.HasFromId)
             {
-                ViewModel.NavigationService.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = message.FromId.Value });
+                ViewModel.NavigationService.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = message.FromId.Value });
             }
         }
 

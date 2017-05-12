@@ -105,7 +105,7 @@ namespace Unigram.Views
                         if (user != null)
                         {
                             ClearNavigation();
-                            MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerUser { UserId = user.Id });
+                            MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = user.Id });
                         }
                     }
                     else if (data.ContainsKey("chat_id"))
@@ -114,7 +114,7 @@ namespace Unigram.Views
                         if (chat != null)
                         {
                             ClearNavigation();
-                            MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerChat { ChatId = chat.Id });
+                            MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerChat { ChatId = chat.Id });
                         }
                     }
                     else if (data.ContainsKey("channel_id"))
@@ -123,7 +123,7 @@ namespace Unigram.Views
                         if (chat != null)
                         {
                             ClearNavigation();
-                            MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = chat.Id });
+                            MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = chat.Id });
                         }
                     }
                 }
@@ -269,18 +269,18 @@ namespace Unigram.Views
 
                 if (e.ClickedItem is TLMessageCommonBase message)
                 {
-                    var peer = message.IsOut || message.ToId is TLPeerChannel || message.ToId is TLPeerChat ? message.ToId : new TLPeerUser { UserId = message.FromId.Value };
+                    var peer = message.IsOut || message.ToId is TLPeerChannel || message.ToId is TLPeerChat ? message.ToId : new ITLPeerUser { UserId = message.FromId.Value };
                     MasterDetail.NavigationService.Navigate(typeof(DialogPage), Tuple.Create(peer, message.Id));
                 }
 
                 if (e.ClickedItem is TLUser user)
                 {
-                    MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerUser { UserId = user.Id });
+                    MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = user.Id });
                 }
 
                 if (e.ClickedItem is TLChannel channel)
                 {
-                    MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = channel.Id });
+                    MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = channel.Id });
                 }
             }
         }
@@ -317,18 +317,18 @@ namespace Unigram.Views
 
             //    if (listView.SelectedItem is TLMessageCommonBase message)
             //    {
-            //        var peer = message.IsOut || message.ToId is TLPeerChannel || message.ToId is TLPeerChat ? message.ToId : new TLPeerUser { UserId = message.FromId.Value };
+            //        var peer = message.IsOut || message.ToId is TLPeerChannel || message.ToId is TLPeerChat ? message.ToId : new ITLPeerUser { UserId = message.FromId.Value };
             //        MasterDetail.NavigationService.Navigate(typeof(DialogPage), Tuple.Create(peer, message.Id));
             //    }
 
             //    if (listView.SelectedItem is TLUser user)
             //    {
-            //        MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerUser { UserId = user.Id });
+            //        MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = user.Id });
             //    }
 
             //    if (listView.SelectedItem is TLChannel channel)
             //    {
-            //        MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = channel.Id });
+            //        MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = channel.Id });
             //    }
             //}
         }
@@ -423,7 +423,7 @@ namespace Unigram.Views
         {
             if (ViewModel.Contacts.Self != null)
             {
-                MasterDetail.NavigationService.Navigate(typeof(DialogPage), new TLPeerUser { UserId = ViewModel.Contacts.Self.Id });
+                MasterDetail.NavigationService.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = ViewModel.Contacts.Self.Id });
             }
         }
 

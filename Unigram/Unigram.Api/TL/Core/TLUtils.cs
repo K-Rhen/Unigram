@@ -99,7 +99,7 @@ namespace Telegram.Api.TL
         {
 
 #if LAYER_40
-            var m = new TLMessage
+            var m = new ITLMessage
             {
                 Id = id,
                 FromId = fromId,
@@ -107,14 +107,14 @@ namespace Telegram.Api.TL
                 IsOut = false,
                 Date = date,
                 Message = message,
-                Media = new TLMessageMediaEmpty(),
+                Media = new ITLMessageMediaEmpty(),
                 IsUnread = true,
             };
 
             if (m.FromId > 0) m.HasFromId = true;
             if (m.Media != null) m.HasMedia = true;
 #else
-            var m = new TLMessage
+            var m = new ITLMessage
             {
                 Id = id,
                 FromId = fromId,
@@ -122,7 +122,7 @@ namespace Telegram.Api.TL
                 Out = false,
                 _date = date,
                 Message = message,
-                _media = new TLMessageMediaEmpty()
+                _media = new ITLMessageMediaEmpty()
             };
 #endif
             return m;
@@ -141,7 +141,7 @@ namespace Telegram.Api.TL
             int? replyToMsgId)
         {
 #if LAYER_40
-            var m = new TLMessage
+            var m = new ITLMessage
             {
                 FromId = fromId,
                 ToId = toId,
@@ -158,7 +158,7 @@ namespace Telegram.Api.TL
             if (m.Media != null) m.HasMedia = true;
             if (m.ReplyToMsgId != null) m.HasReplyToMsgId = true;
 #else
-            var m = new TLMessage
+            var m = new ITLMessage
             {
                 FromId = fromId,
                 ToId = toId,
@@ -602,7 +602,7 @@ namespace Telegram.Api.TL
         //    {
         //        if (commonMessage.ChatId != null)
         //        {
-        //            peer = new TLPeerEncryptedChat{ Id = commonMessage.ChatId };
+        //            peer = new ITLPeerEncryptedChat{ Id = commonMessage.ChatId };
         //        }
         //    }
         //    else
@@ -635,7 +635,7 @@ namespace Telegram.Api.TL
                     }
                     else
                     {
-                        peer = new TLPeerUser { Id = commonMessage.FromId.Value };
+                        peer = new ITLPeerUser { Id = commonMessage.FromId.Value };
                     }
                 }
             }
@@ -708,8 +708,8 @@ namespace Telegram.Api.TL
             return true;
         }
 
-        public static IEnumerable<T> FindInnerObjects<T>(TLTransportMessage obj)
-            where T : TLObject
+        internal static IEnumerable<T> FindInnerObjects<T>(TLTransportMessage obj)
+            where T : ITLObject
         {
             var result = obj.Query as T;
             if (result != null)
@@ -718,7 +718,7 @@ namespace Telegram.Api.TL
             }
             else
             {
-                var gzipData = obj.Query as TLGzipPacked;
+                var gzipData = obj.Query as ITLGzipPacked;
                 if (gzipData != null)
                 {
                     result = gzipData.Query as T;
@@ -728,7 +728,7 @@ namespace Telegram.Api.TL
                     }
                 }
 
-                var container = obj.Query as TLMsgContainer;
+                var container = obj.Query as ITLMsgContainer;
                 if (container != null)
                 {
                     foreach (var message in container.Messages)
@@ -739,7 +739,7 @@ namespace Telegram.Api.TL
                             yield return (T)message.Query;
                         }
 
-                        gzipData = message.Query as TLGzipPacked;
+                        gzipData = message.Query as ITLGzipPacked;
                         if (gzipData != null)
                         {
                             result = gzipData.Query as T;
@@ -794,32 +794,32 @@ namespace Telegram.Api.TL
             var channel = inputPeer as TLInputPeerChannel;
             if (channel != null)
             {
-                return new TLPeerChannel { Id = channel.ChannelId };
+                return new ITLPeerChannel { Id = channel.ChannelId };
             }
 
             // Broadcast are no more supported.
             //var broadcast = inputPeer as TLInputPeerBroadcast;
             //if (broadcast != null)
             //{
-            //    return new TLPeerBroadcast { Id = broadcast.ChatId };
+            //    return new ITLPeerBroadcast { Id = broadcast.ChatId };
             //}
 
             var chat = inputPeer as TLInputPeerChat;
             if (chat != null)
             {
-                return new TLPeerChat { Id = chat.ChatId };
+                return new ITLPeerChat { Id = chat.ChatId };
             }
 
             var user = inputPeer as TLInputPeerUser;
             if (user != null)
             {
-                return new TLPeerUser { Id = user.UserId };
+                return new ITLPeerUser { Id = user.UserId };
             }
 
             var self = inputPeer as TLInputPeerSelf;
             if (self != null)
             {
-                return new TLPeerUser { Id = selfId };
+                return new ITLPeerUser { Id = selfId };
             }
 
             return null;

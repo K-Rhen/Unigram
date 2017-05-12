@@ -32,7 +32,7 @@ namespace Unigram.ViewModels.Payments
             }
         }
 
-        protected TLMessageMediaInvoice _invoice = new TLMessageMediaInvoice();
+        protected TLMessageMediaInvoice _invoice = new ITLMessageMediaInvoice();
         public TLMessageMediaInvoice Invoice
         {
             get

@@ -8,7 +8,19 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLUser : ITLInputPeer
+#if !PORTABLE
+    public partial interface TLUser
+    {
+        TLInputUserBase ToInputUser();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUser
     {
         public override string FullName
         {
@@ -99,7 +111,7 @@ namespace Telegram.Api.TL
             {
                 //if (IsContact || IsMutualContact)
                 //{
-                //    var userContact = new TLInputPeerContact
+                //    var userContact = new ITLInputPeerContact
                 //    {
                 //        UserId = Id
                 //    };
@@ -107,7 +119,7 @@ namespace Telegram.Api.TL
                 //    return userContact;
                 //}
 
-                //var userForeign = new TLInputPeerForeign
+                //var userForeign = new ITLInputPeerForeign
                 //{
                 //    UserId = Id,
                 //    AccessHash = AccessHash
@@ -115,24 +127,24 @@ namespace Telegram.Api.TL
 
                 //return userForeign;
 
-                return new TLInputPeerUser { UserId = Id, AccessHash = AccessHash.Value };
+                return new ITLInputPeerUser { UserId = Id, AccessHash = AccessHash.Value };
             }
 
             //if (IsDeleted)
             //{
-            //    var userDeleted = new TLInputPeerContact { UserId = Id };
+            //    var userDeleted = new ITLInputPeerContact { UserId = Id };
 
             //    return userDeleted;
             //}
 
             if (IsSelf)
             {
-                return new TLInputPeerSelf();
+                return new ITLInputPeerSelf();
             }
 
             Helpers.Execute.ShowDebugMessage("TLUser.ToInputPeer unknown " + FirstName);
 
-            return new TLInputPeerUser { UserId = Id };
+            return new ITLInputPeerUser { UserId = Id };
             //return null;
         }
 
@@ -143,7 +155,7 @@ namespace Telegram.Api.TL
                 //if (IsSet(Flags, (int)UserFlags.Contact)
                 //    || IsSet(Flags, (int)UserFlags.ContactMutual))
                 //{
-                //    var userContact = new TLInputUserContact
+                //    var userContact = new ITLInputUserContact
                 //    {
                 //        UserId = Id
                 //    };
@@ -151,7 +163,7 @@ namespace Telegram.Api.TL
                 //    return userContact;
                 //}
 
-                //var userForeign = new TLInputUserForeign
+                //var userForeign = new ITLInputUserForeign
                 //{
                 //    UserId = Id,
                 //    AccessHash = AccessHash
@@ -159,30 +171,30 @@ namespace Telegram.Api.TL
 
                 //return userForeign;
 
-                return new TLInputUser { AccessHash = AccessHash.Value, UserId = Id };
+                return new ITLInputUser { AccessHash = AccessHash.Value, UserId = Id };
             }
 
             //if (IsSet(Flags, (int)UserFlags.Deleted))
             //{
-            //    var userDeleted = new TLInputUserContact { UserId = Id };
+            //    var userDeleted = new ITLInputUserContact { UserId = Id };
 
             //    return userDeleted;
             //}
 
             if (IsSelf)
             {
-                return new TLInputUserSelf();
+                return new ITLInputUserSelf();
             }
 
             Helpers.Execute.ShowDebugMessage("TLUser.ToInputUser unknown " + FullName);
 
-            return new TLInputUser { UserId = Id };
+            return new ITLInputUser { UserId = Id };
             //return null;
         }
 
         public override TLPeerBase ToPeer()
         {
-            return new TLPeerUser { UserId = Id };
+            return new ITLPeerUser { UserId = Id };
         }
     }
 }

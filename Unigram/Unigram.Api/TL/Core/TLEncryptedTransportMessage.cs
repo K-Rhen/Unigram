@@ -8,7 +8,7 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public class TLEncryptedTransportMessage : TLTransportMessageBase
+    internal class TLEncryptedTransportMessage : ITLTransportMessageBase
     {
         public Int64 AuthKeyId { get; set; }
 
@@ -34,7 +34,7 @@ namespace Telegram.Api.TL
 
             using (var reader = new TLBinaryReader(data2))
             {
-                Query = new TLTransportMessage();
+                Query = new ITLTransportMessage();
                 Query.Read(reader);
             }
 

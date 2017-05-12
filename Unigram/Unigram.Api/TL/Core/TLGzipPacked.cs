@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLGzipPacked : TLObject
+    internal class ITLGzipPacked : ITLObject
     {
         public const uint Signature = 812830625u;
 
         public TLObject Query { get; set; }
 
-        public TLGzipPacked() { }
-        public TLGzipPacked(TLBinaryReader from)
+        public ITLGzipPacked() { }
+        public ITLGzipPacked(TLBinaryReader from)
         {
             Read(from);
         }

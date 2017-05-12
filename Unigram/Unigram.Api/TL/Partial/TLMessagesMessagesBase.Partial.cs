@@ -6,49 +6,76 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLMessagesMessagesBase
+#if !PORTABLE
+    public partial interface TLMessagesMessagesBase
+    {
+        TLMessagesMessagesBase GetEmptyObject();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLMessagesMessagesBase
     {
         public abstract TLMessagesMessagesBase GetEmptyObject();
     }
 
-    public partial class TLMessagesMessages
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessagesMessages
     {
         public override TLMessagesMessagesBase GetEmptyObject()
         {
-            return new TLMessagesMessages
+            return new ITLMessagesMessages
             {
-                Messages = new TLVector<TLMessageBase>(Messages.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
-                Users = new TLVector<TLUserBase>(Users.Count)
+                Messages = new ITLVector<TLMessageBase>(Messages.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count)
             };
         }
     }
 
-    public partial class TLMessagesMessagesSlice
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessagesMessagesSlice
     {
         public override TLMessagesMessagesBase GetEmptyObject()
         {
-            return new TLMessagesMessagesSlice
+            return new ITLMessagesMessagesSlice
             {
                 Count = Count,
-                Messages = new TLVector<TLMessageBase>(Messages.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
-                Users = new TLVector<TLUserBase>(Users.Count)
+                Messages = new ITLVector<TLMessageBase>(Messages.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count)
             };
         }
     }
 
-    public partial class TLMessagesChannelMessages
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessagesChannelMessages
     {
         public override TLMessagesMessagesBase GetEmptyObject()
         {
             // TODO: Verify
-            return new TLMessagesChannelMessages
+            return new ITLMessagesChannelMessages
             {
                 Count = Count,
-                Messages = new TLVector<TLMessageBase>(Messages.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
-                Users = new TLVector<TLUserBase>(Users.Count)
+                Messages = new ITLVector<TLMessageBase>(Messages.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count)
             };
         }
     }

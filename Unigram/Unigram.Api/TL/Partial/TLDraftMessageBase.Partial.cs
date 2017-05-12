@@ -7,16 +7,33 @@ using Telegram.Api.TL.Methods.Messages;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLDraftMessageBase
+#if !PORTABLE
+    public partial interface TLDraftMessageBase
+    {
+        TLMessagesSaveDraft ToSaveDraftObject(TLInputPeerBase peer);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLDraftMessageBase
     {
         public abstract TLMessagesSaveDraft ToSaveDraftObject(TLInputPeerBase peer);
     }
 
-    public partial class TLDraftMessageEmpty
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDraftMessageEmpty
     {
         public override TLMessagesSaveDraft ToSaveDraftObject(TLInputPeerBase peer)
         {
-            return new TLMessagesSaveDraft
+            return new ITLMessagesSaveDraft
             {
                 Peer = peer,
                 Message = string.Empty
@@ -24,11 +41,16 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLDraftMessage
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDraftMessage
     {
         public override TLMessagesSaveDraft ToSaveDraftObject(TLInputPeerBase peer)
         {
-            var obj = new TLMessagesSaveDraft
+            var obj = new ITLMessagesSaveDraft
             {
                 ReplyToMsgId = ReplyToMsgId,
                 Peer = peer,

@@ -178,11 +178,11 @@ namespace Unigram.Controls.Messages
         {
             if (message.IsPost)
             {
-                Context.NavigationService.Navigate(typeof(ChatDetailsPage), new TLPeerChannel { ChannelId = message.ToId.Id });
+                Context.NavigationService.Navigate(typeof(ChatDetailsPage), new ITLPeerChannel { ChannelId = message.ToId.Id });
             }
             else if (message.From != null)
             {
-                Context.NavigationService.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = message.From.Id });
+                Context.NavigationService.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = message.From.Id });
             }
         }
 
@@ -193,16 +193,16 @@ namespace Unigram.Controls.Messages
                 if (message.FwdFrom.HasChannelPost)
                 {
                     // TODO
-                    Context.NavigationService.Navigate(typeof(DialogPage), Tuple.Create((TLPeerBase)new TLPeerChannel { ChannelId = message.FwdFromChannel.Id }, message.FwdFrom.ChannelPost ?? int.MaxValue));
+                    Context.NavigationService.Navigate(typeof(DialogPage), Tuple.Create((TLPeerBase)new ITLPeerChannel { ChannelId = message.FwdFromChannel.Id }, message.FwdFrom.ChannelPost ?? int.MaxValue));
                 }
                 else
                 {
-                    Context.NavigationService.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = message.FwdFromChannel.Id });
+                    Context.NavigationService.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = message.FwdFromChannel.Id });
                 }
             }
             else if (message.FwdFromUser != null)
             {
-                Context.NavigationService.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = message.FwdFromUser.Id });
+                Context.NavigationService.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = message.FwdFromUser.Id });
             }
         }
 
@@ -384,8 +384,8 @@ namespace Unigram.Controls.Messages
             else if (media.TypeId == TLType.MessageMediaDocument)
             {
                 var documentMedia = media as TLMessageMediaDocument;
-                if (TLMessage.IsGif(documentMedia.Document)) return true;
-                else if (TLMessage.IsVideo(documentMedia.Document)) return true;
+                if (documentMedia.Document.IsGif()) return true;
+                else if (documentMedia.Document.IsVideo()) return true;
             }
             else if (media.TypeId == TLType.MessageMediaInvoice && width)
             {
@@ -427,16 +427,16 @@ namespace Unigram.Controls.Messages
             else if (media.TypeId == TLType.MessageMediaDocument)
             {
                 var documentMedia = media as TLMessageMediaDocument;
-                if (TLMessage.IsMusic(documentMedia.Document)) return true;
-                else if (TLMessage.IsVoice(documentMedia.Document)) return true;
-                else if (TLMessage.IsVideo(documentMedia.Document))
+                if (documentMedia.Document.IsMusic()) return true;
+                else if (documentMedia.Document.IsVoice()) return true;
+                else if (documentMedia.Document.IsVideo())
                 {
                     if (string.IsNullOrWhiteSpace(documentMedia.Caption))
                     {
                         return false;
                     }
                 }
-                else if (TLMessage.IsGif(documentMedia.Document))
+                else if (documentMedia.Document.IsGif())
                 {
                     if (string.IsNullOrWhiteSpace(documentMedia.Caption))
                     {

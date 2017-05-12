@@ -47,7 +47,7 @@ namespace Unigram.ViewModels
         {
             using (await _loadMoreLock.WaitAsync())
             {
-                var result = await ProtoService.SearchAsync(_peer, string.Empty, new TLInputMessagesFilterPhotoVideo(), 0, 0, -5, _lastMaxId, 15);
+                var result = await ProtoService.SearchAsync(_peer, string.Empty, new ITLInputMessagesFilterPhotoVideo(), 0, 0, -5, _lastMaxId, 15);
                 if (result.IsSucceeded)
                 {
                     if (result.Result is TLMessagesMessagesSlice)
@@ -168,11 +168,11 @@ namespace Unigram.ViewModels
         {
             if (_message.Media is TLMessageMediaPhoto photoMedia && photoMedia.Photo is TLPhoto photo)
             {
-                return new TLInputStickeredMediaPhoto { Id = photo.ToInputPhoto() };
+                return new ITLInputStickeredMediaPhoto { Id = photo.ToInputPhoto() };
             }
             else if (_message.Media is TLMessageMediaDocument documentMedia && documentMedia.Document is TLDocument document)
             {
-                return new TLInputStickeredMediaDocument { Id = document.ToInputDocument() };
+                return new ITLInputStickeredMediaDocument { Id = document.ToInputDocument() };
             }
 
             return null;

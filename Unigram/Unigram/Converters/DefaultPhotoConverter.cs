@@ -357,7 +357,7 @@ namespace Unigram.Converters
             var tLDocument3 = value as TLDocument;
             if (tLDocument3 != null)
             {
-                if (TLMessage.IsSticker(tLDocument3))
+                if (tLDocument3.IsSticker())
                 {
                     //if (parameter != null && string.Equals(parameter.ToString(), "ignoreStickers", StringComparison.OrdinalIgnoreCase))
                     //{
@@ -371,7 +371,7 @@ namespace Unigram.Converters
 
                     return ReturnOrEnqueueSticker(tLDocument3, null);
                 }
-                else if (TLMessage.IsGif(tLDocument3))
+                else if (tLDocument3.IsGif())
                 {
                     return ReturnOrEnqueueGif(tLDocument3, thumbnail);
                 }

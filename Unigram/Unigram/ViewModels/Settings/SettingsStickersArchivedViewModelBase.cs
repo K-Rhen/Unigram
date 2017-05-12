@@ -71,7 +71,7 @@ namespace Unigram.ViewModels.Settings
                     {
                         if (x is TLStickerSetMultiCovered multi)
                         {
-                            return new TLMessagesStickerSet
+                            return (TLMessagesStickerSet)new ITLMessagesStickerSet
                             {
                                 Set = multi.Set,
                                 Documents = multi.Covers
@@ -79,10 +79,10 @@ namespace Unigram.ViewModels.Settings
                         }
                         else if (x is TLStickerSetCovered single)
                         {
-                            return new TLMessagesStickerSet
+                            return (TLMessagesStickerSet)new ITLMessagesStickerSet
                             {
                                 Set = single.Set,
-                                Documents = new TLVector<TLDocumentBase> { single.Cover }
+                                Documents = new ITLVector<TLDocumentBase> { single.Cover }
                             };
                         }
 
@@ -90,7 +90,7 @@ namespace Unigram.ViewModels.Settings
                     }).ToList();
                 }
 
-                return new TLMessagesStickerSet[0];
+                return new ITLMessagesStickerSet[0];
             }
         }
     }

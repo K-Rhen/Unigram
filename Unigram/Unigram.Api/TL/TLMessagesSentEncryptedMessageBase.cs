@@ -4,14 +4,22 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLMessagesSentEncryptedMessageBase : TLObject, ITLMessagesSentEncryptedMessageBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLMessagesSentEncryptedMessageBase : ITLObject, TLMessagesSentEncryptedMessageBase
 	{
 		public Int32 Date { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0x52738c6c, 0x5a5a, 0xe520, 0xc5, 0x94, 0x46, 0x4d, 0xc3, 0x11, 0x0e, 0x18)]
-	public partial interface ITLMessagesSentEncryptedMessageBase : TLObject
+	public partial interface TLMessagesSentEncryptedMessageBase : TLObject
 	{
 		Int32 Date { get; set; }
 	}
+#endif
+
 }

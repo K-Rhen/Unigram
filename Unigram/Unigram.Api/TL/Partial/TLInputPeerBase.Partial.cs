@@ -7,7 +7,19 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLInputPeerBase
+#if !PORTABLE
+    public partial interface TLInputPeerBase
+    {
+        TLPeerBase ToPeer();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLInputPeerBase
     {
         public TLPeerBase ToPeer()
         {

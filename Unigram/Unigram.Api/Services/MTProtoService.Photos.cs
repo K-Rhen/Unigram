@@ -8,7 +8,7 @@ namespace Telegram.Api.Services
     {
         public void UploadProfilePhotoAsync(TLInputFile file, Action<TLPhotosPhoto> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhotosUploadProfilePhoto { File = file };
+            var obj = new ITLPhotosUploadProfilePhoto { File = file };
 
             const string caption = "photos.uploadProfilePhoto";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -16,7 +16,7 @@ namespace Telegram.Api.Services
 
         public void UpdateProfilePhotoAsync(TLInputPhotoBase id, Action<TLUserProfilePhotoBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhotosUpdateProfilePhoto { Id = id };
+            var obj = new ITLPhotosUpdateProfilePhoto { Id = id };
 
             const string caption = "photos.updateProfilePhoto";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -24,7 +24,7 @@ namespace Telegram.Api.Services
 
         public void GetUserPhotosAsync(TLInputUserBase userId, int offset, long maxId, int limit, Action<TLPhotosPhotosBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhotosGetUserPhotos { UserId = userId, Offset = offset, MaxId = maxId, Limit = limit };
+            var obj = new ITLPhotosGetUserPhotos { UserId = userId, Offset = offset, MaxId = maxId, Limit = limit };
 
             const string caption = "photos.getUserPhotos";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -32,7 +32,7 @@ namespace Telegram.Api.Services
 
         public void DeletePhotosAsync(TLVector<TLInputPhotoBase> id, Action<TLVector<long>> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLPhotosDeletePhotos { Id = id };
+            var obj = new ITLPhotosDeletePhotos { Id = id };
 
             const string caption = "photos.deletePhotos";
             SendInformativeMessage(caption, obj, callback, faultCallback);

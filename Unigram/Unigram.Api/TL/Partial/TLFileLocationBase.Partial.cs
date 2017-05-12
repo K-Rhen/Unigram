@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLFileLocationBase
+#if !PORTABLE
+    public partial interface TLFileLocationBase
+    {
+        void Update(TLFileLocationBase fileLocation);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLFileLocationBase
     {
         public virtual void Update(TLFileLocationBase fileLocation)
         {

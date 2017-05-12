@@ -8,7 +8,37 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLChannel : ITLReadMaxId
+#if !PORTABLE
+    public partial interface TLChannel : ITLReadMaxId
+    {
+        Int32 AdminsCount { get; set; }
+
+        Int32? ParticipantsCount { get; set; }
+
+        TLVector<int> ParticipantIds { get; set; }
+
+        Int32? ReadInboxMaxId { get; set; }
+
+        Int32? ReadOutboxMaxId { get; set; }
+
+        Int32? PinnedMsgId { get; set; }
+
+        Int32? HiddenPinnedMsgId { get; set; }
+
+        Int32? Pts { get; set; }
+
+        TLInputChannelBase ToInputChannel();
+
+        string ExtractRestrictionReason();
+    }
+#endif
+
+#if !PORTABLE
+    internal 
+#else
+    public
+#endif
+    partial class ITLChannel : ITLReadMaxId
     {
         public Int32 AdminsCount { get; set; }
 
@@ -70,7 +100,7 @@ namespace Telegram.Api.TL
 
         public TLInputChannelBase ToInputChannel()
         {
-            return new TLInputChannel { ChannelId = Id, AccessHash = AccessHash.Value };
+            return new ITLInputChannel { ChannelId = Id, AccessHash = AccessHash.Value };
         }
 
         public string ExtractRestrictionReason()

@@ -130,7 +130,7 @@ namespace Unigram.ViewModels
             //TLLong arg_74_0 = this._currentInlineBotResults.QueryId;
 
             var date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now);
-            var message = TLUtils.GetMessage(SettingsHelper.UserId, Peer.ToPeer(), TLMessageState.Sending, true, true, date, string.Empty, new TLMessageMediaEmpty(), TLLong.Random(), null);
+            var message = TLUtils.GetMessage(SettingsHelper.UserId, Peer.ToPeer(), TLMessageState.Sending, true, true, date, string.Empty, new ITLMessageMediaEmpty(), TLLong.Random(), null);
             if (message == null)
             {
                 return;
@@ -217,7 +217,7 @@ namespace Unigram.ViewModels
             var venueMedia = resultBase.SendMessage as TLBotInlineMessageMediaVenue;
             if (venueMedia != null)
             {
-                message.Media = new TLMessageMediaVenue
+                message.Media = new ITLMessageMediaVenue
                 {
                     Title = venueMedia.Title,
                     Address = venueMedia.Address,
@@ -230,7 +230,7 @@ namespace Unigram.ViewModels
             var geoMedia = resultBase.SendMessage as TLBotInlineMessageMediaGeo;
             if (geoMedia != null)
             {
-                message.Media = new TLMessageMediaGeo
+                message.Media = new ITLMessageMediaGeo
                 {
                     Geo = geoMedia.Geo
                 };
@@ -239,7 +239,7 @@ namespace Unigram.ViewModels
             var contactMedia = resultBase.SendMessage as TLBotInlineMessageMediaContact;
             if (contactMedia != null)
             {
-                message.Media = new TLMessageMediaContact
+                message.Media = new ITLMessageMediaContact
                 {
                     PhoneNumber = contactMedia.PhoneNumber,
                     FirstName = contactMedia.FirstName,
@@ -253,7 +253,7 @@ namespace Unigram.ViewModels
             {
                 if (mediaResult.Type.Equals("voice", StringComparison.OrdinalIgnoreCase))
                 {
-                    message.Media = new TLMessageMediaDocument
+                    message.Media = new ITLMessageMediaDocument
                     {
                         Document = mediaResult.Document,
                         Caption = string.Empty,
@@ -263,7 +263,7 @@ namespace Unigram.ViewModels
                 }
                 else if (mediaResult.Type.Equals("audio", StringComparison.OrdinalIgnoreCase))
                 {
-                    message.Media = new TLMessageMediaDocument
+                    message.Media = new ITLMessageMediaDocument
                     {
                         Document = mediaResult.Document,
                         Caption = string.Empty
@@ -271,7 +271,7 @@ namespace Unigram.ViewModels
                 }
                 else if (mediaResult.Type.Equals("sticker", StringComparison.OrdinalIgnoreCase))
                 {
-                    message.Media = new TLMessageMediaDocument
+                    message.Media = new ITLMessageMediaDocument
                     {
                         Document = mediaResult.Document,
                         Caption = string.Empty
@@ -279,7 +279,7 @@ namespace Unigram.ViewModels
                 }
                 else if (mediaResult.Type.Equals("file", StringComparison.OrdinalIgnoreCase))
                 {
-                    message.Media = new TLMessageMediaDocument
+                    message.Media = new ITLMessageMediaDocument
                     {
                         Document = mediaResult.Document,
                         Caption = string.Empty
@@ -287,7 +287,7 @@ namespace Unigram.ViewModels
                 }
                 else if (mediaResult.Type.Equals("gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    message.Media = new TLMessageMediaDocument
+                    message.Media = new ITLMessageMediaDocument
                     {
                         Document = mediaResult.Document,
                         Caption = string.Empty
@@ -295,7 +295,7 @@ namespace Unigram.ViewModels
                 }
                 else if (mediaResult.Type.Equals("photo", StringComparison.OrdinalIgnoreCase))
                 {
-                    message.Media = new TLMessageMediaPhoto
+                    message.Media = new ITLMessageMediaPhoto
                     {
                         Photo = mediaResult.Photo,
                         Caption = string.Empty
@@ -330,21 +330,21 @@ namespace Unigram.ViewModels
             //                    text = "file.ext";
             //                }
             //            }
-            //            tLDocument = new TLDocument
+            //            tLDocument = new ITLDocument
             //            {
             //                Id = 0,
             //                AccessHash = 0,
             //                Date = 0,
             //                MimeType = result.ContentType ?? string.Empty,
             //                Size = 0,
-            //                Thumb = new TLPhotoSizeEmpty
+            //                Thumb = new ITLPhotoSizeEmpty
             //                {
             //                    Type = string.Empty
             //                },
             //                DCId = 0,
-            //                Attributes = new TLVector<TLDocumentAttributeBase>
+            //                Attributes = new ITLVector<TLDocumentAttributeBase>
             //                {
-            //                    new TLDocumentAttributeFilename
+            //                    new ITLDocumentAttributeFilename
             //                    {
             //                        FileName = text
             //                    }
@@ -353,7 +353,7 @@ namespace Unigram.ViewModels
 
             //            if (isVoice || isAudio)
             //            {
-            //                tLDocument.Attributes.Add(new TLDocumentAttributeAudio
+            //                tLDocument.Attributes.Add(new ITLDocumentAttributeAudio
             //                {
             //                    Duration = result.Duration ?? 0,
             //                    Title = result.Title,
@@ -363,7 +363,7 @@ namespace Unigram.ViewModels
             //            }
             //        }
 
-            //        var documentMedia = new TLMessageMediaDocument
+            //        var documentMedia = new ITLMessageMediaDocument
             //        {
             //            Document = tLDocument,
             //            Caption = string.Empty
@@ -377,7 +377,7 @@ namespace Unigram.ViewModels
             //        TLDocumentBase document = result.Document;
             //        if (document != null)
             //        {
-            //            TLMessageMediaDocument media = new TLMessageMediaDocument
+            //            TLMessageMediaDocument media = new ITLMessageMediaDocument
             //            {
             //                Document = document,
             //                Caption = string.Empty
@@ -394,14 +394,14 @@ namespace Unigram.ViewModels
             //            result.ThumbUrl,
             //            result.ContentUrl
             //        }));
-            //        TLFileLocation location = new TLFileLocation
+            //        TLFileLocation location = new ITLFileLocation
             //        {
             //            DCId = 1,
             //            VolumeId = TLLong.Random(),
             //            LocalId = TLInt.Random(),
             //            Secret = TLLong.Random()
             //        };
-            //        TLPhotoCachedSize item2 = new TLPhotoCachedSize
+            //        TLPhotoCachedSize item2 = new ITLPhotoCachedSize
             //        {
             //            Type = "s",
             //            W = result.W ?? 0,
@@ -410,7 +410,7 @@ namespace Unigram.ViewModels
             //            Bytes = new byte[0],
             //            TempUrl = (result.ThumbUrlString ?? result.ContentUrlString)
             //        };
-            //        TLPhotoSize item3 = new TLPhotoSize
+            //        TLPhotoSize item3 = new ITLPhotoSize
             //        {
             //            Type = "m",
             //            W = result.W ?? 0,
@@ -501,19 +501,19 @@ namespace Unigram.ViewModels
             //            });
             //        }
 
-            //        var photo = new TLPhoto
+            //        var photo = new ITLPhoto
             //        {
             //            Id = TLLong.Random(),
             //            AccessHash = TLLong.Random(),
             //            Date = TLUtils.DateToUniversalTimeTLInt(ProtoService.ClientTicksDelta, DateTime.Now),
-            //            Sizes = new TLVector<TLPhotoSizeBase>
+            //            Sizes = new ITLVector<TLPhotoSizeBase>
             //            {
             //                item2,
             //                item3
             //            }
             //        };
 
-            //        var media2 = new TLMessageMediaPhoto
+            //        var media2 = new ITLMessageMediaPhoto
             //        {
             //            Photo = photo,
             //            Caption = string.Empty

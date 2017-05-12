@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLTuple : TLObject
+#if PORTABLE
+    public class TLTuple : ITLObject
     {
         public static TLTuple<T1> Create<T1>(T1 item1)
         {
@@ -278,4 +279,5 @@ namespace Telegram.Api.TL
             TLFactory.Write(to, Item8);
         }
     }
+#endif
 }

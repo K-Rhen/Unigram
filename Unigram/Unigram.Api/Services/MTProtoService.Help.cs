@@ -11,11 +11,11 @@ namespace Telegram.Api.Services
         /// <summary>
         /// Список доступных серверов, максимальный размер участников беседы и др.
         /// </summary>
-	    private TLConfig _config = new TLConfig
+	    private TLConfig _config = new ITLConfig
 	    {
-            DCOptions = new TLVector<TLDCOption>
+            DCOptions = new ITLVector<TLDCOption>
             {
-                new TLDCOption 
+                new ITLDCOption 
                 { 
                     Id = Constants.FirstServerDCId,
                     IpAddress = Constants.FirstServerIpAddress, 
@@ -26,7 +26,7 @@ namespace Telegram.Api.Services
 
         public void GetConfigAsync(Action<TLConfig> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLHelpGetConfig();
+            var obj = new ITLHelpGetConfig();
 
             Logs.Log.Write("help.getConfig");
 
@@ -106,28 +106,28 @@ namespace Telegram.Api.Services
 
         public void GetTermsOfServiceAsync(string langCode, Action<TLHelpTermsOfService> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLHelpGetTermsOfService();
+            var obj = new ITLHelpGetTermsOfService();
 
             SendInformativeMessage("help.getTermsOfService", obj, callback, faultCallback);
         }
 
         public void GetNearestDCAsync(Action<TLNearestDC> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLHelpGetNearestDC();
+            var obj = new ITLHelpGetNearestDC();
 
             SendInformativeMessage("help.getNearestDc", obj, callback, faultCallback);
         }
 
         public void GetInviteTextAsync(string langCode, Action<TLHelpInviteText> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLHelpGetInviteText();
+            var obj = new ITLHelpGetInviteText();
 
             SendInformativeMessage("help.getInviteText", obj, callback, faultCallback);
         }
 
         public void GetSupportAsync( Action<TLHelpSupport> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLHelpGetSupport();
+            var obj = new ITLHelpGetSupport();
 
             SendInformativeMessage<TLHelpSupport>("help.getSupport", obj, 
                 result =>
@@ -140,7 +140,7 @@ namespace Telegram.Api.Services
 
         public void GetAppChangelogAsync(string prevAppVersion, Action<TLUpdatesBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLHelpGetAppChangelog();
+            var obj = new ITLHelpGetAppChangelog();
 
             SendInformativeMessage("help.getAppChangelog", obj, callback, faultCallback);
         }

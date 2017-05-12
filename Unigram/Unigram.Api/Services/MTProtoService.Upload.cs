@@ -12,21 +12,21 @@ namespace Telegram.Api.Services
             var filePartValue = filePart;
             var bytesLength = bytes.Length;
 
-            var obj = new TLUploadSaveFilePart{ FileId = fileId, FilePart = filePart, Bytes = bytes };
+            var obj = new ITLUploadSaveFilePart{ FileId = fileId, FilePart = filePart, Bytes = bytes };
 
             SendInformativeMessage("upload.saveFilePart" + " " + filePart, obj, callback, faultCallback);
         }
 
         public void SaveBigFilePartAsync(long fileId, int filePart, int fileTotalParts, byte[] bytes, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUploadSaveBigFilePart { FileId = fileId, FilePart = filePart, FileTotalParts = fileTotalParts, Bytes = bytes };
+            var obj = new ITLUploadSaveBigFilePart { FileId = fileId, FilePart = filePart, FileTotalParts = fileTotalParts, Bytes = bytes };
             Debug.WriteLine(string.Format("upload.saveBigFilePart file_id={0} file_part={1} file_total_parts={2} bytes={3}", fileId, filePart, fileTotalParts, bytes.Length));
             SendInformativeMessage("upload.saveBigFilePart " + filePart + " " + fileTotalParts, obj, callback, faultCallback);
         }
 
         public void GetFileAsync(TLInputFileLocationBase location, int offset, int limit, Action<TLUploadFile> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLUploadGetFile { Location = location, Offset = offset, Limit = limit };
+            var obj = new ITLUploadGetFile { Location = location, Offset = offset, Limit = limit };
 
             SendInformativeMessage("upload.getFile", obj, callback, faultCallback);
         }

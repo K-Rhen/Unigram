@@ -53,7 +53,7 @@ namespace Unigram.ViewModels.Chats
             var config = CacheService.GetConfig();
             if (config == null) return;
 
-            var peers = new TLVector<TLInputUserBase>(SelectedItems.Select(x => x.ToInputUser()));
+            var peers = new ITLVector<TLInputUserBase>(SelectedItems.Select(x => x.ToInputUser()));
             if (peers.Count <= config.ChatSizeMax)
             {
                 // Classic chat
@@ -68,7 +68,7 @@ namespace Unigram.ViewModels.Chats
                         var chat = updates.Chats.FirstOrDefault() as TLChat;
                         if (chat != null)
                         {
-                            NavigationService.Navigate(typeof(DialogPage), new TLPeerChat { ChatId = chat.Id });
+                            NavigationService.Navigate(typeof(DialogPage), new ITLPeerChat { ChatId = chat.Id });
                         }
                     }
                 }

@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLMessagesStickerSet
+#if !PORTABLE
+    public partial interface TLMessagesStickerSet
+    {
+        TLDocumentBase Cover { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLMessagesStickerSet
     {
         public TLDocumentBase Cover
         {

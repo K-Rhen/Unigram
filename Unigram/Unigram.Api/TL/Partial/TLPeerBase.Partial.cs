@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLPeerBase : TLObject
+#if !PORTABLE
+    public partial interface TLPeerBase
+    {
+        Int32 Id { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLPeerBase
     {
         public Int32 Id
         {
@@ -32,10 +44,10 @@ namespace Telegram.Api.TL
 
         public override bool Equals(object obj)
         {
-            var peer = obj as TLPeerBase;
-            if ((this is TLPeerUser && obj is TLPeerUser) ||
-                (this is TLPeerChat && obj is TLPeerChat) ||
-                (this is TLPeerChannel && obj is TLPeerChannel))
+            var peer = obj as ITLPeerBase;
+            if ((this is ITLPeerUser && obj is ITLPeerUser) ||
+                (this is ITLPeerChat && obj is ITLPeerChat) ||
+                (this is ITLPeerChannel && obj is ITLPeerChannel))
             {
                 return Id.Equals(peer.Id);
             }

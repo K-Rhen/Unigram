@@ -187,12 +187,12 @@ namespace Unigram.Tasks
                 {
                     _phoneCall = requested;
 
-                    var req = new TLPhoneReceivedCall { Peer = new TLInputPhoneCall { Id = requested.Id, AccessHash = requested.AccessHash } };
+                    var req = new ITLPhoneReceivedCall { Peer = new ITLInputPhoneCall { Id = requested.Id, AccessHash = requested.AccessHash } };
 
                     const string caption = "phone.receivedCall";
                     var response = await SendRequestAsync<bool>(caption, req);
 
-                    var responseUser = await SendRequestAsync<TLUser>("voip.getUser", new TLPeerUser { UserId = requested.AdminId });
+                    var responseUser = await SendRequestAsync<TLUser>("voip.getUser", new ITLPeerUser { UserId = requested.AdminId });
                     if (responseUser.Result == null)
                     {
                         return;
@@ -224,10 +224,10 @@ namespace Unigram.Tasks
 
                     await UpdateCallAsync(string.Join(" ", emoji));
 
-                    var response = await SendRequestAsync<TLDataJSON>("phone.getCallConfig", new TLPhoneGetCallConfig());
+                    var response = await SendRequestAsync<TLDataJSON>("phone.getCallConfig", new ITLPhoneGetCallConfig());
                     if (response.IsSucceeded)
                     {
-                        var responseConfig = await SendRequestAsync<TLConfig>("voip.getConfig", new TLPeerUser());
+                        var responseConfig = await SendRequestAsync<TLConfig>("voip.getConfig", new ITLPeerUser());
                         var config = responseConfig.Result;
 
                         VoIPControllerWrapper.UpdateServerConfig(response.Result.Data);
@@ -258,7 +258,7 @@ namespace Unigram.Tasks
 
                     //await Task.Delay(50000);
 
-                    //var req = new TLPhoneDiscardCall { Peer = new TLInputPhoneCall { Id = call.Id, AccessHash = call.AccessHash }, Reason = new TLPhoneCallDiscardReasonHangup() };
+                    //var req = new ITLPhoneDiscardCall { Peer = new ITLInputPhoneCall { Id = call.Id, AccessHash = call.AccessHash }, Reason = new ITLPhoneCallDiscardReasonHangup() };
 
                     //const string caption = "phone.discardCall";
                     //await SendRequestAsync<TLUpdatesBase>(caption, req);
@@ -304,7 +304,7 @@ namespace Unigram.Tasks
         {
             if (_phoneCall is TLPhoneCallRequested requested)
             {
-                var reqConfig = new TLMessagesGetDHConfig { Version = 0, RandomLength = 256 };
+                var reqConfig = new ITLMessagesGetDHConfig { Version = 0, RandomLength = 256 };
 
                 var config = await SendRequestAsync<TLMessagesDHConfig>("messages.getDhConfig", reqConfig);
                 if (config.IsSucceeded)
@@ -325,15 +325,15 @@ namespace Unigram.Tasks
 
                     var g_b = MTProtoService.GetGB(salt, dh.G, dh.P);
 
-                    var request = new TLPhoneAcceptCall
+                    var request = new ITLPhoneAcceptCall
                     {
                         GB = g_b,
-                        Peer = new TLInputPhoneCall
+                        Peer = new ITLInputPhoneCall
                         {
                             Id = requested.Id,
                             AccessHash = requested.AccessHash
                         },
-                        Protocol = new TLPhoneCallProtocol
+                        Protocol = new ITLPhoneCallProtocol
                         {
                             IsUdpP2p = true,
                             IsUdpReflector = true,
@@ -387,7 +387,7 @@ namespace Unigram.Tasks
         {
             if (_phoneCall is TLPhoneCallRequested requested)
             {
-                var req = new TLPhoneDiscardCall { Peer = new TLInputPhoneCall { Id = requested.Id, AccessHash = requested.AccessHash }, Reason = new TLPhoneCallDiscardReasonBusy() };
+                var req = new ITLPhoneDiscardCall { Peer = new ITLInputPhoneCall { Id = requested.Id, AccessHash = requested.AccessHash }, Reason = new ITLPhoneCallDiscardReasonBusy() };
 
                 const string caption = "phone.discardCall";
                 await SendRequestAsync<TLUpdatesBase>(caption, req);
@@ -423,7 +423,7 @@ namespace Unigram.Tasks
                     }
                 }
 
-                return new MTProtoResponse<T>(new TLRPCError { ErrorMessage = "UNKNOWN", ErrorCode = (int)response.Status });
+                return new MTProtoResponse<T>(new ITLRPCError { ErrorMessage = "UNKNOWN", ErrorCode = (int)response.Status });
             }
         }
 
@@ -454,7 +454,7 @@ namespace Unigram.Tasks
                 {
                     if (_phoneCall is TLPhoneCallRequested requested)
                     {
-                        var req = new TLPhoneDiscardCall { Peer = new TLInputPhoneCall { Id = requested.Id, AccessHash = requested.AccessHash }, Reason = new TLPhoneCallDiscardReasonHangup() };
+                        var req = new ITLPhoneDiscardCall { Peer = new ITLInputPhoneCall { Id = requested.Id, AccessHash = requested.AccessHash }, Reason = new ITLPhoneCallDiscardReasonHangup() };
 
                         const string caption2 = "phone.discardCall";
                         await SendRequestAsync<TLUpdatesBase>(caption2, req);

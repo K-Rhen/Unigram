@@ -9,7 +9,19 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLPhotoBase : ITLTransferable, INotifyPropertyChanged
+#if !PORTABLE
+    public partial interface TLPhotoBase : ITLTransferable, INotifyPropertyChanged
+    {
+        TLInputPhotoBase ToInputPhoto();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLPhotoBase : ITLTransferable, INotifyPropertyChanged
     {
         public virtual TLInputPhotoBase ToInputPhoto()
         {
@@ -94,19 +106,29 @@ namespace Telegram.Api.TL
         #endregion
     }
 
-    public partial class TLPhoto
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLPhoto
     {
         public override TLInputPhotoBase ToInputPhoto()
         {
-            return new TLInputPhoto { Id = Id, AccessHash = AccessHash };
+            return new ITLInputPhoto { Id = Id, AccessHash = AccessHash };
         }
     }
 
-    public partial class TLPhotoEmpty
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLPhotoEmpty
     {
         public override TLInputPhotoBase ToInputPhoto()
         {
-            return new TLInputPhotoEmpty();
+            return new ITLInputPhotoEmpty();
         }
     }
 }

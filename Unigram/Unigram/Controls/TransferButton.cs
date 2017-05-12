@@ -83,7 +83,7 @@ namespace Unigram.Controls
 
         private IDownloadManager ChooseDownloadManager(TLDocument document)
         {
-            if (TLMessage.IsVideo(document))
+            if (document.IsVideo())
             {
                 return UnigramContainer.Current.ResolveType<IDownloadVideoFileManager>();
             }
@@ -93,7 +93,7 @@ namespace Unigram.Controls
 
         private IUploadManager ChooseUploadManager(TLDocument document)
         {
-            if (TLMessage.IsVideo(document))
+            if (document.IsVideo())
             {
                 return UnigramContainer.Current.ResolveType<IUploadVideoManager>();
             }
@@ -168,7 +168,7 @@ namespace Unigram.Controls
             var fileName = document.GetFileName();
             if (File.Exists(FileUtils.GetTempFileName(fileName)))
             {
-                if (TLMessage.IsVideo(document))
+                if (document.IsVideo())
                 {
                     return "\uE102";
                 }

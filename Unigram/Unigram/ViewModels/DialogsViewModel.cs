@@ -78,7 +78,7 @@ namespace Unigram.ViewModels
         {
             var lastDate = 0;
             var lastMsgId = 0;
-            var lastPeer = (TLInputPeerBase)new TLInputPeerEmpty();
+            var lastPeer = (TLInputPeerBase)new ITLInputPeerEmpty();
 
             var last = Items.LastOrDefault();
             if (last != null && last.TopMessageItem != null)
@@ -88,15 +88,15 @@ namespace Unigram.ViewModels
 
                 if (last.Peer is TLPeerUser)
                 {
-                    lastPeer = new TLInputPeerUser { UserId = last.Peer.Id };
+                    lastPeer = new ITLInputPeerUser { UserId = last.Peer.Id };
                 }
                 else if (last.Peer is TLPeerChat)
                 {
-                    lastPeer = new TLInputPeerChat { ChatId = last.Peer.Id };
+                    lastPeer = new ITLInputPeerChat { ChatId = last.Peer.Id };
                 }
                 else if (last.Peer is TLPeerChannel)
                 {
-                    lastPeer = new TLInputPeerChannel { ChannelId = last.Peer.Id };
+                    lastPeer = new ITLInputPeerChannel { ChannelId = last.Peer.Id };
                 }
             }
 
@@ -168,7 +168,7 @@ namespace Unigram.ViewModels
         {
             var pinned = Items.Where(x => x.IsPinned).Select(x => x.ToInputPeer());
 
-            var response = await ProtoService.ReorderPinnedDialogsAsync(new TLVector<TLInputPeerBase>(pinned), true);
+            var response = await ProtoService.ReorderPinnedDialogsAsync(new ITLVector<TLInputPeerBase>(pinned), true);
             if (response.IsSucceeded)
             {
 
@@ -184,7 +184,7 @@ namespace Unigram.ViewModels
 
         public void Handle(ChannelUpdateCompletedEventArgs args)
         {
-            var dialog = CacheService.GetDialog(new TLPeerChannel { Id = args.ChannelId });
+            var dialog = CacheService.GetDialog(new ITLPeerChannel { Id = args.ChannelId });
             if (dialog != null)
             {
                 var message = dialog.Messages.FirstOrDefault();
@@ -500,7 +500,7 @@ namespace Unigram.ViewModels
         //    var firstName = user.FirstName;
         //    var dateTime = TLUtils.ToDateTime(update.Date);
         //    var message = string.Format(messageFormat, firstName, dateTime.ToString("dddd"), dateTime.ToString("M"), dateTime.ToString("t"), update.Device, update.Location);
-        //    var serviceMessage = TLUtils.GetMessage(777000, new TLPeerUser { UserId = SettingsHelper.UserId }, TLMessageState.Confirmed, false, true, update.Date, message, new TLMessageMediaEmpty(), TLLong.Random(), null);
+        //    var serviceMessage = TLUtils.GetMessage(777000, new ITLPeerUser { UserId = SettingsHelper.UserId }, TLMessageState.Confirmed, false, true, update.Date, message, new ITLMessageMediaEmpty(), TLLong.Random(), null);
         //    serviceMessage.Id = 0;
 
         //    CacheService.SyncMessage(serviceMessage, x => { });
@@ -875,10 +875,10 @@ namespace Unigram.ViewModels
                     var dialog = parent.FirstOrDefault(x => x.Peer.TypeId == TLType.PeerUser && x.Id == result.Id);
                     if (dialog == null)
                     {
-                        simple.Add(new TLDialog
+                        simple.Add(new ITLDialog
                         {
                             With = result,
-                            Peer = new TLPeerUser { UserId = result.Id }
+                            Peer = new ITLPeerUser { UserId = result.Id }
                         });
                     }
                 }
@@ -931,7 +931,7 @@ namespace Unigram.ViewModels
 
         private async Task<KeyedList<string, TLObject>> SearchMessagesAsync(string query)
         {
-            var result = await ProtoService.SearchGlobalAsync(query, 0, new TLInputPeerEmpty(), 0, 20);
+            var result = await ProtoService.SearchGlobalAsync(query, 0, new ITLInputPeerEmpty(), 0, 20);
             if (result.IsSucceeded)
             {
                 KeyedList<string, TLObject> parent;
@@ -961,9 +961,9 @@ namespace Unigram.ViewModels
 
                         foreach (var message in result.Result.Messages.OfType<TLMessageCommonBase>())
                         {
-                            var peer = message.IsOut || message.ToId is TLPeerChannel || message.ToId is TLPeerChat ? message.ToId : new TLPeerUser { UserId = message.FromId.Value };
+                            var peer = message.IsOut || message.ToId is TLPeerChannel || message.ToId is TLPeerChat ? message.ToId : new ITLPeerUser { UserId = message.FromId.Value };
                             var with = result.Result.Users.FirstOrDefault(x => x.Id == peer.Id) ?? (ITLDialogWith)result.Result.Chats.FirstOrDefault(x => x.Id == peer.Id);
-                            var item = new TLDialog
+                            var item = new ITLDialog
                             {
                                 IsSearchResult = true,
                                 TopMessage = message.Id,

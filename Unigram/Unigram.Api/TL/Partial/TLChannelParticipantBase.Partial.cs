@@ -7,7 +7,22 @@ using Telegram.Api.Services.Cache;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLChannelParticipantBase
+#if !PORTABLE
+    public partial interface TLChannelParticipantBase
+    {
+        TLUser User { get; }
+
+        bool IsCreator { get; }
+        bool IsEditor { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal 
+#else
+    public
+#endif
+    abstract partial class ITLChannelParticipantBase
     {
         private TLUser _user;
         public TLUser User

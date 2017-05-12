@@ -4,7 +4,12 @@ using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-	public abstract partial class TLBotInlineResultBase : TLObject, ITLBotInlineResultBase
+#if !PORTABLE
+	internal
+	#else
+	public
+#endif
+	abstract partial class ITLBotInlineResultBase : ITLObject, TLBotInlineResultBase
 	{
 		public String Id { get; set; }
 		public String Type { get; set; }
@@ -13,8 +18,9 @@ namespace Telegram.Api.TL
 		public TLBotInlineMessageBase SendMessage { get; set; }
 	}
 
+#if !PORTABLE
 	[Guid(0x540a2843, 0x7bb2, 0x02b0, 0x93, 0xdf, 0xae, 0xec, 0x54, 0x84, 0x8c, 0x96)]
-	public partial interface ITLBotInlineResultBase : TLObject
+	public partial interface TLBotInlineResultBase : TLObject
 	{
 		String Id { get; set; }
 		String Type { get; set; }
@@ -22,4 +28,6 @@ namespace Telegram.Api.TL
 		String Description { get; set; }
 		TLBotInlineMessageBase SendMessage { get; set; }
 	}
+#endif
+
 }

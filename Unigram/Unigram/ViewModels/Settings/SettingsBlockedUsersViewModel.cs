@@ -74,7 +74,7 @@ namespace Unigram.ViewModels.Settings
             }
             else
             {
-                var response = await ProtoService.GetFullUserAsync(new TLInputUser { UserId = message.UserId, AccessHash = 0 });
+                var response = await ProtoService.GetFullUserAsync(new ITLInputUser { UserId = message.UserId, AccessHash = 0 });
                 if (response.IsSucceeded)
                 {
                     Execute.BeginOnUIThread(() =>
@@ -95,7 +95,7 @@ namespace Unigram.ViewModels.Settings
         public RelayCommand BlockCommand => new RelayCommand(BlockExecute);
         private void BlockExecute()
         {
-            NavigationService.Navigate(typeof(SettingsBlockUserPage), new TLVector<TLUserBase>(Items));
+            NavigationService.Navigate(typeof(SettingsBlockUserPage), new ITLVector<TLUserBase>(Items));
         }
 
         public RelayCommand<TLUser> UnblockCommand => new RelayCommand<TLUser>(UnblockExecute);
@@ -148,7 +148,7 @@ namespace Unigram.ViewModels.Settings
                     return result;
                 }
 
-                return new TLUser[0];
+                return new ITLUser[0];
             }
         }
     }

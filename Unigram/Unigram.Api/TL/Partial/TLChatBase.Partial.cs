@@ -8,7 +8,19 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLChatBase : ITLDialogWith, ITLInputPeer
+#if !PORTABLE
+    public partial interface TLChatBase : ITLDialogWith
+    {
+        void Update(TLChatBase chat);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLChatBase : ITLDialogWith
     {
         //#region Full chat information
 
@@ -46,7 +58,7 @@ namespace Telegram.Api.TL
             //}
         }
 
-        #region Add
+#region Add
         public virtual string DisplayName
         {
             get
@@ -62,7 +74,7 @@ namespace Telegram.Api.TL
                 return this;
             }
         }
-        #endregion
+#endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         public override void RaisePropertyChanged(string propertyName)
@@ -81,7 +93,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLChat
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChat
     {
         public override string DisplayName
         {
@@ -93,16 +110,21 @@ namespace Telegram.Api.TL
 
         public override TLInputPeerBase ToInputPeer()
         {
-            return new TLInputPeerChat { ChatId = Id };
+            return new ITLInputPeerChat { ChatId = Id };
         }
 
         public override TLPeerBase ToPeer()
         {
-            return new TLPeerChat { ChatId = Id };
+            return new ITLPeerChat { ChatId = Id };
         }
     }
 
-    public partial class TLChatForbidden
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChatForbidden
     {
         public override string DisplayName
         {
@@ -114,16 +136,21 @@ namespace Telegram.Api.TL
 
         public override TLInputPeerBase ToInputPeer()
         {
-            return new TLInputPeerChat { ChatId = Id };
+            return new ITLInputPeerChat { ChatId = Id };
         }
 
         public override TLPeerBase ToPeer()
         {
-            return new TLPeerChat { ChatId = Id };
+            return new ITLPeerChat { ChatId = Id };
         }
     }
 
-    public partial class TLChannel
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChannel
     {
         public override string DisplayName
         {
@@ -135,16 +162,21 @@ namespace Telegram.Api.TL
 
         public override TLInputPeerBase ToInputPeer()
         {
-            return new TLInputPeerChannel { ChannelId = Id, AccessHash = AccessHash.Value };
+            return new ITLInputPeerChannel { ChannelId = Id, AccessHash = AccessHash.Value };
         }
 
         public override TLPeerBase ToPeer()
         {
-            return new TLPeerChannel { ChannelId = Id };
+            return new ITLPeerChannel { ChannelId = Id };
         }
     }
 
-    public partial class TLChannelForbidden
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLChannelForbidden
     {
         public override string DisplayName
         {
@@ -156,12 +188,12 @@ namespace Telegram.Api.TL
 
         public override TLInputPeerBase ToInputPeer()
         {
-            return new TLInputPeerChannel { ChannelId = Id, AccessHash = AccessHash };
+            return new ITLInputPeerChannel { ChannelId = Id, AccessHash = AccessHash };
         }
 
         public override TLPeerBase ToPeer()
         {
-            return new TLPeerChannel { ChannelId = Id };
+            return new ITLPeerChannel { ChannelId = Id };
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Unigram.ViewModels
             }
             else
             {
-                var response = await ProtoService.GetUsersAsync(new TLVector<TLInputUserBase> { new TLInputUserSelf() });
+                var response = await ProtoService.GetUsersAsync(new ITLVector<TLInputUserBase> { new ITLInputUserSelf() });
                 if (response.IsSucceeded)
                 {
                     var user = response.Result.FirstOrDefault() as TLUser;
@@ -68,7 +68,7 @@ namespace Unigram.ViewModels
         public RelayCommand<StorageFile> EditPhotoCommand => new RelayCommand<StorageFile>(EditPhotoExecute);
         private async void EditPhotoExecute(StorageFile file)
         {
-            var fileLocation = new TLFileLocation
+            var fileLocation = new ITLFileLocation
             {
                 VolumeId = TLLong.Random(),
                 LocalId = TLInt.Random(),

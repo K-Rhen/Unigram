@@ -7,7 +7,25 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLDocument
+#if !PORTABLE
+    public partial interface TLDocument
+    {
+        string FileName { get; }
+        string Emoticon { get; }
+        TLInputStickerSetBase StickerSet { get; }
+        string Duration { get; }
+        string GetFileName();
+        string GetFileExtension();
+        TLInputDocumentFileLocation ToInputFileLocation();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLDocument
     {
         public string FileName
         {
@@ -109,7 +127,7 @@ namespace Telegram.Api.TL
 
         public TLInputDocumentFileLocation ToInputFileLocation()
         {
-            return new TLInputDocumentFileLocation
+            return new ITLInputDocumentFileLocation
             {
                 AccessHash = AccessHash,
                 Id = Id

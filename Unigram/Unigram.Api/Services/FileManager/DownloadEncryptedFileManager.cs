@@ -207,7 +207,7 @@ namespace Telegram.Api.Services.FileManager
             {
                 var tsc = new TaskCompletionSource<DownloadableItem>();
 
-                var inputFile = new TLInputEncryptedFileLocation { Id = file.Id, AccessHash = file.AccessHash };
+                var inputFile = new ITLInputEncryptedFileLocation { Id = file.Id, AccessHash = file.AccessHash };
                 var downloadableItem = GetDownloadableItem(file.DCId, inputFile, null, file.Size);
                 downloadableItem.Callback = tsc;
                 downloadableItem.Progress = progress;
@@ -238,7 +238,7 @@ namespace Telegram.Api.Services.FileManager
 
         public void DownloadFile(TLEncryptedFile file, TLObject owner)
         {
-            var inputFile = new TLInputEncryptedFileLocation { Id = file.Id, AccessHash = file.AccessHash };
+            var inputFile = new ITLInputEncryptedFileLocation { Id = file.Id, AccessHash = file.AccessHash };
             var downloadableItem = GetDownloadableItem(file.DCId, inputFile, owner, file.Size);
 
             lock (_itemsSyncRoot)

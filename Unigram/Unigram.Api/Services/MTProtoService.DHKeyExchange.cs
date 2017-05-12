@@ -28,21 +28,21 @@ namespace Telegram.Api.Services
 
         private void ReqPQAsync(TLInt128 nonce, Action<TLResPQ> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLReqPQ{ Nonce = nonce };
+            var obj = new ITLReqPQ{ Nonce = nonce };
 
             SendNonEncryptedMessage("req_pq", obj, callback, faultCallback);
         }
 
         private void ReqDHParamsAsync(TLInt128 nonce, TLInt128 serverNonce, byte[] p, byte[] q, long publicKeyFingerprint, byte[] encryptedData, Action<TLServerDHParamsBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLReqDHParams { Nonce = nonce, ServerNonce = serverNonce, P = p, Q = q, PublicKeyFingerprint = publicKeyFingerprint, EncryptedData = encryptedData };
+            var obj = new ITLReqDHParams { Nonce = nonce, ServerNonce = serverNonce, P = p, Q = q, PublicKeyFingerprint = publicKeyFingerprint, EncryptedData = encryptedData };
 
             SendNonEncryptedMessage("req_DH_params", obj, callback, faultCallback);
         }
 
         public void SetClientDHParamsAsync(TLInt128 nonce, TLInt128 serverNonce, byte[] encryptedData, Action<TLSetClientDHParamsAnswerBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLSetClientDHParams { Nonce = nonce, ServerNonce = serverNonce, EncryptedData = encryptedData };
+            var obj = new ITLSetClientDHParams { Nonce = nonce, ServerNonce = serverNonce, EncryptedData = encryptedData };
 
             SendNonEncryptedMessage("set_client_DH_params", obj, callback, faultCallback);
         }
@@ -52,19 +52,19 @@ namespace Telegram.Api.Services
         public void InitAsync(Action<Tuple<byte[], long?, long?>> callback, Action<TLRPCError> faultCallback = null)
         {
             var authTime = Stopwatch.StartNew();
-            var newNonce = TLInt256.Random();
+            var newNonce = ITLInt256.Random();
 
 #if LOG_REGISTRATION
             TLUtils.WriteLog("Start ReqPQ");
 #endif
-            var nonce = TLInt128.Random();
+            var nonce = ITLInt128.Random();
             ReqPQAsync(nonce,
                 resPQ =>
                 {
                     var serverNonce = resPQ.ServerNonce;
                     if (nonce != resPQ.Nonce)
                     {
-                        var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
+                        var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
 #if LOG_REGISTRATION
                         TLUtils.WriteLog("Stop ReqPQ with error " + error);
 #endif
@@ -106,7 +106,7 @@ namespace Telegram.Api.Services
                         {
                             if (nonce != serverDHParams.Nonce)
                             {
-                                var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
+                                var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
 #if LOG_REGISTRATION
                                 TLUtils.WriteLog("Stop ReqDHParams with error " + error);
 #endif
@@ -116,7 +116,7 @@ namespace Telegram.Api.Services
                             }
                             if (serverNonce != serverDHParams.ServerNonce)
                             {
-                                var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect server_nonce" };
+                                var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect server_nonce" };
 #if LOG_REGISTRATION
                                 TLUtils.WriteLog("Stop ReqDHParams with error " + error);
 #endif
@@ -133,7 +133,7 @@ namespace Telegram.Api.Services
                             var serverDHParamsOk = serverDHParams as TLServerDHParamsOk;
                             if (serverDHParamsOk == null)
                             {
-                                var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "Incorrect serverDHParams " + serverDHParams.GetType() };
+                                var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "Incorrect serverDHParams " + serverDHParams.GetType() };
                                 if (faultCallback != null) faultCallback(error);
                                 TLUtils.WriteLine(error.ToString());
 #if LOG_REGISTRATION
@@ -148,13 +148,13 @@ namespace Telegram.Api.Services
                             var decryptedAnswerWithHash = Utils.AesIge(serverDHParamsOk.EncryptedAnswer, aesParams.Item1, aesParams.Item2, false);
 
                             //var position = 0;
-                            //var serverDHInnerData = (TLServerDHInnerData)new TLServerDHInnerData().FromBytes(decryptedAnswerWithHash.Skip(20).ToArray(), ref position);
+                            //var serverDHInnerData = (TLServerDHInnerData)new ITLServerDHInnerData().FromBytes(decryptedAnswerWithHash.Skip(20).ToArray(), ref position);
                             var serverDHInnerData = TLFactory.From<TLServerDHInnerData>(decryptedAnswerWithHash.Skip(20).ToArray());
 
                             var sha1 = Utils.ComputeSHA1(serverDHInnerData.ToArray());
                             if (!TLUtils.ByteArraysEqual(sha1, decryptedAnswerWithHash.Take(20).ToArray()))
                             {
-                                var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect sha1 TLServerDHInnerData" };
+                                var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect sha1 TLServerDHInnerData" };
 #if LOG_REGISTRATION
                                 TLUtils.WriteLog("Stop ReqDHParams with error " + error);
 #endif
@@ -165,7 +165,7 @@ namespace Telegram.Api.Services
 
                             if (!TLUtils.CheckPrime(serverDHInnerData.DHPrime, serverDHInnerData.G))
                             {
-                                var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect (p, q) pair" };
+                                var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect (p, q) pair" };
 #if LOG_REGISTRATION
                                 TLUtils.WriteLog("Stop ReqDHParams with error " + error);
 #endif
@@ -176,7 +176,7 @@ namespace Telegram.Api.Services
 
                             if (!TLUtils.CheckGaAndGb(serverDHInnerData.GA, serverDHInnerData.DHPrime))
                             {
-                                var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect g_a" };
+                                var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect g_a" };
 #if LOG_REGISTRATION
                                 TLUtils.WriteLog("Stop ReqDHParams with error " + error);
 #endif
@@ -190,7 +190,7 @@ namespace Telegram.Api.Services
 
                             var gbBytes = GetGB(bBytes, serverDHInnerData.G, serverDHInnerData.DHPrime);
 
-                            var clientDHInnerData = new TLClientDHInnerData
+                            var clientDHInnerData = new ITLClientDHInnerData
                             {
                                 Nonce = resPQ.Nonce,
                                 ServerNonce = resPQ.ServerNonce,
@@ -207,7 +207,7 @@ namespace Telegram.Api.Services
                                 {
                                     if (nonce != dhGen.Nonce)
                                     {
-                                        var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
+                                        var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
 #if LOG_REGISTRATION
                                         TLUtils.WriteLog("Stop SetClientDHParams with error " + error);
 #endif
@@ -217,7 +217,7 @@ namespace Telegram.Api.Services
                                     }
                                     if (serverNonce != dhGen.ServerNonce)
                                     {
-                                        var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "incorrect server_nonce" };
+                                        var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect server_nonce" };
 #if LOG_REGISTRATION
                                         TLUtils.WriteLog("Stop SetClientDHParams with error " + error);
 #endif
@@ -229,7 +229,7 @@ namespace Telegram.Api.Services
                                     var dhGenOk = dhGen as TLDHGenOk;
                                     if (dhGenOk == null)
                                     {
-                                        var error = new TLRPCError { ErrorCode = 404, ErrorMessage = "Incorrect dhGen " + dhGen.GetType() };
+                                        var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "Incorrect dhGen " + dhGen.GetType() };
                                         if (faultCallback != null) faultCallback(error);
                                         TLUtils.WriteLine(error.ToString());
 #if LOG_REGISTRATION
@@ -324,7 +324,7 @@ namespace Telegram.Api.Services
             var p = pqPair.Item1.FromUInt64();
             var q = pqPair.Item2.FromUInt64();
 
-            var innerData1 = new TLPQInnerData
+            var innerData1 = new ITLPQInnerData
             {
                 NewNonce = newNonce,
                 Nonce = resPQ.Nonce,

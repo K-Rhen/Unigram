@@ -574,7 +574,7 @@ namespace Unigram.Common
                         var service = WindowWrapper.Current().NavigationServices.GetByFrameId("Main");
                         if (service != null)
                         {
-                            service.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = user.Id });
+                            service.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = user.Id });
                         }
                     }
                 }
@@ -587,7 +587,7 @@ namespace Unigram.Common
                     var service = WindowWrapper.Current().NavigationServices.GetByFrameId("Main");
                     if (service != null)
                     {
-                        service.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = user.Id });
+                        service.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = user.Id });
                     }
                 }
             }
@@ -599,14 +599,14 @@ namespace Unigram.Common
                     var user = InMemoryCacheService.Current.GetUser((string)data) as TLUser;
                     if (user != null && user.HasAccessHash)
                     {
-                        service.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = user.Id });
+                        service.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = user.Id });
                         return;
                     }
 
                     var channel = InMemoryCacheService.Current.GetChannel((string)data);
                     if (channel != null && channel.HasAccessHash)
                     {
-                        service.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = channel.Id });
+                        service.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = channel.Id });
                         return;
                     }
 
@@ -709,7 +709,7 @@ namespace Unigram.Common
             //    if (index != -1)
             //    {
             //        var mention = navstr.Substring(navstr.IndexOf('@'));
-            //        //var user = ServiceLocator.Current.GetInstance<ICacheService>().GetUser(new TLInt(userId));
+            //        //var user = ServiceLocator.Current.GetInstance<ICacheService>().GetUser(new ITLInt(userId));
             //        //if (user != null)
             //        //{
             //        //    var navigationService = WindowWrapper.Current().NavigationServices["Main"];
@@ -833,7 +833,7 @@ namespace Unigram.Common
 
         private static async void NavigateToStickerSet(string text)
         {
-            await StickerSetView.Current.ShowAsync(new TLInputStickerSetShortName { ShortName = text });
+            await StickerSetView.Current.ShowAsync(new ITLInputStickerSetShortName { ShortName = text });
         }
 
         private static async void NavigateToUsername(IMTProtoService mtProtoService, string username, string accessToken, string post, string game)
@@ -851,15 +851,15 @@ namespace Unigram.Common
                     //}
                     //TelegramViewBase.NavigateToUser(user, accessToken, pageKind);
 
-                    service.Navigate(typeof(DialogPage), new TLPeerUser { UserId = user.Id });
+                    service.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = user.Id });
 
                     //if (user.IsBot)
                     //{
-                    //    service.Navigate(typeof(DialogPage), new TLPeerUser { UserId = user.Id });
+                    //    service.Navigate(typeof(DialogPage), new ITLPeerUser { UserId = user.Id });
                     //}
                     //else
                     //{
-                    //    service.Navigate(typeof(UserDetailsPage), new TLPeerUser { UserId = user.Id });
+                    //    service.Navigate(typeof(UserDetailsPage), new ITLPeerUser { UserId = user.Id });
                     //}
 
                     return;
@@ -871,11 +871,11 @@ namespace Unigram.Common
                     {
                         if (int.TryParse(post, out int postId))
                         {
-                            service.Navigate(typeof(DialogPage), Tuple.Create((TLPeerBase)new TLPeerChannel { ChannelId = channel.Id }, postId));
+                            service.Navigate(typeof(DialogPage), Tuple.Create((TLPeerBase)new ITLPeerChannel { ChannelId = channel.Id }, postId));
                         }
                         else
                         {
-                            service.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = channel.Id });
+                            service.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = channel.Id });
                         }
                         return;
                     }
@@ -921,7 +921,7 @@ namespace Unigram.Common
                         await new MessageDialog("No user found with this username", "Argh!").ShowQueuedAsync();
                     }
 
-                    //mtProtoService.ResolveUsernameAsync(new TLString(username), delegate (TLResolvedPeer result)
+                    //mtProtoService.ResolveUsernameAsync(new ITLString(username), delegate (TLResolvedPeer result)
                     //{
                     //    Telegram.Api.Helpers.Execute.BeginOnUIThread(delegate
                     //    {
@@ -991,11 +991,11 @@ namespace Unigram.Common
                     {
                         if (inviteAlready.Chat is TLChat)
                         {
-                            service.Navigate(typeof(DialogPage), new TLPeerChat { ChatId = inviteAlready.Chat.Id });
+                            service.Navigate(typeof(DialogPage), new ITLPeerChat { ChatId = inviteAlready.Chat.Id });
                         }
                         else if (inviteAlready.Chat is TLChannel)
                         {
-                            service.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = inviteAlready.Chat.Id });
+                            service.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = inviteAlready.Chat.Id });
                         }
                     }
                 }
@@ -1024,7 +1024,7 @@ namespace Unigram.Common
                                         var service = WindowWrapper.Current().NavigationServices.GetByFrameId("Main");
                                         if (service != null)
                                         {
-                                            service.Navigate(typeof(DialogPage), new TLPeerChannel { ChannelId = channel.Id });
+                                            service.Navigate(typeof(DialogPage), new ITLPeerChannel { ChannelId = channel.Id });
                                         }
                                     }
                                     else
@@ -1032,7 +1032,7 @@ namespace Unigram.Common
                                         var service = WindowWrapper.Current().NavigationServices.GetByFrameId("Main");
                                         if (service != null)
                                         {
-                                            service.Navigate(typeof(DialogPage), new TLPeerChat { ChatId = chatBase.Id });
+                                            service.Navigate(typeof(DialogPage), new ITLPeerChat { ChatId = chatBase.Id });
                                         }
                                     }
                                 }
@@ -1199,30 +1199,30 @@ namespace Unigram.Common
                     var navstr = match.Value.Substring(index);
                     if (navstr.StartsWith("@"))
                     {
-                        entities.Add(new TLMessageEntityMention { Offset = match.Index + index, Length = match.Length - index });
+                        entities.Add(new ITLMessageEntityMention { Offset = match.Index + index, Length = match.Length - index });
                     }
                     else if (navstr.StartsWith("#"))
                     {
-                        entities.Add(new TLMessageEntityHashtag { Offset = match.Index + index, Length = match.Length - index });
+                        entities.Add(new ITLMessageEntityHashtag { Offset = match.Index + index, Length = match.Length - index });
                     }
                     else if (navstr.StartsWith("/"))
                     {
-                        entities.Add(new TLMessageEntityBotCommand { Offset = match.Index + index, Length = match.Length - index });
+                        entities.Add(new ITLMessageEntityBotCommand { Offset = match.Index + index, Length = match.Length - index });
                     }
                     else if (!navstr.Contains("@"))
                     {
-                        entities.Add(new TLMessageEntityUrl { Offset = match.Index + index, Length = match.Length - index });
+                        entities.Add(new ITLMessageEntityUrl { Offset = match.Index + index, Length = match.Length - index });
                     }
                     else
                     {
-                        entities.Add(new TLMessageEntityEmail { Offset = match.Index + index, Length = match.Length - index });
+                        entities.Add(new ITLMessageEntityEmail { Offset = match.Index + index, Length = match.Length - index });
                     }
                 }
             }
 
             if (message.Entities == null && entities.Count > 0)
             {
-                message.Entities = new TLVector<TLMessageEntityBase>(entities);
+                message.Entities = new ITLVector<TLMessageEntityBase>(entities);
                 message.HasEntities = true;
             }
             else if (message.Entities != null && entities.Count > 0)
@@ -1236,7 +1236,7 @@ namespace Unigram.Common
 
         public static void CopyToClipboard(TLMessage message)
         {
-            CopyToClipboard(message.Message, (IEnumerable<TLMessageEntityBase>)message.Entities ?? new TLMessageEntityBase[0]);
+            CopyToClipboard(message.Message, (IEnumerable<TLMessageEntityBase>)message.Entities ?? new ITLMessageEntityBase[0]);
         }
 
         public static void CopyToClipboard(string message, IEnumerable<TLMessageEntityBase> entities)

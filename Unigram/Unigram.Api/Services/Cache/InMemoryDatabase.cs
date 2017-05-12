@@ -418,10 +418,10 @@ namespace Telegram.Api.Services.Cache
         //            }
 
 
-        //            TLPeerBase peer = new TLPeerEncryptedChat { Id = message.ChatId };
+        //            TLPeerBase peer = new ITLPeerEncryptedChat { Id = message.ChatId };
         //            int index = 0;
 
-        //            var addingDialog = new TLEncryptedDialog
+        //            var addingDialog = new ITLEncryptedDialog
         //            {
         //                Peer = peer,
         //                With = with,
@@ -513,7 +513,7 @@ namespace Telegram.Api.Services.Cache
                     var dialogBase = GetDialog(commonMessage);
                     if (dialogBase != null)
                     {
-                        var dialog = dialogBase as TLDialog;
+                        var dialog = dialogBase as ITLDialog;
                         if (dialog != null)
                         {
                             if (dialog.Messages.Count > 0)
@@ -582,7 +582,7 @@ namespace Telegram.Api.Services.Cache
                             }
                             else
                             {
-                                peer = new TLPeerUser { Id = commonMessage.FromId ?? 0 };
+                                peer = new ITLPeerUser { Id = commonMessage.FromId ?? 0 };
                             }
                         }
 
@@ -605,7 +605,7 @@ namespace Telegram.Api.Services.Cache
 
                         if (peer is TLPeerChannel)
                         {
-                            addingDialog = new TLDialog
+                            addingDialog = new ITLDialog
                             {
                                 Flags = 0,
                                 Peer = peer,
@@ -623,7 +623,7 @@ namespace Telegram.Api.Services.Cache
                         }
                         else
                         {
-                            addingDialog = new TLDialog
+                            addingDialog = new ITLDialog
                             {
                                 Flags = 0,
                                 Peer = peer,
@@ -822,7 +822,7 @@ namespace Telegram.Api.Services.Cache
             {
                 return;
             }
-            var dialog = GetDialog(commonMessage) as TLDialog;
+            var dialog = GetDialog(commonMessage) as ITLDialog;
 
             if (dialog != null)
             {
@@ -833,7 +833,7 @@ namespace Telegram.Api.Services.Cache
                     if (oldMessage != null)
                     {
                         dialog.Messages.Remove(oldMessage);
-                        TLDialog.InsertMessageInOrder(dialog.Messages, cachedMessage);
+                        ITLDialog.InsertMessageInOrder(dialog.Messages, cachedMessage);
                         if (dialog.TopMessage == null || dialog.TopMessage < cachedMessage.Id)
                         {
                             dialog._topMessageItem = cachedMessage;
@@ -1053,16 +1053,16 @@ namespace Telegram.Api.Services.Cache
         //            dialog.Messages.Clear();
 
         //            var chat = (TLEncryptedChatCommon)InMemoryCacheService.Instance.GetEncryptedChat(chatId);
-        //            var lastMessage = new TLDecryptedMessageService
+        //            var lastMessage = new ITLDecryptedMessageService
         //            {
         //                RandomId = TLLong.Random(),
         //                RandomBytes = TLString.Random(Constants.MinRandomBytesLength),
         //                ChatId = chat.Id,
-        //                Action = new TLDecryptedMessageActionEmpty(),
+        //                Action = new ITLDecryptedMessageActionEmpty(),
         //                FromId = MTProtoService.Instance.CurrentUserId,
         //                Date = chat.Date,
-        //                Out = new TLBool(false),
-        //                Unread = new TLBool(false),
+        //                Out = new ITLBool(false),
+        //                Unread = new ITLBool(false),
         //                Status = TLMessageState.Read
         //            };
         //            dialog.Messages.Add(lastMessage);
@@ -1181,7 +1181,7 @@ namespace Telegram.Api.Services.Cache
                 TLMessageBase topMessage = null;
                 lock (_dialogsSyncRoot)
                 {
-                    var dialog = dialogBase as TLDialog;
+                    var dialog = dialogBase as ITLDialog;
                     if (dialog != null)
                     {
                         for (var i = 0; i < messageIds.Count; i++)
@@ -1259,7 +1259,7 @@ namespace Telegram.Api.Services.Cache
 
             lock (_dialogsSyncRoot)
             {
-                var dialog = dialogBase as TLDialog;
+                var dialog = dialogBase as ITLDialog;
                 if (dialog != null)
                 {
                     for (var j = 0; j < dialog.Messages.Count; j++)
@@ -1361,7 +1361,7 @@ namespace Telegram.Api.Services.Cache
 
             lock (_dialogsSyncRoot)
             {
-                var dialog = dialogBase as TLDialog;
+                var dialog = dialogBase as ITLDialog;
                 if (dialog != null)
                 {
                     for (var i = 0; i < messages.Count; i++)
@@ -1614,7 +1614,7 @@ namespace Telegram.Api.Services.Cache
             TLMessageBase topMessage = null;
             lock (_dialogsSyncRoot)
             {
-                var dialog = dialogBase as TLDialog;
+                var dialog = dialogBase as ITLDialog;
                 if (dialog != null)
                 {
                     var updatedIndex = -1;
@@ -1638,14 +1638,14 @@ namespace Telegram.Api.Services.Cache
                         var messageCommon = dialog.Messages[updatedIndex] as TLMessageCommonBase;
                         if (messageCommon != null)
                         {
-                            var clearHistoryMessage = new TLMessageService();
+                            var clearHistoryMessage = new ITLMessageService();
                             clearHistoryMessage.Flags = 0;
                             clearHistoryMessage.Id = messageCommon.Id;
                             clearHistoryMessage.FromId = messageCommon.FromId ?? new int?(-1);
                             clearHistoryMessage.ToId = messageCommon.ToId;
                             clearHistoryMessage.Date = messageCommon.Date;
                             clearHistoryMessage.IsOut = messageCommon.IsOut;
-                            clearHistoryMessage.Action = new TLMessageActionHistoryClear();
+                            clearHistoryMessage.Action = new ITLMessageActionHistoryClear();
 
                             dialog.Messages[updatedIndex] = clearHistoryMessage;
                         }
@@ -1714,7 +1714,7 @@ namespace Telegram.Api.Services.Cache
                 //Execute.BeginOnThreadPool(() =>
                 {
                     var usersTimer = Stopwatch.StartNew();
-                    var users = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLUserBase>>(_usersSyncRoot, UsersMTProtoFileName) ?? new TLVector<TLUserBase>();
+                    var users = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLUserBase>>(_usersSyncRoot, UsersMTProtoFileName) ?? new ITLVector<TLUserBase>();
                     Log(string.Format("Open users time ({0}) : {1}", users.Count, usersTimer.Elapsed));
 
                     UsersContext = new Context<TLUserBase>(users, x => x.Id);
@@ -1728,7 +1728,7 @@ namespace Telegram.Api.Services.Cache
                 //Execute.BeginOnThreadPool(() =>
                 {
                     var chatsTimer = Stopwatch.StartNew();
-                    var chats = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLChatBase>>(_chatsSyncRoot, ChatsMTProtoFileName) ?? new TLVector<TLChatBase>();
+                    var chats = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLChatBase>>(_chatsSyncRoot, ChatsMTProtoFileName) ?? new ITLVector<TLChatBase>();
                     Log(string.Format("Open chats time ({0}) : {1}", chats.Count, chatsTimer.Elapsed));
 
                     ChatsContext = new Context<TLChatBase>(chats, x => x.Id);
@@ -1743,7 +1743,7 @@ namespace Telegram.Api.Services.Cache
                 //var t4 = Task.Factory.StartNew(() =>
                 //{
                 //    var encryptedChatsTimer = Stopwatch.StartNew();
-                //    var encryptedChats = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLEncryptedChatBase>>(_encryptedChatsSyncRoot, EncryptedChatsMTProtoFileName) ?? new TLVector<TLEncryptedChatBase>();
+                //    var encryptedChats = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLEncryptedChatBase>>(_encryptedChatsSyncRoot, EncryptedChatsMTProtoFileName) ?? new ITLVector<TLEncryptedChatBase>();
                 //    Log(string.Format("Open encrypted chats time ({0}) : {1}", encryptedChats.Count, encryptedChatsTimer.Elapsed));
 
                 //    EncryptedChatsContext = new Context<TLEncryptedChatBase>(encryptedChats, x => x.Index);
@@ -1757,7 +1757,7 @@ namespace Telegram.Api.Services.Cache
                 var t5 = Task.Factory.StartNew(() =>
                 {
                     var dialogsTimer = Stopwatch.StartNew();
-                    var dialogs = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLDialog>>(_dialogsFileSyncRoot, DialogsMTProtoFileName) ?? new TLVector<TLDialog>();
+                    var dialogs = TLUtils.OpenObjectFromMTProtoFile<TLVector<TLDialog>>(_dialogsFileSyncRoot, DialogsMTProtoFileName) ?? new ITLVector<TLDialog>();
                     Dialogs = new ObservableCollection<TLDialog>(dialogs);
                     Log(string.Format("Open dialogs time ({0}) : {1}", dialogs.Count, dialogsTimer.Elapsed));
 
@@ -1817,7 +1817,7 @@ namespace Telegram.Api.Services.Cache
                         //}
                         //else
                         {
-                            var dialog = (TLDialog) d;
+                            var dialog = (ITLDialog) d;
                             var peer = dialog.Peer;
                             if (peer is TLPeerUser)
                             {
@@ -1878,7 +1878,7 @@ namespace Telegram.Api.Services.Cache
                             {
                                 dialog.TopMessage = topMessage.Value;
                             }
-                            foreach (var message in dialog.Messages)
+                            foreach (ITLMessageBase message in dialog.Messages)
                             {
                                 if (message.State == TLMessageState.Sending
                                     || message.State == TLMessageState.Compressing)
@@ -1986,13 +1986,13 @@ namespace Telegram.Api.Services.Cache
                 }
             }
 
-            var mtProtoDialogs = new TLVector<TLDialog>(dialogs);
+            var mtProtoDialogs = new ITLVector<TLDialog>(dialogs);
             TLUtils.SaveObjectToMTProtoFile(_dialogsFileSyncRoot, DialogsMTProtoFileName, mtProtoDialogs);
             //var usersTimer = Stopwatch.StartNew();
-            TLUtils.SaveObjectToMTProtoFile(_usersSyncRoot, UsersMTProtoFileName, new TLVector<TLUserBase>(UsersContext.Values.ToList()));
+            TLUtils.SaveObjectToMTProtoFile(_usersSyncRoot, UsersMTProtoFileName, new ITLVector<TLUserBase>(UsersContext.Values.ToList()));
             //TLUtils.WritePerformance(string.Format("Commit users time ({0}) : {1}", UsersContext.Count, usersTimer.Elapsed));
-            TLUtils.SaveObjectToMTProtoFile(_chatsSyncRoot, ChatsMTProtoFileName, new TLVector<TLChatBase>(ChatsContext.Values.ToList()));
-            // TODO: Encrypted TLUtils.SaveObjectToMTProtoFile(_encryptedChatsSyncRoot, EncryptedChatsMTProtoFileName, new TLVector<TLEncryptedChatBase> { Items = EncryptedChatsContext.Values.ToList() });
+            TLUtils.SaveObjectToMTProtoFile(_chatsSyncRoot, ChatsMTProtoFileName, new ITLVector<TLChatBase>(ChatsContext.Values.ToList()));
+            // TODO: Encrypted TLUtils.SaveObjectToMTProtoFile(_encryptedChatsSyncRoot, EncryptedChatsMTProtoFileName, new ITLVector<TLEncryptedChatBase> { Items = EncryptedChatsContext.Values.ToList() });
 
             HasChanges = false;
 

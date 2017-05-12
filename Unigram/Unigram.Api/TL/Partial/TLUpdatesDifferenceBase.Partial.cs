@@ -6,16 +6,33 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLUpdatesDifferenceBase
+#if !PORTABLE
+    public partial interface TLUpdatesDifferenceBase
+    {
+        TLUpdatesDifferenceBase GetEmptyObject();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLUpdatesDifferenceBase
     {
         public abstract TLUpdatesDifferenceBase GetEmptyObject();
     }
 
-    public partial class TLUpdatesDifferenceEmpty
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatesDifferenceEmpty
     {
         public override TLUpdatesDifferenceBase GetEmptyObject()
         {
-            return new TLUpdatesDifferenceEmpty
+            return new ITLUpdatesDifferenceEmpty
             {
                 Date = Date,
                 Seq = Seq
@@ -23,44 +40,59 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdatesDifferenceTooLong
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatesDifferenceTooLong
     {
         public override TLUpdatesDifferenceBase GetEmptyObject()
         {
-            return new TLUpdatesDifferenceTooLong
+            return new ITLUpdatesDifferenceTooLong
             {
                 Pts = Pts
             };
         }
     }
 
-    public partial class TLUpdatesDifference
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatesDifference
     {
         public override TLUpdatesDifferenceBase GetEmptyObject()
         {
-            return new TLUpdatesDifference
+            return new ITLUpdatesDifference
             {
-                NewMessages = new TLVector<TLMessageBase>(NewMessages.Count),
-                NewEncryptedMessages = new TLVector<TLEncryptedMessageBase>(NewEncryptedMessages.Count),
-                OtherUpdates = new TLVector<TLUpdateBase>(OtherUpdates.Count),
-                Users = new TLVector<TLUserBase>(Users.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
+                NewMessages = new ITLVector<TLMessageBase>(NewMessages.Count),
+                NewEncryptedMessages = new ITLVector<TLEncryptedMessageBase>(NewEncryptedMessages.Count),
+                OtherUpdates = new ITLVector<TLUpdateBase>(OtherUpdates.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
                 State = State
             };
         }
     }
 
-    public partial class TLUpdatesDifferenceSlice
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatesDifferenceSlice
     {
         public override TLUpdatesDifferenceBase GetEmptyObject()
         {
-            return new TLUpdatesDifferenceSlice
+            return new ITLUpdatesDifferenceSlice
             {
-                NewMessages = new TLVector<TLMessageBase>(NewMessages.Count),
-                NewEncryptedMessages = new TLVector<TLEncryptedMessageBase>(NewEncryptedMessages.Count),
-                OtherUpdates = new TLVector<TLUpdateBase>(OtherUpdates.Count),
-                Users = new TLVector<TLUserBase>(Users.Count),
-                Chats = new TLVector<TLChatBase>(Chats.Count),
+                NewMessages = new ITLVector<TLMessageBase>(NewMessages.Count),
+                NewEncryptedMessages = new ITLVector<TLEncryptedMessageBase>(NewEncryptedMessages.Count),
+                OtherUpdates = new ITLVector<TLUpdateBase>(OtherUpdates.Count),
+                Users = new ITLVector<TLUserBase>(Users.Count),
+                Chats = new ITLVector<TLChatBase>(Chats.Count),
                 IntermediateState = IntermediateState
             };
         }

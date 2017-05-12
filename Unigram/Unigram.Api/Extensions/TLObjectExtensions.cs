@@ -20,7 +20,7 @@ namespace Telegram.Api
     //    {
     //        if (obj == null)
     //        {
-    //            output.Write(new TLNull().ToBytes());
+    //            output.Write(new ITLNull().ToBytes());
     //        }
     //        else
     //        {
@@ -45,7 +45,7 @@ namespace Telegram.Api
     //    {
     //        if (obj == null)
     //        {
-    //            output.Write(new TLNull().ToBytes());
+    //            output.Write(new ITLNull().ToBytes());
     //        }
     //        else
     //        {
@@ -57,7 +57,7 @@ namespace Telegram.Api
     //    {
     //        if (obj == null)
     //        {
-    //            output.Write(new TLNull().ToBytes());
+    //            output.Write(new ITLNull().ToBytes());
     //        }
     //        else
     //        {

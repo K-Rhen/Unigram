@@ -162,7 +162,7 @@ namespace Unigram.Views
                     prgSendStatus.Value = 40;
 
                     // Send the correct message according to the send content
-                    var message = TLUtils.GetMessage(SettingsHelper.UserId, dialog.Peer, TLMessageState.Sending, true, true, date, txtMessage.Text.Trim(), new TLMessageMediaEmpty(), TLLong.Random(), 0);
+                    var message = TLUtils.GetMessage(SettingsHelper.UserId, dialog.Peer, TLMessageState.Sending, true, true, date, txtMessage.Text.Trim(), new ITLMessageMediaEmpty(), TLLong.Random(), 0);
                     prgSendStatus.Value = 50;
                     cacheService.SyncSendingMessage(message, null, async (m) =>
                     {

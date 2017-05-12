@@ -22,10 +22,10 @@ namespace Unigram.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Media = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new TLInputMessagesFilterPhotoVideo());
-            Files = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new TLInputMessagesFilterDocument());
-            Links = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new TLInputMessagesFilterUrl());
-            Music = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new TLInputMessagesFilterMusic());
+            Media = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new ITLInputMessagesFilterPhotoVideo());
+            Files = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new ITLInputMessagesFilterDocument());
+            Links = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new ITLInputMessagesFilterUrl());
+            Music = new MediaCollection(ProtoService, (TLInputPeerBase)parameter, new ITLInputMessagesFilterMusic());
 
             RaisePropertyChanged(() => Media);
             RaisePropertyChanged(() => Files);

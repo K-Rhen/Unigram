@@ -43,7 +43,7 @@ namespace Unigram.ViewModels
                         {
                             if (set is TLStickerSetCovered covered)
                             {
-                                return new TLStickerSetMultiCovered { Set = covered.Set, Covers = new TLVector<TLDocumentBase> { covered.Cover } };
+                                return new ITLStickerSetMultiCovered { Set = covered.Set, Covers = new ITLVector<TLDocumentBase> { covered.Cover } };
                             }
 
                             return set as TLStickerSetMultiCovered;
@@ -53,9 +53,9 @@ namespace Unigram.ViewModels
                 }
                 else
                 {
-                    //StickerSet = new TLStickerSet();
+                    //StickerSet = new ITLStickerSet();
                     //Items.Clear();
-                    //Items.Add(new TLMessagesStickerSet { Set = new TLStickerSet { Title = "Sticker pack not found." } });
+                    //Items.Add(new ITLMessagesStickerSet { Set = new ITLStickerSet { Title = "Sticker pack not found." } });
 
                     //IsLoading = false;
                 }

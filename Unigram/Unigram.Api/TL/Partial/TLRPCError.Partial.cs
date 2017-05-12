@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLRPCError
+#if !PORTABLE
+    internal
+#else
+	public
+#endif
+    partial class ITLRPCError
     {
         public override string ToString()
         {

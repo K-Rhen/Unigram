@@ -75,7 +75,7 @@ namespace Unigram.ViewModels
 
             if (With is TLChannel channel && channel.HasAccessHash && channel.AccessHash.HasValue)
             {
-                var response = await ProtoService.GetFullChannelAsync(new TLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash.Value });
+                var response = await ProtoService.GetFullChannelAsync(new ITLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash.Value });
                 if (response.IsSucceeded)
                 {
                     var channelFull = response.Result.FullChat as TLChannelFull;
@@ -90,7 +90,7 @@ namespace Unigram.ViewModels
                             var config = CacheService.GetConfig();
                             if (config != null && channelFull.ParticipantsCount <= config.ChatSizeMax)
                             {
-                                var participants = await ProtoService.GetParticipantsAsync(new TLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash.Value }, null, 0, config.ChatSizeMax);
+                                var participants = await ProtoService.GetParticipantsAsync(new ITLInputChannel { ChannelId = channel.Id, AccessHash = channel.AccessHash.Value }, null, 0, config.ChatSizeMax);
                                 if (participants.IsSucceeded)
                                 {
                                     var count = 0;
@@ -327,7 +327,7 @@ namespace Unigram.ViewModels
 
             Execute.BeginOnUIThread(() =>
             {
-                var index = TLDialog.InsertMessageInOrder(Messages, messageCommon);
+                var index = ITLDialog.InsertMessageInOrder(Messages, messageCommon);
                 if (index != -1)
                 {
                     var message = messageCommon as TLMessage;

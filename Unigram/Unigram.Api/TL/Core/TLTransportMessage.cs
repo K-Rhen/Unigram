@@ -4,16 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 
 namespace Telegram.Api.TL
 {
-    public class TLTransportMessage : TLContainerTransportMessage
+    internal class ITLTransportMessage : ITLContainerTransportMessage, TLTransportMessage
     {
         public Int64 Salt { get; set; }
         public Int64 SessionId { get; set; }
 
-        public TLTransportMessage() { }
-        public TLTransportMessage(TLBinaryReader from)
+        public ITLTransportMessage() { }
+        public ITLTransportMessage(TLBinaryReader from)
         {
             Read(from);
         }
@@ -43,5 +44,12 @@ namespace Telegram.Api.TL
                 }
             }
         }
+    }
+
+    [Guid(0xf6d14faa, 0x9a04, 0x33c7, 0x13, 0xce, 0x62, 0x0c, 0xfb, 0xa7, 0x45, 0x1d)]
+    public interface TLTransportMessage : TLContainerTransportMessage
+    {
+        Int64 Salt { get; set; }
+        Int64 SessionId { get; set; }
     }
 }

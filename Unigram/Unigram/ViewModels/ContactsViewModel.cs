@@ -57,7 +57,7 @@ namespace Unigram.ViewModels
             //    Items.Add(user);
             //}
 
-            var contacts = new TLUser[0];
+            var contacts = new ITLUser[0];
 
             var input = string.Join(",", contacts.Select(x => x.Id).Union(new[] { SettingsHelper.UserId }).OrderBy(x => x));
             var hash = Utils.ComputeMD5(input);
@@ -115,7 +115,7 @@ namespace Unigram.ViewModels
             }
             else
             {
-                var response = await ProtoService.GetUsersAsync(new TLVector<TLInputUserBase> { new TLInputUserSelf() });
+                var response = await ProtoService.GetUsersAsync(new ITLVector<TLInputUserBase> { new ITLInputUserSelf() });
                 if (response.IsSucceeded)
                 {
                     var user = response.Result.FirstOrDefault() as TLUser;

@@ -9,7 +9,39 @@ using Telegram.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLUserBase : ITLReadMaxId, ITLDialogWith
+#if !PORTABLE
+    public partial interface TLUserBase : ITLReadMaxId, ITLDialogWith
+    {
+        TLContact Contact { get; set; }
+
+        long? ClientId { get; set; }
+
+        //#region UserFull information
+
+        //public TLContactsLink Link { get; set; }
+
+        //public TLPhotoBase ProfilePhoto { get; set; }
+
+        //public TLPeerNotifySettingsBase NotifySettings { get; set; }
+
+        //public virtual bool IsBlocked { get; set; }
+
+        //public TLBotInfo BotInfo { get; set; }
+
+        //#endregion
+
+        void Update(TLUserBase user);
+
+        string FullName { get; }
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLUserBase : ITLReadMaxId, ITLDialogWith
     {
         public TLContact Contact { get; set; }
 
@@ -77,7 +109,7 @@ namespace Telegram.Api.TL
             }
         }
 
-        #region Add
+#region Add
         public virtual string FullName
         {
             get
@@ -215,7 +247,7 @@ namespace Telegram.Api.TL
             }
         }
 
-        #endregion
+#endregion
 
         public int ReadInboxMaxId
         {

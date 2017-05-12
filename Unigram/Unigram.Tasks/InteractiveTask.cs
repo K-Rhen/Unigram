@@ -54,20 +54,20 @@ namespace Unigram.Tasks
                         var inputPeer = default(TLInputPeerBase);
                         if (data.ContainsKey("from_id"))
                         {
-                            inputPeer = new TLInputPeerUser { UserId = int.Parse(data["from_id"]), AccessHash = long.Parse(data["access_hash"]) };
+                            inputPeer = new ITLInputPeerUser { UserId = int.Parse(data["from_id"]), AccessHash = long.Parse(data["access_hash"]) };
                         }
                         else if (data.ContainsKey("channel_id"))
                         {
-                            inputPeer = new TLInputPeerChannel { ChannelId = int.Parse(data["channel_id"]), AccessHash = long.Parse(data["access_hash"]) };
+                            inputPeer = new ITLInputPeerChannel { ChannelId = int.Parse(data["channel_id"]), AccessHash = long.Parse(data["access_hash"]) };
                             replyToMsgId = data.ContainsKey("msg_id") ? int.Parse(data["msg_id"]) : 0;
                         }
                         else if (data.ContainsKey("chat_id"))
                         {
-                            inputPeer = new TLInputPeerChat { ChatId = int.Parse(data["chat_id"]) };
+                            inputPeer = new ITLInputPeerChat { ChatId = int.Parse(data["chat_id"]) };
                             replyToMsgId = data.ContainsKey("msg_id") ? int.Parse(data["msg_id"]) : 0;
                         }
 
-                        var obj = new TLMessagesSendMessage { Peer = inputPeer, ReplyToMsgId = replyToMsgId, Message = text, IsBackground = true, RandomId = TLLong.Random() };
+                        var obj = new ITLMessagesSendMessage { Peer = inputPeer, ReplyToMsgId = replyToMsgId, Message = text, IsBackground = true, RandomId = TLLong.Random() };
 
                         protoService.SendInformativeMessageInternal<TLUpdatesBase>("messages.sendMessage", obj, result =>
                         {
@@ -84,7 +84,7 @@ namespace Unigram.Tasks
                         });
 
                         //var date = TLUtils.DateToUniversalTimeTLInt(protoService.ClientTicksDelta, DateTime.Now);
-                        //var message = TLUtils.GetMessage(SettingsHelper.UserId, inputPeer, TLMessageState.Sending, true, true, date, text, new TLMessageMediaEmpty(), TLLong.Random(), replyToMsgId);
+                        //var message = TLUtils.GetMessage(SettingsHelper.UserId, inputPeer, TLMessageState.Sending, true, true, date, text, new ITLMessageMediaEmpty(), TLLong.Random(), replyToMsgId);
                         //var history = cacheService.GetHistory(inputPeer, 1);
 
                         //cacheService.SyncSendingMessage(message, null, async (m) =>

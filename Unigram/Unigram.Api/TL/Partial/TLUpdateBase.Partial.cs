@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public abstract partial class TLUpdateBase
+#if !PORTABLE
+    public partial interface TLUpdateBase
+    {
+        IList<int> GetPts();
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    abstract partial class ITLUpdateBase
     {
         public virtual IList<int> GetPts()
         {
@@ -14,7 +26,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateNewMessage
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateNewMessage
     {
         public override IList<int> GetPts()
         {
@@ -22,7 +39,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChatParticipantAdd
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChatParticipantAdd
     {
         public override IList<int> GetPts()
         {
@@ -30,7 +52,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChatParticipantDelete
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChatParticipantDelete
     {
         public override IList<int> GetPts()
         {
@@ -38,7 +65,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateNewEncryptedMessage
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateNewEncryptedMessage
     {
         public override IList<int> GetPts()
         {
@@ -46,7 +78,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateEncryption
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateEncryption
     {
         public override IList<int> GetPts()
         {
@@ -54,7 +91,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateMessageID
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateMessageID
     {
         public override IList<int> GetPts()
         {
@@ -62,7 +104,7 @@ namespace Telegram.Api.TL
         }
     }
 
-    //public partial class TLUpdateReadMessages
+    //internal partial class ITLUpdateReadMessages
     //{
     //    public override IList<int> GetPts()
     //    {
@@ -70,7 +112,12 @@ namespace Telegram.Api.TL
     //    }
     //}
 
-    public partial class TLUpdateReadMessagesContents
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateReadMessagesContents
     {
         public override IList<int> GetPts()
         {
@@ -78,7 +125,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateReadHistoryInbox
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateReadHistoryInbox
     {
         public override IList<int> GetPts()
         {
@@ -86,7 +138,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateReadHistoryOutbox
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateReadHistoryOutbox
     {
         public override IList<int> GetPts()
         {
@@ -94,7 +151,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateEncryptedMessagesRead
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateEncryptedMessagesRead
     {
         public override IList<int> GetPts()
         {
@@ -102,7 +164,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateDeleteMessages
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateDeleteMessages
     {
         public override IList<int> GetPts()
         {
@@ -110,7 +177,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateUserTyping
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateUserTyping
     {
         public override IList<int> GetPts()
         {
@@ -118,7 +190,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChatUserTyping
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChatUserTyping
     {
         public override IList<int> GetPts()
         {
@@ -126,7 +203,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateEncryptedChatTyping
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateEncryptedChatTyping
     {
         public override IList<int> GetPts()
         {
@@ -134,7 +216,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChatParticipants
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChatParticipants
     {
         public override IList<int> GetPts()
         {
@@ -142,7 +229,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateUserStatus
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateUserStatus
     {
         public override IList<int> GetPts()
         {
@@ -150,7 +242,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateUserName
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateUserName
     {
         public override IList<int> GetPts()
         {
@@ -158,7 +255,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateUserPhoto
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateUserPhoto
     {
         public override IList<int> GetPts()
         {
@@ -166,7 +268,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateContactRegistered
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateContactRegistered
     {
         public override IList<int> GetPts()
         {
@@ -174,7 +281,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateContactLink
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateContactLink
     {
         public override IList<int> GetPts()
         {
@@ -182,7 +294,7 @@ namespace Telegram.Api.TL
         }
     }
 
-    //public partial class TLUpdateActivation
+    //internal partial class ITLUpdateActivation
     //{
     //    public override IList<int> GetPts()
     //    {
@@ -190,7 +302,7 @@ namespace Telegram.Api.TL
     //    }
     //}
 
-    //public partial class TLUpdateNewAuthorization
+    //internal partial class ITLUpdateNewAuthorization
     //{
     //    public override IList<int> GetPts()
     //    {
@@ -198,7 +310,12 @@ namespace Telegram.Api.TL
     //    }
     //}
 
-    public partial class TLUpdateDCOptions
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateDCOptions
     {
         public override IList<int> GetPts()
         {
@@ -206,7 +323,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateNotifySettings
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateNotifySettings
     {
         public override IList<int> GetPts()
         {
@@ -214,7 +336,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateUserBlocked
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateUserBlocked
     {
         public override IList<int> GetPts()
         {
@@ -222,7 +349,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdatePrivacy
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdatePrivacy
     {
         public override IList<int> GetPts()
         {
@@ -230,7 +362,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateUserPhone
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateUserPhone
     {
         public override IList<int> GetPts()
         {
@@ -238,7 +375,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateServiceNotification
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateServiceNotification
     {
         public override IList<int> GetPts()
         {
@@ -246,7 +388,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateWebPage
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateWebPage
     {
         public override IList<int> GetPts()
         {
@@ -254,7 +401,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChannelTooLong
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChannelTooLong
     {
         public override IList<int> GetPts()
         {
@@ -262,7 +414,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateNewChannelMessage : ITLMultiChannelPts
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateNewChannelMessage : ITLMultiChannelPts
     {
         public override IList<int> GetPts()
         {
@@ -270,7 +427,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateReadChannelInbox
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateReadChannelInbox
     {
         public override IList<int> GetPts()
         {
@@ -278,7 +440,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateDeleteChannelMessages : ITLMultiChannelPts
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateDeleteChannelMessages : ITLMultiChannelPts
     {
         public override IList<int> GetPts()
         {
@@ -286,7 +453,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateEditChannelMessage : ITLMultiChannelPts
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateEditChannelMessage : ITLMultiChannelPts
     {
         public override IList<int> GetPts()
         {
@@ -294,7 +466,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChannelMessageViews
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChannelMessageViews
     {
         public override IList<int> GetPts()
         {
@@ -302,7 +479,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChannel
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChannel
     {
         public override IList<int> GetPts()
         {
@@ -310,7 +492,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChatAdmins
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChatAdmins
     {
         public override IList<int> GetPts()
         {
@@ -318,7 +505,12 @@ namespace Telegram.Api.TL
         }
     }
 
-    public partial class TLUpdateChatParticipantAdmin
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLUpdateChatParticipantAdmin
     {
         public override IList<int> GetPts()
         {

@@ -78,8 +78,8 @@ namespace Unigram.ViewModels
             var confirm = await TLMessageDialog.ShowAsync("Do you want to delete this photo?", "Delete", "OK", "Cancel");
             if (confirm == ContentDialogResult.Primary && _selectedItem is GalleryPhotoItem item)
             {
-                //var response = await ProtoService.UpdateProfilePhotoAsync(new TLInputPhotoEmpty());
-                var response = await ProtoService.DeletePhotosAsync(new TLVector<TLInputPhotoBase> { new TLInputPhoto { Id = item.Photo.Id, AccessHash = item.Photo.AccessHash } });
+                //var response = await ProtoService.UpdateProfilePhotoAsync(new ITLInputPhotoEmpty());
+                var response = await ProtoService.DeletePhotosAsync(new ITLVector<TLInputPhotoBase> { new ITLInputPhoto { Id = item.Photo.Id, AccessHash = item.Photo.AccessHash } });
                 if (response.IsSucceeded)
                 {
                     var index = Items.IndexOf(item);
@@ -143,7 +143,7 @@ namespace Unigram.ViewModels
 
         public override TLInputStickeredMediaBase ToInputStickeredMedia()
         {
-            return new TLInputStickeredMediaPhoto { Id = _photo.ToInputPhoto() };
+            return new ITLInputStickeredMediaPhoto { Id = _photo.ToInputPhoto() };
         }
     }
 
@@ -179,7 +179,7 @@ namespace Unigram.ViewModels
         {
             get
             {
-                return TLMessage.IsVideo(_document);
+                return _document.IsVideo();
             }
         }
 
@@ -187,7 +187,7 @@ namespace Unigram.ViewModels
 
         public override TLInputStickeredMediaBase ToInputStickeredMedia()
         {
-            return new TLInputStickeredMediaDocument { Id = _document.ToInputDocument() };
+            return new ITLInputStickeredMediaDocument { Id = _document.ToInputDocument() };
         }
 
         public override Uri GetVideoSource()

@@ -8,7 +8,22 @@ using Telegram.Api.Helpers;
 
 namespace Telegram.Api.TL
 {
-    public partial class TLAuthorization : INotifyPropertyChanged
+#if !PORTABLE
+    public partial interface TLAuthorization
+    {
+        bool IsCurrent { get; }
+        bool IsOfficialApp { get; }
+
+        void Update(TLAuthorization authorization);
+    }
+#endif
+
+#if !PORTABLE
+    internal
+#else
+    public
+#endif
+    partial class ITLAuthorization : INotifyPropertyChanged
     {
         public bool IsCurrent
         {

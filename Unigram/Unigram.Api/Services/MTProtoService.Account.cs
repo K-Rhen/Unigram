@@ -28,7 +28,7 @@ namespace Telegram.Api.Services
 
         public void GetTmpPasswordAsync(byte[] hash, int period, Action<TLAccountTmpPassword> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountGetTmpPassword { PasswordHash = hash, Period = period };
+            var obj = new ITLAccountGetTmpPassword { PasswordHash = hash, Period = period };
 
             const string caption = "account.getTmpPassword";
             SendInformativeMessage(caption, obj, callback, faultCallback);
@@ -36,42 +36,42 @@ namespace Telegram.Api.Services
 
         public void ReportPeerAsync(TLInputPeerBase peer, TLReportReasonBase reason, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountReportPeer { Peer = peer, Reason = reason };
+            var obj = new ITLAccountReportPeer { Peer = peer, Reason = reason };
 
             SendInformativeMessage("account.reportPeer", obj, callback, faultCallback);
         }
 
 	    public void DeleteAccountAsync(string reason, Action<bool> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountDeleteAccount { Reason = reason };
+            var obj = new ITLAccountDeleteAccount { Reason = reason };
 
             SendInformativeMessage("account.deleteAccount", obj, callback, faultCallback);
 	    }
 
         public void UpdateDeviceLockedAsync(int period, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountUpdateDeviceLocked { Period = period };
+            var obj = new ITLAccountUpdateDeviceLocked { Period = period };
 
             SendInformativeMessage("account.updateDeviceLocked", obj, callback, faultCallback);
         }
 
 	    public void GetWallpapersAsync(Action<TLVector<TLWallPaperBase>> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountGetWallPapers();
+            var obj = new ITLAccountGetWallPapers();
 
             SendInformativeMessage("account.getWallpapers", obj, callback, faultCallback);
 	    }
 
         public void SendChangePhoneCodeAsync(string phoneNumber, bool? currentNumber, Action<TLAuthSentCode> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountSendChangePhoneCode { Flags = 0, PhoneNumber = phoneNumber, CurrentNumber = currentNumber };
+            var obj = new ITLAccountSendChangePhoneCode { Flags = 0, PhoneNumber = phoneNumber, CurrentNumber = currentNumber };
 
             SendInformativeMessage("account.sendChangePhoneCode", obj, callback, faultCallback);
         }
 
         public void ChangePhoneAsync(string phoneNumber, string phoneCodeHash, string phoneCode, Action<TLUserBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountChangePhone { PhoneNumber = phoneNumber, PhoneCodeHash = phoneCodeHash, PhoneCode = phoneCode };
+            var obj = new ITLAccountChangePhone { PhoneNumber = phoneNumber, PhoneCodeHash = phoneCodeHash, PhoneCode = phoneCode };
 
             SendInformativeMessage<TLUserBase>("account.changePhone", obj, user => _cacheService.SyncUser(user, callback), faultCallback);
         }
@@ -80,7 +80,7 @@ namespace Telegram.Api.Services
         {
             if (_activeTransport.AuthKey == null)
             {
-                faultCallback?.Invoke(new TLRPCError
+                faultCallback?.Invoke(new ITLRPCError
                 {
                     ErrorCode = 404,
                     ErrorMessage = "Service is not initialized to register device"
@@ -89,7 +89,7 @@ namespace Telegram.Api.Services
                 return;
             }
 
-            var obj = new TLAccountRegisterDevice
+            var obj = new ITLAccountRegisterDevice
             {
                 //TokenType = 3,   // MPNS
                 //TokenType = 8,   // WNS
@@ -116,7 +116,7 @@ namespace Telegram.Api.Services
 
         public void UnregisterDeviceAsync(int tokenType, string token, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountUnregisterDevice
+            var obj = new ITLAccountUnregisterDevice
             {
                 //TokenType = 3,   // MPNS
                 //TokenType = 8,   // WNS
@@ -143,7 +143,7 @@ namespace Telegram.Api.Services
 
         public void GetNotifySettingsAsync(TLInputNotifyPeerBase peer, Action<TLPeerNotifySettingsBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountGetNotifySettings { Peer = peer };
+            var obj = new ITLAccountGetNotifySettings { Peer = peer };
 
             SendInformativeMessage("account.getNotifySettings", obj, callback, faultCallback);
         }
@@ -152,7 +152,7 @@ namespace Telegram.Api.Services
         {
             Execute.ShowDebugMessage(string.Format("account.resetNotifySettings"));
 
-            var obj = new TLAccountResetNotifySettings();
+            var obj = new ITLAccountResetNotifySettings();
 
             SendInformativeMessage("account.resetNotifySettings", obj, callback, faultCallback);
         }
@@ -161,14 +161,14 @@ namespace Telegram.Api.Services
         {
             //Execute.ShowDebugMessage(string.Format("account.updateNotifySettings peer=[{0}] settings=[{1}]", peer, settings));
 
-            var obj = new TLAccountUpdateNotifySettings { Peer = peer, Settings = settings };
+            var obj = new ITLAccountUpdateNotifySettings { Peer = peer, Settings = settings };
 
             SendInformativeMessage("account.updateNotifySettings", obj, callback, faultCallback);
         }
 
         public void UpdateProfileAsync(string firstName, string lastName, string about, Action<TLUserBase> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountUpdateProfile { FirstName = firstName, LastName = lastName, About = about };
+            var obj = new ITLAccountUpdateProfile { FirstName = firstName, LastName = lastName, About = about };
 
             SendInformativeMessage<TLUserBase>("account.updateProfile", obj, result => _cacheService.SyncUser(result, callback), faultCallback);
         }
@@ -187,7 +187,7 @@ namespace Telegram.Api.Services
 #endif
             }
 #endif
-            var obj = new TLAccountUpdateStatus { Offline = offline };
+            var obj = new ITLAccountUpdateStatus { Offline = offline };
             System.Diagnostics.Debug.WriteLine("account.updateStatus offline=" + offline);
             SendInformativeMessage("account.updateStatus", obj, callback, faultCallback);
         }
@@ -221,105 +221,105 @@ namespace Telegram.Api.Services
 
 	    public void CheckUsernameAsync(string username, Action<bool> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountCheckUsername { Username = username };
+            var obj = new ITLAccountCheckUsername { Username = username };
 
             SendInformativeMessage("account.checkUsername", obj, callback, faultCallback);
 	    }
 
 	    public void UpdateUsernameAsync(string username, Action<TLUserBase> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountUpdateUsername { Username = username };
+            var obj = new ITLAccountUpdateUsername { Username = username };
 
             SendInformativeMessage("account.updateUsername", obj, callback, faultCallback);
 	    }
 
 	    public void GetAccountTTLAsync(Action<TLAccountDaysTTL> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountGetAccountTTL();
+            var obj = new ITLAccountGetAccountTTL();
 
             SendInformativeMessage("account.getAccountTTL", obj, callback, faultCallback);
 	    }
 
         public void SetAccountTTLAsync(TLAccountDaysTTL ttl, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountSetAccountTTL { TTL = ttl};
+            var obj = new ITLAccountSetAccountTTL { TTL = ttl};
 
             SendInformativeMessage("account.setAccountTTL", obj, callback, faultCallback);
         }
 
         public void DeleteAccountTTLAsync(string reason, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountDeleteAccount { Reason = reason };
+            var obj = new ITLAccountDeleteAccount { Reason = reason };
 
             SendInformativeMessage("account.deleteAccount", obj, callback, faultCallback);
         }
 
         public void GetPrivacyAsync(TLInputPrivacyKeyBase key, Action<TLAccountPrivacyRules> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountGetPrivacy { Key = key };
+            var obj = new ITLAccountGetPrivacy { Key = key };
 
             SendInformativeMessage("account.getPrivacy", obj, callback, faultCallback);
         }
 
         public void SetPrivacyAsync(TLInputPrivacyKeyBase key, TLVector<TLInputPrivacyRuleBase> rules, Action<TLAccountPrivacyRules> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountSetPrivacy { Key = key, Rules = rules };
+            var obj = new ITLAccountSetPrivacy { Key = key, Rules = rules };
 
             SendInformativeMessage("account.setPrivacy", obj, callback, faultCallback);
         }
 
         public void GetAuthorizationsAsync(Action<TLAccountAuthorizations> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountGetAuthorizations();
+            var obj = new ITLAccountGetAuthorizations();
 
             SendInformativeMessage("account.getAuthorizations", obj, callback, faultCallback);
         }
 
         public void ResetAuthorizationAsync(long hash, Action<bool> callback, Action<TLRPCError> faultCallback = null)
         {
-            var obj = new TLAccountResetAuthorization { Hash = hash };
+            var obj = new ITLAccountResetAuthorization { Hash = hash };
 
             SendInformativeMessage("account.resetAuthorization", obj, callback, faultCallback);
         }
 
 	    public void GetPasswordAsync(Action<TLAccountPasswordBase> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountGetPassword();
+            var obj = new ITLAccountGetPassword();
 
             SendInformativeMessage("account.getPassword", obj, callback, faultCallback);
 	    }
 
 	    public void GetPasswordSettingsAsync(byte[] currentPasswordHash, Action<TLAccountPasswordSettings> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountGetPasswordSettings { CurrentPasswordHash = currentPasswordHash };
+            var obj = new ITLAccountGetPasswordSettings { CurrentPasswordHash = currentPasswordHash };
 
             SendInformativeMessage("account.getPasswordSettings", obj, callback, faultCallback);
 	    }
 
 	    public void UpdatePasswordSettingsAsync(byte[] currentPasswordHash, TLAccountPasswordInputSettings newSettings, Action<bool> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountUpdatePasswordSettings { CurrentPasswordHash = currentPasswordHash, NewSettings = newSettings };
+            var obj = new ITLAccountUpdatePasswordSettings { CurrentPasswordHash = currentPasswordHash, NewSettings = newSettings };
 
             SendInformativeMessage("account.updatePasswordSettings", obj, callback, faultCallback);
 	    }
 
 	    public void CheckPasswordAsync(byte[] passwordHash, Action<TLAuthAuthorization> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAuthCheckPassword { PasswordHash = passwordHash };
+            var obj = new ITLAuthCheckPassword { PasswordHash = passwordHash };
 
             SendInformativeMessage("auth.checkPassword", obj, callback, faultCallback);
 	    }
 
 	    public void RequestPasswordRecoveryAsync(Action<TLAuthPasswordRecovery> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAuthRequestPasswordRecovery();
+            var obj = new ITLAuthRequestPasswordRecovery();
 
             SendInformativeMessage("auth.requestPasswordRecovery", obj, callback, faultCallback);
 	    }
 
 	    public void RecoverPasswordAsync(string code, Action<TLAuthAuthorization> callback, Action<TLRPCError> faultCallback = null)
 	    {
-	        var obj = new TLAuthRecoverPassword {Code = code};
+	        var obj = new ITLAuthRecoverPassword {Code = code};
 
             SendInformativeMessage("auth.recoverPassword", obj, callback, faultCallback);
 	    }
@@ -327,14 +327,14 @@ namespace Telegram.Api.Services
 
 	    public void ConfirmPhoneAsync(string phoneCodeHash, string phoneCode, Action<bool> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountConfirmPhone { PhoneCodeHash = phoneCodeHash, PhoneCode = phoneCode };
+            var obj = new ITLAccountConfirmPhone { PhoneCodeHash = phoneCodeHash, PhoneCode = phoneCode };
 
             SendInformativeMessage("account.confirmPhone", obj, callback, faultCallback);
 	    }
 
 	    public void SendConfirmPhoneCodeAsync(string hash, bool currentNumber, Action<TLAuthSentCode> callback, Action<TLRPCError> faultCallback = null)
 	    {
-            var obj = new TLAccountSendConfirmPhoneCode { Flags = 0, Hash = hash, CurrentNumber = currentNumber };
+            var obj = new ITLAccountSendConfirmPhoneCode { Flags = 0, Hash = hash, CurrentNumber = currentNumber };
 
             SendInformativeMessage("account.sendConfirmPhoneCode", obj, callback, faultCallback);
 	    }

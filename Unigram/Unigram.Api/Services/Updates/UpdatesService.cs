@@ -642,14 +642,14 @@ namespace Telegram.Api.Services.Updates
             var message = TLUtils.GetShortMessage(
                 updatesShortMessage.Id,
                 updatesShortMessage.UserId,
-                new TLPeerUser { Id = GetCurrentUserId() },
+                new ITLPeerUser { Id = GetCurrentUserId() },
                 updatesShortMessage.Date,
                 updatesShortMessage.Message);
 
             var shortMessage40 = updatesShortMessage as TLUpdateShortMessage;
             if (shortMessage40 != null)
             {
-                message.Flags = (TLMessage.Flag)(int)shortMessage40.Flags;
+                message.Flags = (TLMessageFlag)(int)shortMessage40.Flags;
                 message.FwdFrom = shortMessage40.FwdFrom;
                 //message.FwdFromId = shortMessage25.FwdFromId;
                 //message.FwdDate = shortMessage40.FwdDate;
@@ -677,7 +677,7 @@ namespace Telegram.Api.Services.Updates
 
             if (message.IsOut)
             {
-                message.ToId = new TLPeerUser { Id = updatesShortMessage.UserId };
+                message.ToId = new ITLPeerUser { Id = updatesShortMessage.UserId };
                 message.FromId = GetCurrentUserId();
             }
 
@@ -712,14 +712,14 @@ namespace Telegram.Api.Services.Updates
             var message = TLUtils.GetShortMessage(
                 updatesShortChatMessage.Id,
                 updatesShortChatMessage.FromId,
-                new TLPeerChat { Id = updatesShortChatMessage.ChatId },
+                new ITLPeerChat { Id = updatesShortChatMessage.ChatId },
                 updatesShortChatMessage.Date,
                 updatesShortChatMessage.Message);
 
             var shortChatMessage40 = updatesShortChatMessage as TLUpdateShortChatMessage;
             if (shortChatMessage40 != null)
             {
-                message.Flags = (TLMessage.Flag)(int)shortChatMessage40.Flags;
+                message.Flags = (TLMessageFlag)(int)shortChatMessage40.Flags;
                 message.FwdFrom = shortChatMessage40.FwdFrom;
                 //message.FwdFromId = shortChatMessage25.FwdFromId;
                 //message.FwdDate = shortChatMessage40.FwdDate;
@@ -1016,7 +1016,7 @@ namespace Telegram.Api.Services.Updates
                         var channel = result.Chats.FirstOrDefault() as TLChannel;
                         if (channel != null)
                         {
-                            GetParticipantAsync(channel.ToInputChannel(), new TLInputUserSelf(), 
+                            GetParticipantAsync(channel.ToInputChannel(), new ITLInputUserSelf(), 
                             result2 => 
                             {
                                 // sync users
@@ -1067,7 +1067,7 @@ namespace Telegram.Api.Services.Updates
                     if (message == null)
                     {
                         GetChannelMessagesAsync(channel.ToInputChannel(),
-                            new TLVector<int> {updateChannelPinnedMessage.Id},
+                            new ITLVector<int> {updateChannelPinnedMessage.Id},
                             messagesBase =>
                             {
                                 _cacheService.AddMessagesToContext(messagesBase, result =>
@@ -1228,7 +1228,7 @@ namespace Telegram.Api.Services.Updates
                     }
                     else
                     {
-                        peer = commonMessage.IsOut ? commonMessage.ToId : new TLPeerUser { Id = commonMessage.FromId ?? 0 };
+                        peer = commonMessage.IsOut ? commonMessage.ToId : new ITLPeerUser { Id = commonMessage.FromId ?? 0 };
                         readMaxId = _cacheService.GetUser(peer.Id) as ITLReadMaxId;
                     }
 
@@ -1486,7 +1486,7 @@ namespace Telegram.Api.Services.Updates
                     SetReadMaxId(readMaxId, updateReadChannelOutbox.MaxId, true);
                 }
 
-                var dialog = _cacheService.GetDialog(new TLPeerChannel { Id = updateReadChannelOutbox.ChannelId });
+                var dialog = _cacheService.GetDialog(new ITLPeerChannel { Id = updateReadChannelOutbox.ChannelId });
                 if (dialog != null)
                 {
                     var dialog53 = dialog as TLDialog;
@@ -1555,7 +1555,7 @@ namespace Telegram.Api.Services.Updates
                     SetReadMaxId(readMaxId, updateReadChannelInbox.MaxId, false);
                 }
 
-                var dialog = _cacheService.GetDialog(new TLPeerChannel { Id = updateReadChannelInbox.ChannelId });
+                var dialog = _cacheService.GetDialog(new ITLPeerChannel { Id = updateReadChannelInbox.ChannelId });
                 if (dialog != null)
                 {
                     var dialog53 = dialog as TLDialog;
@@ -1844,7 +1844,7 @@ namespace Telegram.Api.Services.Updates
 
                 if (user == null)
                 {
-                    GetFullUserAsync(new TLInputUser { UserId = contactRegistered.UserId, AccessHash = 0 },
+                    GetFullUserAsync(new ITLInputUser { UserId = contactRegistered.UserId, AccessHash = 0 },
                         userFull =>
                         {
                             // TODO: 06/05/2017
@@ -1995,8 +1995,8 @@ namespace Telegram.Api.Services.Updates
                 var message = _cacheService.GetMessage(updateWebPage.WebPage) as TLMessage;
                 if (message != null)
                 {
-                    // TODO: message._media = new TLMessageMediaWebPage { Webpage = updateWebPage.Webpage };
-                    message.Media = new TLMessageMediaWebPage { WebPage = updateWebPage.WebPage };
+                    // TODO: message._media = new ITLMessageMediaWebPage { Webpage = updateWebPage.Webpage };
+                    message.Media = new ITLMessageMediaWebPage { WebPage = updateWebPage.WebPage };
 
                     _cacheService.SyncMessage(message,
                         m =>
@@ -2214,14 +2214,14 @@ namespace Telegram.Api.Services.Updates
                         var channel = chatBase as TLChannel;
                         if (channel != null)
                         {
-                            channel.Photo = new TLChatPhoto { PhotoSmall = small.Location, PhotoBig = big.Location };
+                            channel.Photo = new ITLChatPhoto { PhotoSmall = small.Location, PhotoBig = big.Location };
                             channel.RaisePropertyChanged(() => channel.PhotoSelf);
                         }
 
                         var chat = chatBase as TLChat;
                         if (chat != null)
                         {
-                            chat.Photo = new TLChatPhoto { PhotoSmall = small.Location, PhotoBig = big.Location };
+                            chat.Photo = new ITLChatPhoto { PhotoSmall = small.Location, PhotoBig = big.Location };
                             chat.RaisePropertyChanged(() => chat.PhotoSelf);
                         }
                     }
@@ -2235,14 +2235,14 @@ namespace Telegram.Api.Services.Updates
                     var channel = chatBase as TLChannel;
                     if (channel != null)
                     {
-                        channel.Photo = new TLChatPhotoEmpty();
+                        channel.Photo = new ITLChatPhotoEmpty();
                         channel.RaisePropertyChanged(() => channel.PhotoSelf);
                     }
 
                     var chat = chatBase as TLChat;
                     if (chat != null)
                     {
-                        chat.Photo = new TLChatPhotoEmpty();
+                        chat.Photo = new ITLChatPhotoEmpty();
                         chat.RaisePropertyChanged(() => chat.PhotoSelf);
                     }
                 }
@@ -2634,16 +2634,16 @@ namespace Telegram.Api.Services.Updates
                 //{
                 //    _cacheService.SyncEncryptedChat(updateEncryption.Chat, result => _eventAggregator.Publish(result));
 
-                //    var message = new TLDecryptedMessageService
+                //    var message = new ITLDecryptedMessageService
                 //    {
                 //        RandomId = TLLong.Random(),
                 //        RandomBytes = TLString.Random(Constants.MinRandomBytesLength),
                 //        ChatId = chatRequested.Id,
-                //        Action = new TLDecryptedMessageActionEmpty(),
+                //        Action = new ITLDecryptedMessageActionEmpty(),
                 //        FromId = MTProtoService.Instance.CurrentUserId,
                 //        Date = chatRequested.Date,
-                //        Out = new TLBool(false),
-                //        Unread = new TLBool(false),
+                //        Out = new ITLBool(false),
+                //        Unread = new ITLBool(false),
                 //        Status = TLMessageState.Read
                 //    };
 
@@ -2681,7 +2681,7 @@ namespace Telegram.Api.Services.Updates
                 //            var keyFingerprint = new long?(BitConverter.ToInt64(keyHash, 12));
 
                 //            AcceptEncryptionAsync(
-                //                new TLInputEncryptedChat
+                //                new ITLInputEncryptedChat
                 //                {
                 //                    AccessHash = chatRequested.AccessHash,
                 //                    ChatId = chatRequested.Id
@@ -2725,7 +2725,7 @@ namespace Telegram.Api.Services.Updates
                 //                var action = serviceMessage.Action as TLDecryptedMessageActionEmpty;
                 //                if (action != null)
                 //                {
-                //                    serviceMessage.Unread = new TLBool(true);
+                //                    serviceMessage.Unread = new ITLBool(true);
                 //                    serviceMessage.Status = TLMessageState.Confirmed;
                 //                }
                 //            }
@@ -2740,11 +2740,11 @@ namespace Telegram.Api.Services.Updates
                 //                    var currentUserId = MTProtoService.Instance.CurrentUserId;
                 //                    var clientTicksDelta = MTProtoService.Instance.ClientTicksDelta;
 
-                //                    var notifyLayerAction = new TLDecryptedMessageActionNotifyLayer();
+                //                    var notifyLayerAction = new ITLDecryptedMessageActionNotifyLayer();
                 //                    notifyLayerAction.Layer = new int?(Constants.SecretSupportedLayer);
 
                 //                    // уведомляем в старом слое, чтобы не сломать предыдущие версии клиентов
-                //                    var notifyLayerMessage = new TLDecryptedMessageService
+                //                    var notifyLayerMessage = new ITLDecryptedMessageService
                 //                    {
                 //                        Action = notifyLayerAction,
                 //                        RandomId = TLLong.Random(),
@@ -2763,7 +2763,7 @@ namespace Telegram.Api.Services.Updates
                 //                        messageResult =>
                 //                        {
                 //                            SendEncryptedServiceAsync(
-                //                                new TLInputEncryptedChat
+                //                                new ITLInputEncryptedChat
                 //                                {
                 //                                    AccessHash = encryptedChat.AccessHash,
                 //                                    ChatId = encryptedChat.Id
@@ -2818,24 +2818,24 @@ namespace Telegram.Api.Services.Updates
             if (user != null)
             {
                 var currentUserId = MTProtoService.Current.CurrentUserId;
-                var message = new TLMessageService
+                var message = new ITLMessageService
                 {
                     Flags = 0,
                     Id = 0,
                     FromId = user.Id,
-                    ToId = new TLPeerUser { Id = currentUserId },
+                    ToId = new ITLPeerUser { Id = currentUserId },
                     State = TLMessageState.Confirmed,
                     IsOut = false,
                     IsUnread = false,
                     Date = updateContactRegistered.Date,
                     // TODO: local object 
-                    // Action = new TLMessageActionContactRegistered { UserId = user.Id },
+                    // Action = new ITLMessageActionContactRegistered { UserId = user.Id },
                     RandomId = TLLong.Random()
                 };
 
                 Execute.BeginOnThreadPool(() => _eventAggregator.Publish(user));
 
-                var dialog = _cacheService.GetDialog(new TLPeerUser { Id = user.Id });
+                var dialog = _cacheService.GetDialog(new ITLPeerUser { Id = user.Id });
                 if (dialog == null)
                 {
                     _cacheService.SyncMessage(message, notifyNewMessage, notifyNewMessage,
@@ -2886,7 +2886,7 @@ namespace Telegram.Api.Services.Updates
 //                {
 //                    eventAggregator.Publish(encryptedChat);
 
-//                    var actionNoop = new TLDecryptedMessageActionNoop();
+//                    var actionNoop = new ITLDecryptedMessageActionNoop();
 
 //                    SendEncryptedServiceActionAsync(sendEncryptedServiceActionAsync, cacheService, eventAggregator, encryptedChat, actionNoop,
 //                        (message, result) =>
@@ -2926,7 +2926,7 @@ namespace Telegram.Api.Services.Updates
 //                encryptedChat.PFS_KeyFingerprint = keyFingerprint;
 //                cacheService.SyncEncryptedChat(encryptedChat, cachedChat =>
 //                {
-//                    var actionAcceptKey = new TLDecryptedMessageActionAcceptKey
+//                    var actionAcceptKey = new ITLDecryptedMessageActionAcceptKey
 //                    {
 //                        ExchangeId = encryptedChat.PFS_ExchangeId,
 //                        KeyFingerprint = keyFingerprint,
@@ -2958,7 +2958,7 @@ namespace Telegram.Api.Services.Updates
 //                // abort for keyfingerprint != acceptKey.keyFingerprint
 //                if (keyFingerprint.Value != acceptKey.KeyFingerprint.Value)
 //                {
-//                    var actionAbortKey = new TLDecryptedMessageActionAbortKey
+//                    var actionAbortKey = new ITLDecryptedMessageActionAbortKey
 //                    {
 //                        ExchangeId = encryptedChat.PFS_ExchangeId
 //                    };
@@ -2980,7 +2980,7 @@ namespace Telegram.Api.Services.Updates
 //                encryptedChat.PFS_KeyFingerprint = keyFingerprint;
 //                cacheService.SyncEncryptedChat(encryptedChat, cachedChat =>
 //                {
-//                    var actionCommitKey = new TLDecryptedMessageActionCommitKey
+//                    var actionCommitKey = new ITLDecryptedMessageActionCommitKey
 //                    {
 //                        ExchangeId = encryptedChat.PFS_ExchangeId,
 //                        KeyFingerprint = keyFingerprint
@@ -3021,7 +3021,7 @@ namespace Telegram.Api.Services.Updates
 
 //            encryptedChat.RawOutSeqNo = new int?(encryptedChat.RawOutSeqNo.Value + 1);
 
-//            var message = new TLDecryptedMessageService17
+//            var message = new ITLDecryptedMessageService17
 //            {
 //                Action = action,
 //                RandomId = randomId,
@@ -3045,7 +3045,7 @@ namespace Telegram.Api.Services.Updates
 //                messageResult =>
 //                {
 //                    sendEncryptedServiceAsync(
-//                        new TLInputEncryptedChat
+//                        new ITLInputEncryptedChat
 //                        {
 //                            AccessHash = encryptedChat.AccessHash,
 //                            ChatId = encryptedChat.Id
@@ -3070,7 +3070,7 @@ namespace Telegram.Api.Services.Updates
 
 //        public static void UpgradeSecretChatLayerAndSendNotification(SendEncryptedServiceAction sendEncryptedServiceAsync, ICacheService cacheService, ITelegramEventAggregator eventAggregator, TLEncryptedChat encryptedChat, int? layer, int? rawInSeqNo, int? rawOutSeqNo)
 //        {
-//            var newEncryptedChat = new TLEncryptedChat20();
+//            var newEncryptedChat = new ITLEncryptedChat20();
 //            newEncryptedChat.Layer = layer;
 
 //            newEncryptedChat.RawInSeqNo = rawInSeqNo;
@@ -3103,7 +3103,7 @@ namespace Telegram.Api.Services.Updates
 
 //                    var randomId = TLLong.Random();
 
-//                    var notifyLayerAction = new TLDecryptedMessageActionNotifyLayer();
+//                    var notifyLayerAction = new ITLDecryptedMessageActionNotifyLayer();
 //                    notifyLayerAction.Layer = new int?(Constants.SecretSupportedLayer);
 
 //                    var inSeqNo = TLUtils.GetInSeqNo(currentUserId, newEncryptedChat);
@@ -3115,7 +3115,7 @@ namespace Telegram.Api.Services.Updates
 //                        newEncryptedChat17.RawOutSeqNo = new int?(newEncryptedChat17.RawOutSeqNo.Value + 1);
 //                    }
 
-//                    var decryptedMessageService17 = new TLDecryptedMessageService17
+//                    var decryptedMessageService17 = new ITLDecryptedMessageService17
 //                    {
 //                        Action = notifyLayerAction,
 //                        RandomId = randomId,
@@ -3141,7 +3141,7 @@ namespace Telegram.Api.Services.Updates
 //                        messageResult =>
 //                        {
 //                            sendEncryptedServiceAsync(
-//                                new TLInputEncryptedChat
+//                                new ITLInputEncryptedChat
 //                                {
 //                                    AccessHash = encryptedChat.AccessHash,
 //                                    ChatId = encryptedChat.Id
@@ -3197,7 +3197,7 @@ namespace Telegram.Api.Services.Updates
                         {
                             for (var i = ClientSeq.Value + 1; i < seqList[0]; i++)
                             {
-                                _lostSeq[i] = new Tuple<DateTime, TLUpdatesState>(DateTime.Now, new TLUpdatesState { Seq = ClientSeq ?? 0, Pts = _pts ?? 0, Date = _date ?? 0, Qts = _qts ?? 0 });
+                                _lostSeq[i] = new Tuple<DateTime, TLUpdatesState>(DateTime.Now, new ITLUpdatesState { Seq = ClientSeq ?? 0, Pts = _pts ?? 0, Date = _date ?? 0, Qts = _qts ?? 0 });
                             }
                         }
 
@@ -3263,7 +3263,7 @@ namespace Telegram.Api.Services.Updates
                         {
                             for (var i = _pts.Value + 1; i < ptsList[0]; i++)
                             {
-                                _lostPts[i] = new Tuple<DateTime, TLUpdatesState>(DateTime.Now, new TLUpdatesState { Seq = ClientSeq.Value, Pts = _pts.Value, Date = _date.Value, Qts = _qts.Value });
+                                _lostPts[i] = new Tuple<DateTime, TLUpdatesState>(DateTime.Now, new ITLUpdatesState { Seq = ClientSeq.Value, Pts = _pts.Value, Date = _date.Value, Qts = _qts.Value });
                             }
                         }
 
@@ -3685,10 +3685,10 @@ namespace Telegram.Api.Services.Updates
                     return;
                 }
 
-                var updatesList = TLUtils.FindInnerObjects<TLUpdatesBase>(transportMessage).ToList();
-                var updatesTooLong = TLUtils.FindInnerObjects<TLUpdatesTooLong>(transportMessage).ToList();
+                var updatesList = TLUtils.FindInnerObjects<ITLUpdatesBase>(transportMessage).ToList();
+                var updatesTooLong = TLUtils.FindInnerObjects<ITLUpdatesTooLong>(transportMessage).ToList();
 
-                ProcessUpdates(updatesList, updatesTooLong);
+                ProcessUpdates(updatesList.Cast<TLUpdatesBase>().ToList(), updatesTooLong.Cast<TLUpdatesTooLong>().ToList());
             }
             catch (Exception e)
             {
@@ -3864,12 +3864,12 @@ namespace Telegram.Api.Services.Updates
         public void SaveState()
         {
             TLUtils.WritePerformance("<<Saving current state");
-            TLUtils.SaveObjectToMTProtoFile(_stateRoot, Constants.StateFileName, new TLUpdatesState { Date = _date ?? -1, Pts = _pts ?? -1, Qts = _qts ?? -1, Seq = ClientSeq ?? -1, UnreadCount = _unreadCount ?? -1 });
+            TLUtils.SaveObjectToMTProtoFile(_stateRoot, Constants.StateFileName, new ITLUpdatesState { Date = _date ?? -1, Pts = _pts ?? -1, Qts = _qts ?? -1, Seq = ClientSeq ?? -1, UnreadCount = _unreadCount ?? -1 });
         }
 
         public TLUpdatesState GetState()
         {
-            return new TLUpdatesState { Date = _date ?? -1, Pts = _pts ?? -1, Qts = _qts ?? -1, Seq = ClientSeq ?? -1, UnreadCount = _unreadCount ?? -1 };
+            return new ITLUpdatesState { Date = _date ?? -1, Pts = _pts ?? -1, Qts = _qts ?? -1, Seq = ClientSeq ?? -1, UnreadCount = _unreadCount ?? -1 };
         }
 
         public void SaveStateSnapshot(string toDirectoryName)

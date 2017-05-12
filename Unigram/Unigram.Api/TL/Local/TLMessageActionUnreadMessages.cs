@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.TL
 {
-    public class TLMessageActionUnreadMessages : TLMessageActionBase
+#if PORTABLE
+    public class TLMessageActionUnreadMessages : ITLMessageActionBase
     {
 
     }
+#endif
 }

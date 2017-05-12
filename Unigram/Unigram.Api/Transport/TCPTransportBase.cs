@@ -277,7 +277,7 @@ namespace Telegram.Api.Transport
             try
             {
                 //var position = 0;
-                //var encryptedMessage = (TLEncryptedTransportMessage)new TLEncryptedTransportMessage().FromBytes(bytes, ref position);
+                //var encryptedMessage = (TLEncryptedTransportMessage)new ITLEncryptedTransportMessage().FromBytes(bytes, ref position);
                 //encryptedMessage.Decrypt(AuthKey);
 
                 var encryptedMessage = new TLEncryptedTransportMessage();
@@ -479,7 +479,7 @@ namespace Telegram.Api.Transport
 #if LOG_REGISTRATION
                     TLUtils.WriteLog(String.Format("Socket.ClearNonEncryptedHistory {0} item {1}", Id, historyItem.Value.Caption));
 #endif
-                    historyItem.Value.FaultCallback?.Invoke(new TLRPCError { ErrorCode = 404, ErrorMessage = error.ToString() });
+                    historyItem.Value.FaultCallback?.Invoke(new ITLRPCError { ErrorCode = 404, ErrorMessage = error.ToString() });
                 }
 
                 _nonEncryptedHistory.Clear();
