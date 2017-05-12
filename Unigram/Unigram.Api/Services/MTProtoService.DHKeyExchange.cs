@@ -62,7 +62,7 @@ namespace Telegram.Api.Services
                 resPQ =>
                 {
                     var serverNonce = resPQ.ServerNonce;
-                    if (nonce != resPQ.Nonce)
+                    if ((ITLInt128)nonce != (ITLInt128)resPQ.Nonce)
                     {
                         var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
 #if LOG_REGISTRATION
@@ -104,7 +104,7 @@ namespace Telegram.Api.Services
                         encryptedInnerData,
                         serverDHParams =>
                         {
-                            if (nonce != serverDHParams.Nonce)
+                            if ((ITLInt128)nonce != (ITLInt128)serverDHParams.Nonce)
                             {
                                 var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
 #if LOG_REGISTRATION
@@ -114,7 +114,7 @@ namespace Telegram.Api.Services
                                 if (faultCallback != null) faultCallback(error);
                                 TLUtils.WriteLine(error.ToString());
                             }
-                            if (serverNonce != serverDHParams.ServerNonce)
+                            if ((ITLInt128)serverNonce != (ITLInt128)serverDHParams.ServerNonce)
                             {
                                 var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect server_nonce" };
 #if LOG_REGISTRATION
@@ -205,7 +205,7 @@ namespace Telegram.Api.Services
                             SetClientDHParamsAsync(resPQ.Nonce, resPQ.ServerNonce, encryptedClientDHInnerData,
                                 dhGen =>
                                 {
-                                    if (nonce != dhGen.Nonce)
+                                    if ((ITLInt128)nonce != (ITLInt128)dhGen.Nonce)
                                     {
                                         var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect nonce" };
 #if LOG_REGISTRATION
@@ -215,7 +215,7 @@ namespace Telegram.Api.Services
                                         if (faultCallback != null) faultCallback(error);
                                         TLUtils.WriteLine(error.ToString());
                                     }
-                                    if (serverNonce != dhGen.ServerNonce)
+                                    if ((ITLInt128)serverNonce != (ITLInt128)dhGen.ServerNonce)
                                     {
                                         var error = new ITLRPCError { ErrorCode = 404, ErrorMessage = "incorrect server_nonce" };
 #if LOG_REGISTRATION

@@ -361,9 +361,9 @@ namespace Telegram.Api.Helpers
     //        //    {
     //        //        knownTypes[i] = typeof(BackgroundItem);
     //        //    }
-    //        //    else if (knownTypes[i].Name == typeof(TLConfig28).Name)
+    //        //    else if (knownTypes[i].Name == typeof(ITLConfig28).Name)
     //        //    {
-    //        //        knownTypes[i] = typeof(TLConfig28);
+    //        //        knownTypes[i] = typeof(ITLConfig28);
     //        //    }
     //        //}
     //    }

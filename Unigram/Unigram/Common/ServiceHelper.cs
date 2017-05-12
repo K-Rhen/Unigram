@@ -26,14 +26,14 @@ namespace Unigram.Common
 {
     public class ServiceHelper
     {
-        private static readonly Dictionary<Type, Func<TLMessageService, TLMessageActionBase, int, string, bool, Paragraph>> _actionsCache;
+        private static readonly Dictionary<TLType, Func<TLMessageService, TLMessageActionBase, int, string, bool, Paragraph>> _actionsCache;
 
         static ServiceHelper()
         {
-            _actionsCache = new Dictionary<Type, Func<TLMessageService, TLMessageActionBase, int, string, bool, Paragraph>>();
-            _actionsCache.Add(typeof(TLMessageActionDate), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(new DateTimeFormatter("day month").Format(Utils.UnixTimestampToDateTime(((TLMessageActionDate)action).Date))));
-            _actionsCache.Add(typeof(TLMessageActionEmpty), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionEmpty));
-            _actionsCache.Add(typeof(TLMessageActionGameScore), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
+            _actionsCache = new Dictionary<TLType, Func<TLMessageService, TLMessageActionBase, int, string, bool, Paragraph>>();
+            _actionsCache.Add((TLType)0xFFFFFF10, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(new DateTimeFormatter("day month").Format(Utils.UnixTimestampToDateTime(((TLMessageActionDate)action).Date))));
+            _actionsCache.Add(TLType.MessageActionEmpty, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionEmpty));
+            _actionsCache.Add(TLType.MessageActionGameScore, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
             {
                 var value = ((TLMessageActionGameScore)action).Score;
                 var won = value == 0 || value > 0;
@@ -68,11 +68,11 @@ namespace Unigram.Common
 
                 return ReplaceLinks(won ? AppResources.UserScoredPlural : AppResources.UserScored, new[] { AppResources.UserNominativeSingular, value.ToString() }, new[] { "tg-bold://", "tg-bold://" }, useActiveLinks);
             });
-            _actionsCache.Add(typeof(TLMessageActionChatCreate), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatCreate, new[] { fromUserFullName, ((TLMessageActionChatCreate)action).Title }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
-            _actionsCache.Add(typeof(TLMessageActionChatEditPhoto), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatEditPhoto, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
-            _actionsCache.Add(typeof(TLMessageActionChatEditTitle), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatEditTitle, new[] { fromUserFullName, ((TLMessageActionChatEditTitle)action).Title }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
-            _actionsCache.Add(typeof(TLMessageActionChatDeletePhoto), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatDeletePhoto, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
-            _actionsCache.Add(typeof(TLMessageActionChatAddUser), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
+            _actionsCache.Add(TLType.MessageActionChatCreate, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatCreate, new[] { fromUserFullName, ((TLMessageActionChatCreate)action).Title }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
+            _actionsCache.Add(TLType.MessageActionChatEditPhoto, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatEditPhoto, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
+            _actionsCache.Add(TLType.MessageActionChatEditTitle, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatEditTitle, new[] { fromUserFullName, ((TLMessageActionChatEditTitle)action).Title }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
+            _actionsCache.Add(TLType.MessageActionChatDeletePhoto, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatDeletePhoto, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
+            _actionsCache.Add(TLType.MessageActionChatAddUser, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
             {
                 var users = ((TLMessageActionChatAddUser)action).Users;
                 var names = new List<string>();
@@ -108,7 +108,7 @@ namespace Unigram.Common
 
                 return ReplaceLinks(string.Format(AppResources.MessageActionChatAddUser, "{0}", codesReplace), names.ToArray(), tags.ToArray(), useActiveLinks);
             });
-            _actionsCache.Add(typeof(TLMessageActionChatDeleteUser), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
+            _actionsCache.Add(TLType.MessageActionChatDeleteUser, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
             {
                 var userId = ((TLMessageActionChatDeleteUser)action).UserId;
                 var user = InMemoryCacheService.Current.GetUser(userId);
@@ -125,8 +125,8 @@ namespace Unigram.Common
 
                 return ReplaceLinks(AppResources.MessageActionUserLeftGroup, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks);
             });
-            //_actionsCache.Add(typeof(TLMessageActionUnreadMessages), (TLMessageBase message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => AppResources.UnreadMessages.ToLowerInvariant());
-            //_actionsCache.Add(typeof(TLMessageActionContactRegistered), delegate (TLMessageBase message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks)
+            //_actionsCache.Add(TLType.MessageActionUnreadMessages, (TLMessageBase message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => AppResources.UnreadMessages.ToLowerInvariant());
+            //_actionsCache.Add(TLType.MessageActionContactRegistered, delegate (TLMessageBase message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks)
             //{
             //    TLInt userId = ((TLMessageActionContactRegistered)action).UserId;
             //    TLUserBase user = IoC.Get<ICacheService>(null).GetUser(userId);
@@ -137,13 +137,13 @@ namespace Unigram.Common
             //    }
             //    return string.Format(AppResources.ContactRegistered, text);
             //});
-            _actionsCache.Add(typeof(TLMessageActionChatJoinedByLink), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatJoinedByLink, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
-            //_actionsCache.Add(typeof(TLMessageActionMessageGroup), delegate (TLMessageBase message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks)
+            _actionsCache.Add(TLType.MessageActionChatJoinedByLink, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChatJoinedByLink, new[] { fromUserFullName }, new[] { "tg-user://" + fromUserId }, useActiveLinks));
+            //_actionsCache.Add(TLType.MessageActionMessageGroup, delegate (TLMessageBase message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks)
             //{
             //    int value = ((TLMessageActionMessageGroup)action).Group.Count.Value;
             //    return Language.Declension(value, AppResources.CommentNominativeSingular, AppResources.CommentNominativePlural, AppResources.CommentGenitiveSingular, AppResources.CommentGenitivePlural, null, null).ToLower(CultureInfo.get_CurrentUICulture());
             //});
-            _actionsCache.Add(typeof(TLMessageActionChatMigrateTo), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
+            _actionsCache.Add(TLType.MessageActionChatMigrateTo, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
             {
                 var channelId = ((TLMessageActionChatMigrateTo)action).ChannelId;
                 var channel = InMemoryCacheService.Current.GetChat(channelId) as TLChannel;
@@ -155,10 +155,10 @@ namespace Unigram.Common
 
                 return ReplaceLinks(AppResources.MessageActionChatMigrateTo, new[] { fullName }, new[] { "tg-channel://" + channelId }, useActiveLinks);
             });
-            _actionsCache.Add(typeof(TLMessageActionChannelMigrateFrom), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChannelMigrateFrom));
-            _actionsCache.Add(typeof(TLMessageActionHistoryClear), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks("History was cleared"));
-            _actionsCache.Add(typeof(TLMessageActionUnreadMessages), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks("Unread messages"));
-            _actionsCache.Add(typeof(TLMessageActionPhoneCall), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
+            _actionsCache.Add(TLType.MessageActionChannelMigrateFrom, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks(AppResources.MessageActionChannelMigrateFrom));
+            _actionsCache.Add(TLType.MessageActionHistoryClear, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks("History was cleared"));
+            _actionsCache.Add((TLType)0xFFFFFF09, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) => ReplaceLinks("Unread messages"));
+            _actionsCache.Add(TLType.MessageActionPhoneCall, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
             {
                 if (message is TLMessageService serviceMessage && action is TLMessageActionPhoneCall phoneCallAction)
                 {
@@ -181,7 +181,7 @@ namespace Unigram.Common
 
                 return null;
             });
-            _actionsCache.Add(typeof(TLMessageActionPaymentSent), (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
+            _actionsCache.Add(TLType.MessageActionPaymentSent, (TLMessageService message, TLMessageActionBase action, int fromUserId, string fromUserFullName, bool useActiveLinks) =>
             {
                 if (message is TLMessageService serviceMessage && action is TLMessageActionPaymentSent paymentSentAction)
                 {
@@ -274,9 +274,9 @@ namespace Unigram.Common
             var user = InMemoryCacheService.Current.GetUser(fromId) as TLUser;
             var username = user != null ? user.FullName : AppResources.UserNominativeSingular;
             var action = serviceMessage.Action;
-            if (action != null && _actionsCache.ContainsKey(action.GetType()))
+            if (action != null && _actionsCache.ContainsKey(action.TypeId))
             {
-                return _actionsCache[action.GetType()].Invoke(serviceMessage, action, fromId.Value, username, useActiveLinks);
+                return _actionsCache[action.TypeId].Invoke(serviceMessage, action, fromId.Value, username, useActiveLinks);
             }
 
             var paragraph = new Paragraph();
@@ -436,9 +436,9 @@ namespace Unigram.Common
                 }
             }
 
-            if (action != null && _actionsCache.ContainsKey(action.GetType()))
+            if (action != null && _actionsCache.ContainsKey(action.TypeId))
             {
-                return _actionsCache[action.GetType()].Invoke(serviceMessage, action, fromId.Value, userFullName, useActiveLinks);
+                return _actionsCache[action.TypeId].Invoke(serviceMessage, action, fromId.Value, userFullName, useActiveLinks);
             }
 
             var paragraph = new Paragraph();

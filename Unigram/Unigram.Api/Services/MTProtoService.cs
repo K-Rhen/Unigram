@@ -1642,7 +1642,7 @@ namespace Telegram.Api.Services
                         // задержкой с новой солью и authKey
                         _config = TLExtensions.Merge(_config, config);
                         SaveConfig();
-                        if (historyItem.Object.GetType() == typeof(TLAuthSendCode))
+                        if (historyItem.Object.GetType() == typeof(ITLAuthSendCode))
                         {
                             var dcOption = _config.DCOptions.First(x => x.IsValidIPv4Option(serverNumber));
 
@@ -1732,8 +1732,8 @@ namespace Telegram.Api.Services
                 }
                 else
                 {
-                    if (historyItem.Object.GetType() == typeof(TLAuthSendCode)
-                        || historyItem.Object.GetType() == typeof(TLUploadGetFile))
+                    if (historyItem.Object.GetType() == typeof(ITLAuthSendCode)
+                        || historyItem.Object.GetType() == typeof(ITLUploadGetFile))
                     {
                         var activeDCOption = _config.DCOptions.First(x => x.IsValidIPv4Option(serverNumber));
 

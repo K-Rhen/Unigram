@@ -31,9 +31,11 @@ namespace Telegram.Api.TL
             }
             else if ((TLType)type == TLType.Vector)
             {
-                if (typeof(T) != typeof(object) && typeof(T) != typeof(TLObject))
+                if (typeof(T) != typeof(object) && typeof(T) != typeof(ITLObject))
                 {
-                    return (T)(Object)Activator.CreateInstance(typeof(T), from);
+                    var d1 = typeof(ITLVector<>);
+                    var makeme = d1.MakeGenericType(typeof(T).GenericTypeArguments);
+                    return (T)(Object)Activator.CreateInstance(makeme, from);
                 }
                 else
                 {
@@ -43,16 +45,20 @@ namespace Telegram.Api.TL
                         var inner = from.ReadUInt32();
                         from.BaseStream.Position -= 8;
 
-                        var innerType = Type.GetType($"Telegram.Api.TL.TL{(TLType)inner}");
+                        var innerType = Type.GetType($"Telegram.Api.TL.ITL{(TLType)inner}");
                         if (innerType != null)
                         {
                             var baseType = innerType.GetTypeInfo().BaseType;
-                            if (baseType.Name != "TLObject")
+                            if (baseType.Name != "ITLObject")
                             {
-                                innerType = baseType;
+                                innerType = Type.GetType(baseType.FullName.Replace("ITL", "TL"));
+                            }
+                            else
+                            {
+                                innerType = Type.GetType($"Telegram.Api.TL.TL{(TLType)inner}");
                             }
 
-                            var d1 = typeof(TLVector<>);
+                            var d1 = typeof(ITLVector<>);
                             var typeArgs = new Type[] { innerType };
                             var makeme = d1.MakeGenericType(typeArgs);
                             return (T)(Object)Activator.CreateInstance(makeme, from);
@@ -103,8 +109,8 @@ namespace Telegram.Api.TL
             else if (type == typeof(Boolean)) to.Write((bool)value);
             else if (type == typeof(String)) to.Write((string)value);
             else if (type == typeof(Byte[])) to.WriteByteArray((byte[])value);
-            else if (type == typeof(TLInt128)) ((TLInt128)value).Write(to);
-            else if (type == typeof(TLInt256)) ((TLInt256)value).Write(to);
+            else if (type == typeof(ITLInt128)) ((TLInt128)value).Write(to);
+            else if (type == typeof(ITLInt256)) ((TLInt256)value).Write(to);
             else ((TLObject)value).Write(to);
         }
 

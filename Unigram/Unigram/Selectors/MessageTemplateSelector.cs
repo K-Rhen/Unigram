@@ -11,7 +11,7 @@ namespace Unigram.Selectors
 {
     public class MessageTemplateSelector : DataTemplateSelector
     {
-        private readonly Dictionary<Type, Func<TLMessageBase, DataTemplate>> _templatesCache;
+        private readonly Dictionary<TLType, Func<TLMessageBase, DataTemplate>> _templatesCache;
 
         protected DataTemplate EmptyMessageTemplate = new DataTemplate();
 
@@ -32,10 +32,10 @@ namespace Unigram.Selectors
 
         public MessageTemplateSelector()
         {
-            _templatesCache = new Dictionary<Type, Func<TLMessageBase, DataTemplate>>();
-            _templatesCache.Add(typeof(TLMessageService), new Func<TLMessageBase, DataTemplate>(GenerateServiceMessageTemplate));
-            _templatesCache.Add(typeof(TLMessageEmpty), (TLMessageBase m) => EmptyMessageTemplate);
-            _templatesCache.Add(typeof(TLMessage), new Func<TLMessageBase, DataTemplate>(GenerateCommonMessageTemplate));
+            _templatesCache = new Dictionary<TLType, Func<TLMessageBase, DataTemplate>>();
+            _templatesCache.Add(TLType.MessageService, new Func<TLMessageBase, DataTemplate>(GenerateServiceMessageTemplate));
+            _templatesCache.Add(TLType.MessageEmpty, (TLMessageBase m) => EmptyMessageTemplate);
+            _templatesCache.Add(TLType.Message, new Func<TLMessageBase, DataTemplate>(GenerateCommonMessageTemplate));
         }
 
         private DataTemplate GenerateServiceMessageTemplate(TLMessageBase message)
@@ -115,7 +115,7 @@ namespace Unigram.Selectors
                 return EmptyMessageTemplate;
             }
 
-            if (_templatesCache.TryGetValue(message.GetType(), out Func<TLMessageBase, DataTemplate> func))
+            if (_templatesCache.TryGetValue(message.TypeId, out Func<TLMessageBase, DataTemplate> func))
             {
                 return func.Invoke(message);
             }
