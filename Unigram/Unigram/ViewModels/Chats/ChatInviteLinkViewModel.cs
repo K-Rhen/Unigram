@@ -11,6 +11,7 @@ using Telegram.Api.TL;
 using Unigram.Common;
 using Unigram.Controls;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -54,7 +55,7 @@ namespace Unigram.ViewModels.Chats
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Task<MTProtoResponse<TLExportedChatInviteBase>> task = null;
+            IAsyncOperation<MTProtoResponse<TLExportedChatInviteBase>> task = null;
 
             if (parameter is TLPeerChannel peerChannel)
             {
@@ -143,7 +144,7 @@ namespace Unigram.ViewModels.Chats
             var confirm = await TLMessageDialog.ShowAsync("Are you sure you want to revoke this link? Once you do, no one will be able to join the group using it.", "Telegram", "Revoke", "Cancel");
             if (confirm == ContentDialogResult.Primary)
             {
-                Task<MTProtoResponse<TLExportedChatInviteBase>> task = null;
+                IAsyncOperation<MTProtoResponse<TLExportedChatInviteBase>> task = null;
 
                 if (_peer is TLPeerChannel peerChannel)
                 {

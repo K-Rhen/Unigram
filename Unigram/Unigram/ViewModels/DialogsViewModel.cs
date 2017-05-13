@@ -17,6 +17,7 @@ using Telegram.Logs;
 using Template10.Utils;
 using Unigram.Common;
 using Unigram.Controls;
+using Windows.Foundation;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -1076,7 +1077,7 @@ namespace Unigram.ViewModels
                 var confirm = await TLMessageDialog.ShowAsync(message, "Delete", "Delete", "Cancel");
                 if (confirm == ContentDialogResult.Primary)
                 {
-                    Task<MTProtoResponse<TLUpdatesBase>> task;
+                    IAsyncOperation<MTProtoResponse<TLUpdatesBase>> task;
                     if (channel.IsCreator)
                     {
                         task = ProtoService.DeleteChannelAsync(channel);

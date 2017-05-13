@@ -46,6 +46,7 @@ using Telegram.Api.TL.Methods.Messages;
 using Telegram.Api;
 using Unigram.Views;
 using Telegram.Api.TL.Methods.Phone;
+using Windows.Foundation;
 
 namespace Unigram.ViewModels
 {
@@ -532,7 +533,7 @@ namespace Unigram.ViewModels
 
             if (replyIds.Count > 0)
             {
-                Task<MTProtoResponse<TLMessagesMessagesBase>> task = null;
+                IAsyncOperation<MTProtoResponse<TLMessagesMessagesBase>> task = null;
 
                 if (Peer is TLInputPeerChannel)
                 {
@@ -863,7 +864,7 @@ namespace Unigram.ViewModels
 
             if (shouldFetch)
             {
-                Task<MTProtoResponse<TLMessagesMessagesBase>> task = null;
+                IAsyncOperation<MTProtoResponse<TLMessagesMessagesBase>> task = null;
 
                 if (Peer is TLInputPeerChannel)
                 {

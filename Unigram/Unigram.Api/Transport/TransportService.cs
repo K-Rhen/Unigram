@@ -7,7 +7,7 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Transport
 {
-    internal class TransportService : ITransportService
+    public class TransportService : ITransportService
     {
         public TransportService()
         {
@@ -225,7 +225,7 @@ namespace Telegram.Api.Transport
         }
     }
 
-    internal class TransportEventArgs : EventArgs
+    public class TransportEventArgs : EventArgs
     {
         public ITransport Transport { get; set; }
     }

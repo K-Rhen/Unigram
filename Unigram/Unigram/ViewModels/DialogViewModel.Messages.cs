@@ -18,6 +18,7 @@ using Unigram.Native;
 using Unigram.Views;
 using Unigram.Views.Payments;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -218,8 +219,7 @@ namespace Unigram.ViewModels
             {
                 var messages = new ITLVector<int>(remoteMessages.Select(x => x.Id).ToList());
 
-                Task<MTProtoResponse<TLMessagesAffectedMessages>> task;
-
+                IAsyncOperation<MTProtoResponse<TLMessagesAffectedMessages>> task;
                 if (Peer is TLInputPeerChannel)
                 {
                     task = ProtoService.DeleteMessagesAsync(new ITLInputChannel { ChannelId = ((TLInputPeerChannel)Peer).ChannelId, AccessHash = ((TLInputPeerChannel)Peer).AccessHash }, messages);
