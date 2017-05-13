@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Telegram.Api.Transport
 {
-    public class TcpTransportResult
+    internal class TcpTransportResult
     {
         public SocketError Error { get; set; }
 

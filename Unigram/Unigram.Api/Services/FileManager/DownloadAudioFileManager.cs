@@ -20,7 +20,7 @@ namespace Telegram.Api.Services.FileManager
     {
     }
 
-    public class DownloadAudioFileManager : IDownloadAudioFileManager
+    public sealed class DownloadAudioFileManager : IDownloadAudioFileManager
     {
         private readonly object _randomRoot = new object();
 

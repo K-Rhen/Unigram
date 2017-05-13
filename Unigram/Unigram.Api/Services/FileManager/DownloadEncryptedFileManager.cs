@@ -22,7 +22,7 @@ namespace Telegram.Api.Services.FileManager
         void CancelDownloadFile(TLObject owner);
     }
 
-    public class DownloadEncryptedFileManager : IDownloadEncryptedFileManager
+    public sealed class DownloadEncryptedFileManager : IDownloadEncryptedFileManager
     {
         private readonly object _randomRoot = new object();
 

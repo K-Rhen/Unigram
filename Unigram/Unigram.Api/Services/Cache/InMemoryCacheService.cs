@@ -14,7 +14,7 @@ using Action = System.Action;
 
 namespace Telegram.Api.Services.Cache
 {
-    public class InMemoryCacheService : ICacheService
+    public sealed class InMemoryCacheService : ICacheService
     {
         private readonly object _databaseSyncRoot = new object();
 

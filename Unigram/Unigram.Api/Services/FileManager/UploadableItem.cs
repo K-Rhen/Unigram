@@ -5,7 +5,7 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Services.FileManager
 {
-    public class UploadableItem
+    public sealed class UploadableItem
     {
         public bool FileNotFound { get; set; }
 

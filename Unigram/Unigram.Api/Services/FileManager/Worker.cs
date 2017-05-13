@@ -63,7 +63,7 @@ namespace Telegram.Api.Services.FileManager
         }
     }
 #else
-    public class Worker
+    internal class Worker
     {
         private readonly Task _thread;
 

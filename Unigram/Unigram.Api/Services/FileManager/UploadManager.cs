@@ -30,7 +30,7 @@ namespace Telegram.Api.Services.FileManager
     public interface IUploadDocumentManager : IUploadManager { }
     public interface IUploadVideoManager : IUploadManager { }
 
-    public class UploadManager : IUploadFileManager, IUploadAudioManager, IUploadDocumentManager, IUploadVideoManager
+    public sealed class UploadManager : IUploadFileManager, IUploadAudioManager, IUploadDocumentManager, IUploadVideoManager
     {
         private readonly object _itemsSyncRoot = new object();
         private readonly List<UploadableItem> _items = new List<UploadableItem>();

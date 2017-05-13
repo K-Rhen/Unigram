@@ -29,7 +29,7 @@ namespace Telegram.Api.Services.FileManager
     {
     }
 
-    public class DownloadVideoFileManager : IDownloadVideoFileManager
+    public sealed class DownloadVideoFileManager : IDownloadVideoFileManager
     {
         private readonly object _randomRoot = new object();
 

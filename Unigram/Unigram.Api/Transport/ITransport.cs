@@ -5,7 +5,7 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Transport
 {
-    public interface ITransport
+    internal interface ITransport
     {
         bool Additional { get; set; }
 

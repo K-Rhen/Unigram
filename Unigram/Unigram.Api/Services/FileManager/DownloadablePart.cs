@@ -9,7 +9,7 @@ namespace Telegram.Api.Services.FileManager
         Processed,
     }
 
-    public class DownloadablePart
+    public sealed class DownloadablePart
     {
         public int Number { get; protected set; }
 

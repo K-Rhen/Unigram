@@ -2,13 +2,13 @@
 
 namespace Telegram.Api.Services.Cache.EventArgs
 {
-    public class TopMessageUpdatedEventArgs : System.EventArgs
+    public sealed class TopMessageUpdatedEventArgs : System.EventArgs
     {
-        public TLPeerBase Peer { get; protected set; }
+        public TLPeerBase Peer { get; private set; }
 
         public TLDialog Dialog { get; set; }
 
-        public TLMessageBase Message { get; protected set; }
+        public TLMessageBase Message { get; private set; }
 
         // TODO: Encrypted public TLDecryptedMessageBase DecryptedMessage { get; protected set; }
 

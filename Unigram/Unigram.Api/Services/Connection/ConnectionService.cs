@@ -23,11 +23,11 @@ namespace Telegram.Api.Services.Connection
         event EventHandler ConnectionLost;
     }
 
-    public class ConnectionService : IConnectionService
+    public sealed class ConnectionService : IConnectionService
     {
         public event EventHandler ConnectionLost;
 
-        protected virtual void RaiseConnectionFailed()
+        private void RaiseConnectionFailed()
         {
             ConnectionLost?.Invoke(this, EventArgs.Empty);
         }

@@ -5,7 +5,7 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Services.FileManager
 {
-    public class DownloadableItem
+    public sealed class DownloadableItem
     {
         public int DCId { get; set; }
 

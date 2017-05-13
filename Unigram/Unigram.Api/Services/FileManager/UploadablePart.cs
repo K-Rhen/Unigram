@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Telegram.Api.Services.FileManager
 {
-    public class UploadablePart
+    public sealed class UploadablePart
     {
         public UploadableItem ParentItem { get; protected set; }
 

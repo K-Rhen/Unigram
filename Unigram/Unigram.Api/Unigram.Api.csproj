@@ -440,7 +440,6 @@
     <Compile Include="Services\Cache\InMemoryCacheService.cs" />
     <Compile Include="Services\Cache\InMemoryDatabase.cs" />
     <Compile Include="Services\Connection\ConnectionService.cs" />
-    <Compile Include="Services\DCOptionItem.cs" />
     <Compile Include="Services\DelayedItem.cs" />
     <Compile Include="Services\DeviceInfo\IDeviceInfoService.cs" />
     <Compile Include="Services\HistoryItem.cs" />
@@ -465,8 +464,6 @@
     <Compile Include="Services\MTProtoService.Users.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\Updates\IUpdatesService.cs" />
-    <Compile Include="Services\Updates\ReceiveUpdatesEventArgs.cs" />
-    <Compile Include="Services\Updates\UpdatesBySeqComparer.cs" />
     <Compile Include="Services\Updates\UpdatesService.cs" />
     <Compile Include="TL\Core\ITLMultiPts.cs" />
     <Compile Include="TL\Core\TLBinaryReader.cs" />
@@ -1206,6 +1203,9 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

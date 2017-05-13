@@ -21,7 +21,7 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Services.Updates
 {
-    public class UpdatesService : IUpdatesService
+    internal class UpdatesService : IUpdatesService
     {
         public TLUserBase CurrentUser { get; set; }
 

@@ -32,14 +32,14 @@ namespace Telegram.Api.Services
             SendNonEncryptedMessageByTransport(transport, "req_DH_params", obj, callback, faultCallback);
         }
 
-        public void SetClientDHParamsByTransportAsync(ITransport transport, TLInt128 nonce, TLInt128 serverNonce, byte[] encryptedData, Action<TLSetClientDHParamsAnswerBase> callback, Action<TLRPCError> faultCallback = null)
+        private void SetClientDHParamsByTransportAsync(ITransport transport, TLInt128 nonce, TLInt128 serverNonce, byte[] encryptedData, Action<TLSetClientDHParamsAnswerBase> callback, Action<TLRPCError> faultCallback = null)
         {
             var obj = new ITLSetClientDHParams { Nonce = nonce, ServerNonce = serverNonce, EncryptedData = encryptedData };
 
             SendNonEncryptedMessageByTransport(transport, "set_client_DH_params", obj, callback, faultCallback);
         }
 
-        public void InitTransportAsync(ITransport transport, Action<Tuple<byte[], long?, long?>> callback, Action<TLRPCError> faultCallback = null)
+        private void InitTransportAsync(ITransport transport, Action<Tuple<byte[], long?, long?>> callback, Action<TLRPCError> faultCallback = null)
         {
             var authTime = Stopwatch.StartNew();
             var newNonce = ITLInt256.Random();
@@ -854,7 +854,7 @@ namespace Telegram.Api.Services
                 });
         }
 
-        public void MessageAcknowledgmentsByTransport(ITransport transport, TLVector<long> ids)
+        private void MessageAcknowledgmentsByTransport(ITransport transport, TLVector<long> ids)
         {
             PrintCaption("msgs_ack");
             TLUtils.WriteLine("ids");
@@ -1793,7 +1793,7 @@ namespace Telegram.Api.Services
             }
         }
 
-        public void ClearHistoryByTransport(ITransport transport)
+        private void ClearHistoryByTransport(ITransport transport)
         {
             _transportService.CloseTransport(transport);
 

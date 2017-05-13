@@ -3,11 +3,11 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Services.Cache.EventArgs
 {
-    public class MessagesRemovedEventArgs
+    public sealed class MessagesRemovedEventArgs
     {
-        public TLDialog Dialog { get; protected set; }
+        public TLDialog Dialog { get; private set; }
 
-        public IList<TLMessageBase> Messages { get; protected set; }
+        public IList<TLMessageBase> Messages { get; private set; }
 
         // TODO: Encrypted public TLDecryptedMessageBase DecryptedMessage { get; protected set; }
 
@@ -31,7 +31,7 @@ namespace Telegram.Api.Services.Cache.EventArgs
         //}
     }
 
-    public class DialogAddedEventArgs
+    public sealed class DialogAddedEventArgs
     {
         public TLDialog Dialog { get; protected set; }
 
@@ -41,7 +41,7 @@ namespace Telegram.Api.Services.Cache.EventArgs
         }
     }
 
-    public class DialogRemovedEventArgs
+    public sealed class DialogRemovedEventArgs
     {
         public TLDialog Dialog { get; protected set; }
 

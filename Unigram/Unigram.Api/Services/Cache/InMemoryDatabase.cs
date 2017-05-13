@@ -16,7 +16,7 @@ using Telegram.Api.TL;
 
 namespace Telegram.Api.Services.Cache
 {
-    public class InMemoryDatabase : IDisposable
+    internal class InMemoryDatabase : IDisposable
     {
         private volatile bool _isOpened;
 

@@ -4,17 +4,20 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Telegram.Api.Aggregator {
+namespace Telegram.Api.Aggregator
+{
     /// <summary>
     /// Generic extension methods used by the framework.
     /// </summary>
-    public static class ExtensionMethods {
+    internal static class ExtensionMethods
+    {
         /// <summary>
         /// Get's the name of the assembly.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <returns>The assembly's name.</returns>
-        public static string GetAssemblyName(this Assembly assembly) {
+        public static string GetAssemblyName(this Assembly assembly)
+        {
             return assembly.FullName.Remove(assembly.FullName.IndexOf(','));
         }
 
@@ -25,7 +28,8 @@ namespace Telegram.Api.Aggregator {
         /// <param name="member">The member to inspect for attributes.</param>
         /// <param name="inherit">Whether or not to search for inherited attributes.</param>
         /// <returns>The list of attributes found.</returns>
-        public static IEnumerable<T> GetAttributes<T>(this MemberInfo member, bool inherit) {
+        public static IEnumerable<T> GetAttributes<T>(this MemberInfo member, bool inherit)
+        {
 #if WIN_RT
             return member.GetCustomAttributes(inherit).OfType<T>();
 #else
@@ -39,8 +43,10 @@ namespace Telegram.Api.Aggregator {
         /// <typeparam name="T">The enumerable item's type.</typeparam>
         /// <param name="enumerable">The elements to enumerate.</param>
         /// <param name="action">The action to apply to each item in the list.</param>
-        public static void Apply<T>(this IEnumerable<T> enumerable, Action<T> action) {
-            foreach(var item in enumerable) {
+        public static void Apply<T>(this IEnumerable<T> enumerable, Action<T> action)
+        {
+            foreach (var item in enumerable)
+            {
                 action(item);
             }
         }
@@ -50,15 +56,18 @@ namespace Telegram.Api.Aggregator {
         /// </summary>
         /// <param name="expression">The expression to convert.</param>
         /// <returns>The member info.</returns>
-        public static MemberInfo GetMemberInfo(this Expression expression) {
+        public static MemberInfo GetMemberInfo(this Expression expression)
+        {
             var lambda = (LambdaExpression)expression;
 
             MemberExpression memberExpression;
-            if (lambda.Body is UnaryExpression) {
+            if (lambda.Body is UnaryExpression)
+            {
                 var unaryExpression = (UnaryExpression)lambda.Body;
                 memberExpression = (MemberExpression)unaryExpression.Operand;
             }
-            else {
+            else
+            {
                 memberExpression = (MemberExpression)lambda.Body;
             }
 
@@ -107,7 +116,8 @@ namespace Telegram.Api.Aggregator {
         /// <param name="assembly">The assembly.</param>
         /// <returns>A collection of the public types defined in this assembly that are visible outside the assembly.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IEnumerable<Type> GetExportedTypes(this Assembly assembly) {
+        public static IEnumerable<Type> GetExportedTypes(this Assembly assembly)
+        {
             if (assembly == null)
                 throw new ArgumentNullException("assembly");
 
@@ -120,7 +130,8 @@ namespace Telegram.Api.Aggregator {
         /// <param name="target">The target type</param>
         /// <param name="type">The type to check.</param>
         /// <returns>true if the specified type can be assigned to this type; otherwise, false.</returns>
-        public static bool IsAssignableFrom(this Type target, Type type) {
+        public static bool IsAssignableFrom(this Type target, Type type)
+        {
             return target.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
         }
 #endif
